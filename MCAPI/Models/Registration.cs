@@ -10,8 +10,8 @@ namespace MCAPI.Models
 
     public class Registration
     {
-        public int User { get; set; }
-        public int Event { get; set; }
+        public int UserID { get; set; }
+        public int EventID { get; set; }
         public User User { get; set; }
         public Event Event { get; set; }
     }

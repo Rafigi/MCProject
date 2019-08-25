@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MCAPI.Migrations
 {
     [DbContext(typeof(McDbContext))]
-    [Migration("20190824113721_initializeCreate")]
-    partial class initializeCreate
+    [Migration("20190824234911_CreateDbFirstTime")]
+    partial class CreateDbFirstTime
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,19 +64,19 @@ namespace MCAPI.Migrations
 
                     b.Property<int>("RegistrationCount");
 
-                    b.Property<int?>("RouteID1");
+                    b.Property<int?>("RouteID");
 
                     b.Property<string>("StartDate");
 
                     b.Property<string>("StartTime");
 
-                    b.Property<int?>("UserID1");
+                    b.Property<int?>("UserID");
 
                     b.HasKey("EventID");
 
-                    b.HasIndex("RouteID1");
+                    b.HasIndex("RouteID");
 
-                    b.HasIndex("UserID1");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Events");
                 });
@@ -112,13 +112,13 @@ namespace MCAPI.Migrations
 
                     b.Property<bool>("Toll");
 
-                    b.Property<int?>("UserID1");
+                    b.Property<int?>("UserID");
 
                     b.HasKey("RouteID");
 
                     b.HasIndex("AdresseID");
 
-                    b.HasIndex("UserID1");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Routes");
                 });
@@ -149,24 +149,24 @@ namespace MCAPI.Migrations
 
             modelBuilder.Entity("MCAPI.Models.Event", b =>
                 {
-                    b.HasOne("MCAPI.Models.Route", "RouteID")
+                    b.HasOne("MCAPI.Models.Route", "Route")
                         .WithMany()
-                        .HasForeignKey("RouteID1");
+                        .HasForeignKey("RouteID");
 
-                    b.HasOne("MCAPI.Models.User", "UserID")
+                    b.HasOne("MCAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserID1");
+                        .HasForeignKey("UserID");
                 });
 
             modelBuilder.Entity("MCAPI.Models.Registration", b =>
                 {
                     b.HasOne("MCAPI.Models.Event", "Event")
-                        .WithMany()
+                        .WithMany("Registration")
                         .HasForeignKey("EventID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MCAPI.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Registration")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -177,9 +177,9 @@ namespace MCAPI.Migrations
                         .WithMany()
                         .HasForeignKey("AdresseID");
 
-                    b.HasOne("MCAPI.Models.User", "UserID")
+                    b.HasOne("MCAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserID1");
+                        .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618
         }

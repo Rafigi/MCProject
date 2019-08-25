@@ -1,9 +1,5 @@
 ﻿using MCAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MCAPI.McContext
 {
@@ -11,7 +7,7 @@ namespace MCAPI.McContext
     {
         public McDbContext(DbContextOptions<McDbContext> options) : base(options)
         {
-            
+
         }
 
         //Tables in the Database
@@ -26,7 +22,17 @@ namespace MCAPI.McContext
         // we override the OnModelCreating method here.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Registration>().HasKey(ue => new { ue.UserID , ue.EventID});
+            modelBuilder.Entity<Registration>().HasKey(ue => new { ue.UserID, ue.EventID });
+
+            modelBuilder.Entity<Registration>()
+            .HasOne(bc => bc.Event)
+            .WithMany(b => b.Registration)
+            .HasForeignKey(bc => bc.EventID);
+
+            modelBuilder.Entity<Registration>()
+            .HasOne(bc => bc.User)
+            .WithMany(c => c.Registration)
+            .HasForeignKey(bc => bc.UserID);
         }
     }
 }

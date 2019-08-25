@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MCAPI.Models
 {
@@ -14,6 +15,9 @@ namespace MCAPI.Models
         public string Birthdate { get; set; }
         [Required]
         public string Created { get; set; }
+
+        //Is there to make a many og many relation for the registration
+        public ICollection<Registration> Registration { get; set; }
 
     }
 }

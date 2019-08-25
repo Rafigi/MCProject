@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MCAPI.Migrations
 {
-    public partial class initializeCreate : Migration
+    public partial class CreateDbFirstTime : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,7 +55,7 @@ namespace MCAPI.Migrations
                     Ferry = table.Column<bool>(nullable: false),
                     Toll = table.Column<bool>(nullable: false),
                     Created = table.Column<string>(nullable: true),
-                    UserID1 = table.Column<int>(nullable: true)
+                    UserID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,8 +67,8 @@ namespace MCAPI.Migrations
                         principalColumn: "AdresseID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Routes_Users_UserID1",
-                        column: x => x.UserID1,
+                        name: "FK_Routes_Users_UserID",
+                        column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Restrict);
@@ -88,21 +88,21 @@ namespace MCAPI.Migrations
                     EndTime = table.Column<string>(nullable: true),
                     RegistrationCount = table.Column<int>(nullable: false),
                     Created = table.Column<string>(nullable: true),
-                    RouteID1 = table.Column<int>(nullable: true),
-                    UserID1 = table.Column<int>(nullable: true)
+                    RouteID = table.Column<int>(nullable: true),
+                    UserID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Events", x => x.EventID);
                     table.ForeignKey(
-                        name: "FK_Events_Routes_RouteID1",
-                        column: x => x.RouteID1,
+                        name: "FK_Events_Routes_RouteID",
+                        column: x => x.RouteID,
                         principalTable: "Routes",
                         principalColumn: "RouteID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Events_Users_UserID1",
-                        column: x => x.UserID1,
+                        name: "FK_Events_Users_UserID",
+                        column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Restrict);
@@ -133,14 +133,14 @@ namespace MCAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_RouteID1",
+                name: "IX_Events_RouteID",
                 table: "Events",
-                column: "RouteID1");
+                column: "RouteID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_UserID1",
+                name: "IX_Events_UserID",
                 table: "Events",
-                column: "UserID1");
+                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Registration_EventID",
@@ -153,9 +153,9 @@ namespace MCAPI.Migrations
                 column: "AdresseID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Routes_UserID1",
+                name: "IX_Routes_UserID",
                 table: "Routes",
-                column: "UserID1");
+                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

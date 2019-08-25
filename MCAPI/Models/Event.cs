@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MCAPI.Models
@@ -18,5 +19,7 @@ namespace MCAPI.Models
         public Route Route { get; set; }
         public User User { get; set; }
 
+        //Is there to make a many og many relation for the registration
+        public ICollection<Registration> Registration { get; set; }
     }
 }
