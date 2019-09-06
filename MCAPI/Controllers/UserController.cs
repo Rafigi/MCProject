@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using MCAPI.Commands;
+using MCAPI.Messages;
+using MCAPI.Models;
+using MCAPI.Persistence;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MCAPI.Controllers
@@ -11,6 +12,13 @@ namespace MCAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        IUnitOfWork _unitOfWork;
+        ISession _session;
+        public UserController(ISession session, IUnitOfWork unitOfWork)
+        {
+            _session = session;
+            _unitOfWork = unitOfWork;
+        }
         // GET: api/User
         [HttpGet]
         public IEnumerable<string> Get()
@@ -18,18 +26,13 @@ namespace MCAPI.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST: api/User
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("Create")]
+        public IActionResult Create([FromBody] User user)
         {
-
+            _session.Add(new CreateUserCommand(user, _unitOfWork));
+            _session.Commit();
+            return Ok();
         }
 
         // PUT: api/User/5
@@ -42,6 +45,13 @@ namespace MCAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+
+        }
+
+        public class Test
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
         }
     }
 }

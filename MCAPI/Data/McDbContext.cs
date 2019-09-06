@@ -1,6 +1,5 @@
 ﻿using MCAPI.Models;
 using Microsoft.EntityFrameworkCore;
-
 namespace MCAPI.McContext
 {
     public class McDbContext : DbContext
@@ -15,7 +14,7 @@ namespace MCAPI.McContext
         public DbSet<Event> Events { get; set; }
 
         public DbSet<Route> Routes { get; set; }
-        public DbSet<Adresse> Adresses { get; set; }
+        public DbSet<Address> Adresses { get; set; }
         public DbSet<Registration> Registration { get; set; }
 
 
@@ -33,6 +32,22 @@ namespace MCAPI.McContext
             .HasOne(bc => bc.User)
             .WithMany(c => c.Registration)
             .HasForeignKey(bc => bc.UserID);
+
+            modelBuilder.Entity<Route>()
+                .HasOne(a => a.Address)
+                .WithMany(r => r.Routes);
+
+            modelBuilder.Entity<Route>()
+               .HasOne(u => u.User)
+               .WithMany(r => r.Routes);
+
+            modelBuilder.Entity<Event>()
+               .HasOne(u => u.User)
+               .WithMany(r => r.Events);
+
+            modelBuilder.Entity<Event>()
+               .HasOne(r => r.Route)
+               .WithMany(e => e.Events);
         }
     }
 }

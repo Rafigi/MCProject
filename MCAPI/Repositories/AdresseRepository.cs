@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace MCAPI.IRepository
 {
-    public class AdresseRepository : Repository<Adresse>, IAdresseRepository
+    public class AdresseRepository : Repository<Address>, IAdresseRepository
     {
         public AdresseRepository(McDbContext context) : base(context)
         {
         }
 
-        public Adresse GetAdresseByID(int id)
+        public Address GetAdresseByID(Guid id)
         {
             throw new NotImplementedException();
         }

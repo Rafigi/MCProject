@@ -8,8 +8,8 @@ namespace MCAPI.IRepository
 {
     public interface IUserRepository : IRepository<User>
     {
-        User GetUserByID(int id);
-        string GetUsernameByID(int id);
-        string GetEmailByID(int id);
+        User GetUserByID(Guid id);
+        string GetUsernameByID(Guid id);
+        string GetEmailByID(Guid id);
     }
 }

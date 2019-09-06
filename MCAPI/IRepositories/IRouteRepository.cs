@@ -9,10 +9,10 @@ namespace MCAPI.IRepository
     public interface IRouteRepository : IRepository<Route>
     {
         IEnumerable<Route> GetAllRoutes();
-        double GetRouteDistance(int id);
+        double GetRouteDistance(Guid id);
         IEnumerable<Route> GetRoutesWithSearchCritia(bool motorway, bool ferry, bool toll);
-        IEnumerable<Route> GetUserCreatedRoutesByID(int id);
-        Route GetRouteByID(int id);
+        IEnumerable<Route> GetUserCreatedRoutesByID(Guid id);
+        Route GetRouteByID(Guid id);
 
 
     }
