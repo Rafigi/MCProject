@@ -1,16 +1,15 @@
 ﻿using MCAPI.Models;
 using MCAPI.Persistence;
 using System;
+using System.Threading.Tasks;
 
 namespace MCAPI.Commands
 {
     public class CreateUserCommand : ICommand
     {
-        private readonly IUnitOfWork _unitOfWork;
         public User User { get; private set; }
 
-
-        public CreateUserCommand(User user, IUnitOfWork unitOfWork)
+        public CreateUserCommand(User user)
         {
             User = new User()
             {
@@ -20,16 +19,13 @@ namespace MCAPI.Commands
                 Email = user.Email,
                 Created = user.Created
             };
-            _unitOfWork = unitOfWork;
         }
 
-        public void Execute()
+        public Task Execute(IUnitOfWork unitOfWork)
         {
-            _unitOfWork.Users.Add(User);
-            _unitOfWork.Complete();
+            unitOfWork.Users.Add(User);
+            return Task.CompletedTask;
         }
     }
-
-
 }
 

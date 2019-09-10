@@ -1,9 +1,12 @@
 ﻿using MCAPI.Messages;
+using MCAPI.Persistence;
+using System.Threading.Tasks;
 
 namespace MCAPI.Commands
 {
-    public interface ICommand
+    public interface ICommand : IMessage
     {
-        void Execute();
+        Task Execute(IUnitOfWork unitOfWork);
+
     }
 }

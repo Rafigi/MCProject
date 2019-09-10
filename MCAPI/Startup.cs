@@ -2,6 +2,7 @@
 using MCAPI.McContext;
 using MCAPI.Messages;
 using MCAPI.Persistence;
+using MCAPI.ServicesBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -26,9 +27,8 @@ namespace MCAPI
             services.AddDbContext<McDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
 
-            //Add Cqrs services
-            services.AddSingleton<CreateUserCommand>();
-            services.AddScoped<ISession, Session>();
+            //Add DI Services
+            services.AddScoped<IServiceBus, ServiceBus>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

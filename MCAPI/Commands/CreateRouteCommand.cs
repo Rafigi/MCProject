@@ -1,5 +1,7 @@
 ﻿using MCAPI.Models;
+using MCAPI.Persistence;
 using System;
+using System.Threading.Tasks;
 
 namespace MCAPI.Commands
 {
@@ -22,7 +24,7 @@ namespace MCAPI.Commands
             };
         }
 
-        public void Execute()
+        public Task Execute(IUnitOfWork unitOfWork)
         {
             throw new NotImplementedException();
         }

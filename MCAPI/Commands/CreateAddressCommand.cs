@@ -1,17 +1,13 @@
 ﻿using MCAPI.Models;
 using MCAPI.Persistence;
 using System;
+using System.Threading.Tasks;
 
 namespace MCAPI.Commands
 {
     public class CreateAddressCommand : ICommand
     {
-        IUnitOfWork _unitOfWork;
         public Address Address { get; private set; }
-        public CreateAddressCommand(IUnitOfWork unitOfWork)
-        {
-            _unitOfWork = unitOfWork;
-        }
 
         public CreateAddressCommand(Guid addressID, Address address)
         {
@@ -29,14 +25,9 @@ namespace MCAPI.Commands
             };
         }
 
-        public void Complete()
+        public Task Execute(IUnitOfWork unitOfWork)
         {
-            _unitOfWork.Adresses.Add(Address);
-        }
-
-        public void Execute()
-        {
-            throw new NotImplementedException();
+            unitOfWork.Adresses.Add(Address);
         }
     }
 }

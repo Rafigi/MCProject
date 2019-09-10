@@ -4,6 +4,7 @@ using MCAPI.Commands;
 using MCAPI.Messages;
 using MCAPI.Models;
 using MCAPI.Persistence;
+using MCAPI.ServicesBus;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MCAPI.Controllers
@@ -12,26 +13,25 @@ namespace MCAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        IUnitOfWork _unitOfWork;
-        ISession _session;
-        public UserController(ISession session, IUnitOfWork unitOfWork)
+        private readonly IServiceBus _serviceBus;
+        public UserController(IServiceBus serviceBus)
         {
-            _session = session;
-            _unitOfWork = unitOfWork;
+            _serviceBus = serviceBus;
         }
+
         // GET: api/User
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return null;
         }
 
         // POST: api/User
         [HttpPost("Create")]
         public IActionResult Create([FromBody] User user)
         {
-            _session.Add(new CreateUserCommand(user, _unitOfWork));
-            _session.Commit();
+            _serviceBus.Add(new CreateUserCommand(user));
+            _serviceBus.Complete();
             return Ok();
         }
 
