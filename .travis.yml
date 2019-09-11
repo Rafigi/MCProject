@@ -3,5 +3,5 @@ dist: xenial
 mono: none
 dotnet: 2.2
 script:
-    - dotnet restore
+    - nuget restore MCProject.sln
     - dotnet build
