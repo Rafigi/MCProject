@@ -1,4 +1,5 @@
-language: CSharp
+language: csharp
+solution: solution-name.sln
 mono:
  - none
  dotnet: 2.1.502
