@@ -25,8 +25,6 @@ namespace MCAPI.Persistence
             Events = new EventRepository(_context);
             Routes = new RouteRepository(_context);
             Users = new UserRepository(_context);
-
-
         }
 
         public int Complete()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MCAPI.Persistence
 {
-    interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IAdresseRepository Adresses { get; }
         IEventRepository Events { get; }

@@ -10,67 +10,76 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MCAPI.Migrations
 {
     [DbContext(typeof(McDbContext))]
-    [Migration("20190824234911_CreateDbFirstTime")]
-    partial class CreateDbFirstTime
+    [Migration("20190901112923_Inizilation_Database")]
+    partial class Inizilation_Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("MCAPI.Models.Adresse", b =>
+            modelBuilder.Entity("MCAPI.Models.Address", b =>
                 {
-                    b.Property<int>("AdresseID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("AddressID")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
-                    b.Property<string>("Country");
+                    b.Property<string>("Country")
+                        .IsRequired();
 
                     b.Property<string>("Latitude");
 
                     b.Property<string>("Longitude");
 
-                    b.Property<string>("StreetName");
+                    b.Property<string>("StreetName")
+                        .IsRequired();
 
-                    b.Property<double>("StreetNumber");
+                    b.Property<string>("StreetNumber")
+                        .IsRequired();
 
                     b.Property<int>("Zipcode");
 
-                    b.HasKey("AdresseID");
+                    b.HasKey("AddressID");
 
                     b.ToTable("Adresses");
                 });
 
             modelBuilder.Entity("MCAPI.Models.Event", b =>
                 {
-                    b.Property<int>("EventID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("EventID")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Created");
+                    b.Property<string>("Created")
+                        .IsRequired();
 
-                    b.Property<string>("Description");
+                    b.Property<string>("Description")
+                        .IsRequired();
 
-                    b.Property<string>("EndDate");
+                    b.Property<string>("EndDate")
+                        .IsRequired();
 
-                    b.Property<string>("EndTime");
+                    b.Property<string>("EndTime")
+                        .IsRequired();
 
-                    b.Property<string>("Headline");
+                    b.Property<string>("Headline")
+                        .IsRequired();
 
                     b.Property<int>("RegistrationCount");
 
-                    b.Property<int?>("RouteID");
+                    b.Property<Guid>("RouteID");
 
-                    b.Property<string>("StartDate");
+                    b.Property<string>("StartDate")
+                        .IsRequired();
 
-                    b.Property<string>("StartTime");
+                    b.Property<string>("StartTime")
+                        .IsRequired();
 
-                    b.Property<int?>("UserID");
+                    b.Property<Guid?>("UserID");
 
                     b.HasKey("EventID");
 
@@ -83,9 +92,9 @@ namespace MCAPI.Migrations
 
             modelBuilder.Entity("MCAPI.Models.Registration", b =>
                 {
-                    b.Property<int>("UserID");
+                    b.Property<Guid?>("UserID");
 
-                    b.Property<int>("EventID");
+                    b.Property<Guid?>("EventID");
 
                     b.HasKey("UserID", "EventID");
 
@@ -96,13 +105,13 @@ namespace MCAPI.Migrations
 
             modelBuilder.Entity("MCAPI.Models.Route", b =>
                 {
-                    b.Property<int>("RouteID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("RouteID")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("AdresseID");
+                    b.Property<Guid>("AddressID");
 
-                    b.Property<string>("Created");
+                    b.Property<string>("Created")
+                        .IsRequired();
 
                     b.Property<double>("Distance");
 
@@ -112,11 +121,11 @@ namespace MCAPI.Migrations
 
                     b.Property<bool>("Toll");
 
-                    b.Property<int?>("UserID");
+                    b.Property<Guid?>("UserID");
 
                     b.HasKey("RouteID");
 
-                    b.HasIndex("AdresseID");
+                    b.HasIndex("AddressID");
 
                     b.HasIndex("UserID");
 
@@ -125,9 +134,8 @@ namespace MCAPI.Migrations
 
             modelBuilder.Entity("MCAPI.Models.User", b =>
                 {
-                    b.Property<int>("UserID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<Guid>("UserID")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Birthdate");
 
@@ -150,11 +158,12 @@ namespace MCAPI.Migrations
             modelBuilder.Entity("MCAPI.Models.Event", b =>
                 {
                     b.HasOne("MCAPI.Models.Route", "Route")
-                        .WithMany()
-                        .HasForeignKey("RouteID");
+                        .WithMany("Events")
+                        .HasForeignKey("RouteID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MCAPI.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Events")
                         .HasForeignKey("UserID");
                 });
 
@@ -173,12 +182,13 @@ namespace MCAPI.Migrations
 
             modelBuilder.Entity("MCAPI.Models.Route", b =>
                 {
-                    b.HasOne("MCAPI.Models.Adresse", "Adresse")
-                        .WithMany()
-                        .HasForeignKey("AdresseID");
+                    b.HasOne("MCAPI.Models.Address", "Address")
+                        .WithMany("Routes")
+                        .HasForeignKey("AddressID")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("MCAPI.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Routes")
                         .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618

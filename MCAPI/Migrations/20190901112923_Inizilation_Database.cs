@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MCAPI.Migrations
 {
-    public partial class CreateDbFirstTime : Migration
+    public partial class Inizilation_Database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,27 +11,25 @@ namespace MCAPI.Migrations
                 name: "Adresses",
                 columns: table => new
                 {
-                    AdresseID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    StreetName = table.Column<string>(nullable: true),
-                    StreetNumber = table.Column<double>(nullable: false),
-                    City = table.Column<string>(nullable: true),
+                    AddressID = table.Column<Guid>(nullable: false),
+                    StreetName = table.Column<string>(nullable: false),
+                    StreetNumber = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
                     Zipcode = table.Column<int>(nullable: false),
-                    Country = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: false),
                     Latitude = table.Column<string>(nullable: true),
                     Longitude = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Adresses", x => x.AdresseID);
+                    table.PrimaryKey("PK_Adresses", x => x.AddressID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserID = table.Column<Guid>(nullable: false),
                     Username = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
@@ -47,25 +45,24 @@ namespace MCAPI.Migrations
                 name: "Routes",
                 columns: table => new
                 {
-                    RouteID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    AdresseID = table.Column<int>(nullable: true),
+                    RouteID = table.Column<Guid>(nullable: false),
                     Distance = table.Column<double>(nullable: false),
                     Motorway = table.Column<bool>(nullable: false),
                     Ferry = table.Column<bool>(nullable: false),
                     Toll = table.Column<bool>(nullable: false),
-                    Created = table.Column<string>(nullable: true),
-                    UserID = table.Column<int>(nullable: true)
+                    Created = table.Column<string>(nullable: false),
+                    UserID = table.Column<Guid>(nullable: true),
+                    AddressID = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Routes", x => x.RouteID);
                     table.ForeignKey(
-                        name: "FK_Routes_Adresses_AdresseID",
-                        column: x => x.AdresseID,
+                        name: "FK_Routes_Adresses_AddressID",
+                        column: x => x.AddressID,
                         principalTable: "Adresses",
-                        principalColumn: "AdresseID",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "AddressID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Routes_Users_UserID",
                         column: x => x.UserID,
@@ -78,18 +75,17 @@ namespace MCAPI.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    EventID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Headline = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    StartDate = table.Column<string>(nullable: true),
-                    StartTime = table.Column<string>(nullable: true),
-                    EndDate = table.Column<string>(nullable: true),
-                    EndTime = table.Column<string>(nullable: true),
+                    EventID = table.Column<Guid>(nullable: false),
+                    Headline = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    StartDate = table.Column<string>(nullable: false),
+                    StartTime = table.Column<string>(nullable: false),
+                    EndDate = table.Column<string>(nullable: false),
+                    EndTime = table.Column<string>(nullable: false),
                     RegistrationCount = table.Column<int>(nullable: false),
-                    Created = table.Column<string>(nullable: true),
-                    RouteID = table.Column<int>(nullable: true),
-                    UserID = table.Column<int>(nullable: true)
+                    Created = table.Column<string>(nullable: false),
+                    UserID = table.Column<Guid>(nullable: true),
+                    RouteID = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -99,7 +95,7 @@ namespace MCAPI.Migrations
                         column: x => x.RouteID,
                         principalTable: "Routes",
                         principalColumn: "RouteID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Events_Users_UserID",
                         column: x => x.UserID,
@@ -112,8 +108,8 @@ namespace MCAPI.Migrations
                 name: "Registration",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(nullable: false),
-                    EventID = table.Column<int>(nullable: false)
+                    UserID = table.Column<Guid>(nullable: false),
+                    EventID = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -148,9 +144,9 @@ namespace MCAPI.Migrations
                 column: "EventID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Routes_AdresseID",
+                name: "IX_Routes_AddressID",
                 table: "Routes",
-                column: "AdresseID");
+                column: "AddressID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Routes_UserID",

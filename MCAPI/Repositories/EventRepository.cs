@@ -18,12 +18,12 @@ namespace MCAPI.IRepository
             return McDbContext.Events.ToList();
         }
 
-        public Event GetEventByID(int id)
+        public Event GetEventByID(Guid id)
         {
             return McDbContext.Events.Single(x => x.EventID == id);
         }
 
-        public IEnumerable<Event> GetEventsCreatedByUser(int id)
+        public IEnumerable<Event> GetEventsCreatedByUser(Guid id)
         {
             return McDbContext.Events.Where(x => x.User.UserID == id).ToList();
         }

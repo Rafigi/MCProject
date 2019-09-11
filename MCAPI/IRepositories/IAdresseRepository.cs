@@ -1,9 +1,10 @@
 ﻿using MCAPI.Models;
+using System;
 
 namespace MCAPI.IRepository
 {
-    public interface IAdresseRepository : IRepository<Adresse>
+    public interface IAdresseRepository : IRepository<Address>
     {
-        Adresse GetAdresseByID(int id);
+        Address GetAdresseByID(Guid id);
     }
 }

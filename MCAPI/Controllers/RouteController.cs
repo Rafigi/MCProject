@@ -1,44 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using MCAPI.Commands;
-using MCAPI.Messages;
+﻿using MCAPI.Commands;
 using MCAPI.Models;
-using MCAPI.Persistence;
 using MCAPI.ServicesBus;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace MCAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class RouteController : ControllerBase
     {
         private readonly IServiceBus _serviceBus;
-        public UserController(IServiceBus serviceBus)
+        public RouteController(IServiceBus serviceBus)
         {
             _serviceBus = serviceBus;
         }
-
-        // GET: api/User
+        // GET: api/Route
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return null;
+            return new string[] { "value1", "value2" };
         }
 
-        // POST: api/User
-        [HttpPost("Create")]
-        public IActionResult Create([FromBody] User user)
+        // POST: api/Route
+        [HttpPost]
+        public IActionResult CreateRoute([FromBody] Route route)
         {
-            _serviceBus.Add(new CreateUserCommand(user));
+            var addressId = Guid.NewGuid();
+            _serviceBus.Add(new CreateAddressCommand(addressId, route.Address));
+            _serviceBus.Add(new CreateRouteCommand(addressId, route));
             _serviceBus.Complete();
             return Ok();
         }
 
-        // PUT: api/User/5
+        // PUT: api/Route/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE: api/ApiWithActions/5
@@ -46,12 +46,6 @@ namespace MCAPI.Controllers
         public void Delete(int id)
         {
 
-        }
-
-        public class Test
-        {
-            public int ID { get; set; }
-            public string Name { get; set; }
         }
     }
 }

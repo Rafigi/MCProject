@@ -14,17 +14,17 @@ namespace MCAPI.IRepository
         {      
         }
 
-        public string GetEmailByID(int id)
+        public string GetEmailByID(Guid id)
         {
             return McDbContext.Users.Single(x => x.UserID == id).Email;
         }
 
-        public User GetUserByID(int id)
+        public User GetUserByID(Guid id)
         {
             return McDbContext.Users.Single(x => x.UserID == id);
         }
 
-        public string GetUsernameByID(int id)
+        public string GetUsernameByID(Guid id)
         {
             return McDbContext.Users.Single(x => x.UserID == id).Username;
         }

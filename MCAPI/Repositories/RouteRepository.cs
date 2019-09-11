@@ -3,7 +3,6 @@ using MCAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MCAPI.IRepository
 {
@@ -18,12 +17,12 @@ namespace MCAPI.IRepository
             return McDbContext.Routes.ToList();
         }
 
-        public Route GetRouteByID(int id)
+        public Route GetRouteByID(Guid id)
         {
             return McDbContext.Routes.Single(x => x.RouteID == id);
         }
 
-        public double GetRouteDistance(int id)
+        public double GetRouteDistance(Guid id)
         {
             return McDbContext.Routes.Single(x => x.RouteID == id).Distance;
         }
@@ -33,11 +32,11 @@ namespace MCAPI.IRepository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Route> GetUserCreatedRoutesByID(int id)
+        public IEnumerable<Route> GetUserCreatedRoutesByID(Guid id)
         {
             return McDbContext.Routes.Where(x => x.User.UserID == id);
         }
-        
+
         public McDbContext McDbContext
         {
             get { return _context as McDbContext; }
