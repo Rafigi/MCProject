@@ -1,4 +1,6 @@
 language: csharp
 solution: MCproject.sln
+mono:
+- none
 script:
-  - msbuild /p:Configuration=Release MCproject.sln
+ - msbuild /p:Configuration=Release MCproject.sln
