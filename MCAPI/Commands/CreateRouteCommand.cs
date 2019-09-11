@@ -26,7 +26,7 @@ namespace MCAPI.Commands
 
         public Task Execute(IUnitOfWork unitOfWork)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }

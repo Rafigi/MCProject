@@ -28,6 +28,7 @@ namespace MCAPI.Commands
         public Task Execute(IUnitOfWork unitOfWork)
         {
             unitOfWork.Adresses.Add(Address);
+            return Task.CompletedTask;
         }
     }
 }
