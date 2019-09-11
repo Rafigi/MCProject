@@ -1,7 +1,8 @@
 language: csharp
-mono: none
-dotnet: 2.2.108
 solution: MCProject.sln
-script:
-  - dotnet restore
-  - dotnet test
+before_install:
+  - sudo apt-get install nunit-console
+before_script:
+  - nuget restore MCProject.sln
+after_script:
+  - nunit-console Route\bin\Debug\netcoreapp2.2/MCRoute.Test.dll
