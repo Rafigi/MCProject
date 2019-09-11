@@ -1,11 +1,5 @@
 language: csharp
-solution: solution-name.sln
-mono:
- - none
+solution: MCproject.sln
 script:
-- dotnet restore
-install:
- - nuget restore MCProject.sln
- - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
-script:
- - msbuild /p:Configuration=Release MCProject.sln
+  - msbuild /p:Configuration=Release MCproject.sln
+
