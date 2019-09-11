@@ -1,8 +1,6 @@
 language: csharp
-solution: MCproject.sln
-install:
-  - dotnet restore
-  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+mono: none
+dotnet: 2.2
 script:
-  - dotnet build
-  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./MyProject.Tests/bin/Release/MyProject.Tests.dll
+    - dotnet restore
+    - dotnet build
