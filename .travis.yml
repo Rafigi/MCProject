@@ -1,7 +1,7 @@
 language: csharp
-dist: xenial
-mono: none
-dotnet: 2.2
+solution: solution-name.sln
+install:
+  - nuget restore solution-name.sln
+  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
-    - nuget restore MCProject.sln
-    - dotnet build
+  - msbuild /p:Configuration=Release solution-name.sln
