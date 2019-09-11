@@ -1,6 +1,0 @@
-language: csharp
-solution: MCProject.sln
-script:
- - dotnet restore
-install:
- - nuget restore MCProject.sln
