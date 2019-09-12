@@ -5,4 +5,4 @@ before_install:
 before_script:
   - nuget restore MCProject.sln
 after_script:
-  - nunit-console Route\bin\Debug\netcoreapp2.2/MCRoute.Test.dll
+  - nunit-console bin/Release//MCRoute.Test.dll
