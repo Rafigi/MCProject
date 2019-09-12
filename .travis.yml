@@ -1,8 +1,8 @@
 language: csharp
-solution: MCProject.sln
-before_install:
-  - sudo apt-get install nunit-console
-before_script:
-  - nuget restore MCProject.sln
-after_script:
-  - nunit-console bin/Release//MCRoute.Test.dll
+solution: MCproject.sln
+install:
+  - nuget restore MCproject.sln
+  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+script:
+  - msbuild /p:Configuration=Release MCproject.sln
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./MCproject/bin/Release/MCRoute.Tests.dll
