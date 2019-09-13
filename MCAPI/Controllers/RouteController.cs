@@ -1,5 +1,6 @@
 ﻿using MCAPI.Commands;
 using MCAPI.Factory;
+using MCAPI.IRepository;
 using MCAPI.Models;
 using MCAPI.ServicesBus;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,25 @@ namespace MCAPI.Controllers
     {
         private readonly IServiceBus _serviceBus;
         private readonly IRouteFactory _routeFactory;
-        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory )
+        private readonly IRouteRepository _routeRepository; 
+        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IRouteRepository routeRepository )
         {
             _serviceBus = serviceBus;
             _routeFactory = routeFactory;
+            _routeRepository = routeRepository;
+        }
+
+        // GET: api/Route By ID
+        [HttpGet("{id}")]
+        public Route Get(Guid id)
+        {
+            return _routeRepository.GetRouteByID(id);
         }
         // GET: api/Route
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Route> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _routeRepository.GetAll();
         }
 
         // POST: api/Route
@@ -47,9 +57,9 @@ namespace MCAPI.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(Route route)
         {
-
+            _routeRepository.Remove(route);
         }
     }
 }

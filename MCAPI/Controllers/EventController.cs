@@ -1,5 +1,6 @@
 ﻿using MCAPI.Commands;
 using MCAPI.Factory;
+using MCAPI.IRepository;
 using MCAPI.Models;
 using MCAPI.ServicesBus;
 using Microsoft.AspNetCore.Mvc;
@@ -12,18 +13,30 @@ namespace MCAPI.Controllers
     [ApiController]
     public class EventController : ControllerBase
     {
-        IServiceBus _serviceBus;
-        IEventFactory _eventFactory;
-        public EventController(IServiceBus serviceBus, IEventFactory eventFactory)
+        private readonly IServiceBus _serviceBus;
+        private readonly IEventFactory _eventFactory;
+        private readonly IEventRepository _eventRepository;
+
+        public EventController(IServiceBus serviceBus, IEventFactory eventFactory, IEventRepository eventRepository)
         {
             _serviceBus = serviceBus;
             _eventFactory = eventFactory;
+            _eventRepository = eventRepository;
+        }
+
+
+
+        // GET: api/Event/id By ID
+        [HttpGet("{id}")]
+        public Event GetAll(Guid id )
+        {
+            return _eventRepository.GetEventByID(id);
         }
         // GET: api/Event
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Event> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return _eventRepository.GetAll();
         }
 
         // POST: api/Event

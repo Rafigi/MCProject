@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MCAPI.Commands;
 using MCAPI.Factory;
+using MCAPI.IRepository;
 using MCAPI.Messages;
 using MCAPI.Models;
 using MCAPI.Persistence;
@@ -15,18 +16,27 @@ namespace MCAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IServiceBus _serviceBus;
-        IUserFactory _userFactory;
-        public UserController(IServiceBus serviceBus, IUserFactory userFactory)
+        private readonly IUserFactory _userFactory;
+        private readonly IUserRepository _userRepository;
+        public UserController(IServiceBus serviceBus, IUserFactory userFactory, IUserRepository userRepository)
         {
             _serviceBus = serviceBus;
             _userFactory = userFactory;
+            _userRepository = userRepository;
         }
 
-        // GET: api/User
+        // GET: api/Users
         [HttpGet]
-        public IEnumerable<string> Get()
+        public User GetUser(Guid id)
         {
-            return null;
+            return _userRepository.GetUserByID(id);
+        }
+
+        // GET: api/Users
+        [HttpGet]
+        public IEnumerable<User> GetAll()
+        {
+            return _userRepository.GetAll();
         }
 
         // POST: api/User
@@ -42,19 +52,14 @@ namespace MCAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(User user)
         {
-
-        }
-
-        public class Test
-        {
-            public int ID { get; set; }
-            public string Name { get; set; }
+            _userRepository.Remove(user);
         }
     }
 }
