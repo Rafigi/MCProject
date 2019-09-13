@@ -1,4 +1,5 @@
 ﻿using MCAPI.Commands;
+using MCAPI.Factory;
 using MCAPI.Models;
 using MCAPI.ServicesBus;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,11 @@ namespace MCAPI.Controllers
     public class RouteController : ControllerBase
     {
         private readonly IServiceBus _serviceBus;
-        public RouteController(IServiceBus serviceBus)
+        private readonly IRouteFactory _routeFactory;
+        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory )
         {
             _serviceBus = serviceBus;
+            _routeFactory = routeFactory;
         }
         // GET: api/Route
         [HttpGet]
@@ -27,9 +30,10 @@ namespace MCAPI.Controllers
         [HttpPost]
         public IActionResult CreateRoute([FromBody] Route route)
         {
-            var addressId = Guid.NewGuid();
-            _serviceBus.Add(new CreateAddressCommand(addressId, route.Address));
-            _serviceBus.Add(new CreateRouteCommand(addressId, route));
+            var _route = _routeFactory.Create(route);
+
+            _serviceBus.Add(new CreateAddressCommand(_route.Address));
+            _serviceBus.Add(new CreateRouteCommand(_route));
             _serviceBus.Complete();
             return Ok();
         }

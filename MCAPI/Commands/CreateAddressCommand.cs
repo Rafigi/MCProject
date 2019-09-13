@@ -9,12 +9,11 @@ namespace MCAPI.Commands
     {
         public Address Address { get; private set; }
 
-        public CreateAddressCommand(Guid addressID, Address address)
+        public CreateAddressCommand(Address address)
         {
             Address = new Address()
             {
-
-                AddressID = addressID,
+                AddressID = address.AddressID,
                 StreetName = address.StreetName,
                 StreetNumber = address.StreetNumber,
                 City = address.City,

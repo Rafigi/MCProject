@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MCAPI.Commands;
+using MCAPI.Factory;
 using MCAPI.Messages;
 using MCAPI.Models;
 using MCAPI.Persistence;
@@ -14,9 +15,11 @@ namespace MCAPI.Controllers
     public class UserController : ControllerBase
     {
         private readonly IServiceBus _serviceBus;
-        public UserController(IServiceBus serviceBus)
+        IUserFactory _userFactory;
+        public UserController(IServiceBus serviceBus, IUserFactory userFactory)
         {
             _serviceBus = serviceBus;
+            _userFactory = userFactory;
         }
 
         // GET: api/User
@@ -30,7 +33,7 @@ namespace MCAPI.Controllers
         [HttpPost("Create")]
         public IActionResult Create([FromBody] User user)
         {
-            _serviceBus.Add(new CreateUserCommand(user));
+            _serviceBus.Add(new CreateUserCommand(_userFactory.Create(user)));
             _serviceBus.Complete();
             return Ok();
         }
