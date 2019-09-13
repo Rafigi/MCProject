@@ -9,12 +9,12 @@ namespace MCAPI.Commands
     {
         public Route Route { get; private set; }
 
-        public CreateRouteCommand(Guid addressID, Route route)
+        public CreateRouteCommand(Route route)
         {
             Route = new Route()
             {
-                RouteID = Guid.NewGuid(),
-                AddressID = addressID,
+                RouteID = route.RouteID,
+                AddressID = route.AddressID,
                 Created = route.Created,
                 Distance = route.Distance,
                 Ferry = route.Ferry,

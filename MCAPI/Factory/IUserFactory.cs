@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MCAPI.Factory
 {
-    public class CreateRouteFactory
+    public interface IUserFactory : IFactory<User>
     {
     }
 }

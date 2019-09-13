@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 
 namespace MCAPI.Factory
 {
-    interface IFactory
+    public interface IFactory<TType> where TType : class
     {
+        TType Create(TType type);
+        TType Update(TType type);
     }
 }

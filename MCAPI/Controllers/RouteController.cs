@@ -1,4 +1,6 @@
 ﻿using MCAPI.Commands;
+using MCAPI.Factory;
+using MCAPI.IRepository;
 using MCAPI.Models;
 using MCAPI.ServicesBus;
 using Microsoft.AspNetCore.Mvc;
@@ -12,24 +14,36 @@ namespace MCAPI.Controllers
     public class RouteController : ControllerBase
     {
         private readonly IServiceBus _serviceBus;
-        public RouteController(IServiceBus serviceBus)
+        private readonly IRouteFactory _routeFactory;
+        private readonly IRouteRepository _routeRepository; 
+        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IRouteRepository routeRepository )
         {
             _serviceBus = serviceBus;
+            _routeFactory = routeFactory;
+            _routeRepository = routeRepository;
+        }
+
+        // GET: api/Route By ID
+        [HttpGet("{id}")]
+        public Route Get(Guid id)
+        {
+            return _routeRepository.GetRouteByID(id);
         }
         // GET: api/Route
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Route> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _routeRepository.GetAll();
         }
 
         // POST: api/Route
         [HttpPost]
         public IActionResult CreateRoute([FromBody] Route route)
         {
-            var addressId = Guid.NewGuid();
-            _serviceBus.Add(new CreateAddressCommand(addressId, route.Address));
-            _serviceBus.Add(new CreateRouteCommand(addressId, route));
+            var _route = _routeFactory.Create(route);
+
+            _serviceBus.Add(new CreateAddressCommand(_route.Address));
+            _serviceBus.Add(new CreateRouteCommand(_route));
             _serviceBus.Complete();
             return Ok();
         }
@@ -43,9 +57,9 @@ namespace MCAPI.Controllers
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(Route route)
         {
-
+            _routeRepository.Remove(route);
         }
     }
 }
