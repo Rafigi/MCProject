@@ -44,7 +44,7 @@ namespace MCRoute.Test
             };
            
 
-            CreateRouteCommand createRouteCommand = new CreateRouteCommand(Guid.NewGuid(), route);
+            CreateRouteCommand createRouteCommand = new CreateRouteCommand(route);
             Assert.IsFalse(route.Ferry, "Ferry should be false");
             Assert.IsFalse(route.Motorway, "Motorway should be false");
             Assert.IsNotNull(route.Address, "Address should not be null");
