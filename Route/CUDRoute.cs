@@ -1,9 +1,10 @@
 using MCAPI.Commands;
-using MCAPI.Models;
+using MCAPI.McWorld.Route;
+using MCAPI.McWorld.Shared.Models;
 using NUnit.Framework;
 using System;
 
-namespace MCRoute.Test
+namespace Tests.MCRoute.Test
 {
     public class CUDRoute
     {
