@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\McWorld.Address\McWorld.Address.csproj" />
+    <ProjectReference Include="..\McWorld.Event\McWorld.Event.csproj" />
+    <ProjectReference Include="..\MCWorld.Route\McWorld.Route.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
   </ItemGroup>
 
