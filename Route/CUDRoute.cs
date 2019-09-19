@@ -1,10 +1,10 @@
-using MCAPI.Commands;
-using MCAPI.Models;
-using NUnit.Framework;
-using System;
-
-namespace MCRoute.Test
+namespace Tests.MCRoute.Test
 {
+    using McWorld.Route;
+    using McWorld.Shared.Models;
+    using McWorld.User;
+    using NUnit.Framework;
+    using System;
     public class CUDRoute
     {
         [SetUp]
@@ -42,9 +42,9 @@ namespace MCRoute.Test
                 User = null,
                 UserID = Guid.NewGuid()
             };
-           
 
-            CreateRouteCommand createRouteCommand = new CreateRouteCommand(Guid.NewGuid(), route);
+
+            CreateRouteCommand createRouteCommand = new CreateRouteCommand(route);
             Assert.IsFalse(route.Ferry, "Ferry should be false");
             Assert.IsFalse(route.Motorway, "Motorway should be false");
             Assert.IsNotNull(route.Address, "Address should not be null");
