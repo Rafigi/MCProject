@@ -6,6 +6,7 @@ namespace McWorld.Web.Controllers
     using McWorld.Shared.Models;
     using McWorld.Shared.ServicesBus;
     using Microsoft.AspNetCore.Mvc;
+    using McWorld.User;
     using System;
     using System.Collections.Generic;
     [Route("api/[controller]")]
@@ -38,10 +39,10 @@ namespace McWorld.Web.Controllers
 
         // POST: api/User
         [HttpPost]
-        public IActionResult Create([FromBody] string value)
+        public IActionResult Create([FromBody] User user)
         {
-            //_serviceBus.Add(new CreateUserCommand(_userFactory.Create(user)));
-            //_serviceBus.Complete();
+            _serviceBus.Add(new CreateUserCommand(_userFactory.Create(user)));
+            _serviceBus.Complete();
             return Ok();
         }
 

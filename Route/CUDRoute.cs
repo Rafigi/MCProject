@@ -2,6 +2,7 @@ namespace Tests.MCRoute.Test
 {
     using McWorld.Route;
     using McWorld.Shared.Models;
+    using McWorld.User;
     using NUnit.Framework;
     using System;
     public class CUDRoute
@@ -68,13 +69,13 @@ namespace Tests.MCRoute.Test
                 Routes = null
             };
 
-            //CreateUserCommand createUserCommand = new CreateUserCommand(user);
-            //Assert.IsNotNull(user.UserID, "UserID cant be null");
-            //Assert.IsNotEmpty(user.Username, "Username can not be empty");
-            //Assert.IsNotEmpty(user.Password, "Password can not be empty");
-            //Assert.IsNotEmpty(user.Created, "Created can not be empty");
-            //Assert.IsNotEmpty(user.Birthdate, "Birthday can not be empty");
-            //Assert.IsNotEmpty(user.Email, "Email can not be empty");
+            CreateUserCommand createUserCommand = new CreateUserCommand(user);
+            Assert.IsNotNull(user.UserID, "UserID cant be null");
+            Assert.IsNotEmpty(user.Username, "Username can not be empty");
+            Assert.IsNotEmpty(user.Password, "Password can not be empty");
+            Assert.IsNotEmpty(user.Created, "Created can not be empty");
+            Assert.IsNotEmpty(user.Birthdate, "Birthday can not be empty");
+            Assert.IsNotEmpty(user.Email, "Email can not be empty");
         }
     }
 }

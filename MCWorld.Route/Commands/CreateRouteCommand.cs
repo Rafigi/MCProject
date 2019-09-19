@@ -25,6 +25,7 @@
 
         public Task Execute(IUnitOfWork unitOfWork)
         {
+            unitOfWork.Routes.Add(Route);
             return Task.CompletedTask;
         }
     }

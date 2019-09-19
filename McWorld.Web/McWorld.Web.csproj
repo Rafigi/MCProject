@@ -30,6 +30,7 @@
     <ProjectReference Include="..\McWorld.Event\McWorld.Event.csproj" />
     <ProjectReference Include="..\MCWorld.Route\McWorld.Route.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
+    <ProjectReference Include="..\McWorld.User\McWorld.User.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
