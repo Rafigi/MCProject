@@ -1,7 +1,7 @@
-﻿namespace MCAPI.McWorld.Shared.ServicesBus
+﻿namespace McWorld.Shared.ServicesBus
 {
-    using MCAPI.McWorld.Shared.Messages;
-    using MCAPI.McWorld.Shared.Persistence;
+    using McWorld.Shared.Messages;
+    using McWorld.Shared.Persistence;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     public class ServiceBus : IServiceBus

@@ -1,8 +1,8 @@
-﻿namespace MCAPI.McWorld.Address
+﻿namespace McWorld.Address
 {
-    using MCAPI.McWorld.Shared.Models;
-    using MCAPI.McWorld.Shared.Messages;
-    using MCAPI.McWorld.Shared.Persistence;
+    using McWorld.Shared.Models;
+    using McWorld.Shared.Messages;
+    using McWorld.Shared.Persistence;
     using System.Threading.Tasks;
     public class CreateAddressCommand : ICommand
     {

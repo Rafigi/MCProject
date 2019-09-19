@@ -1,7 +1,7 @@
 ﻿
-namespace MCAPI.McWorld.Shared.Factory
+namespace McWorld.Shared.Factory
 {
-    using MCAPI.McWorld.Shared.Models;
+    using McWorld.Shared.Models;
     using System;
     public class AddressFactory : IAddressFactory
     {

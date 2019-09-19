@@ -1,6 +1,6 @@
-﻿namespace MCAPI.McWorld.Shared.Data
+﻿namespace McWorld.Shared.Data
 {
-    using MCAPI.McWorld.Shared.Models;
+    using McWorld.Shared.Models;
     using Microsoft.EntityFrameworkCore;
     public class McDbContext : DbContext
     {

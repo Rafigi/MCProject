@@ -1,4 +1,4 @@
-﻿namespace MCAPI.McWorld.Shared.Models
+﻿namespace McWorld.Shared.Models
 {
     using System;
     using System.Collections.Generic;

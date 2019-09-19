@@ -16,7 +16,6 @@
   <ItemGroup>
     <ProjectReference Include="..\MCWorld.Route\McWorld.Route.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
-    <ProjectReference Include="..\McWorld.User\McWorld.User.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,15 +1,16 @@
-using MCAPI.McWorld.Shared.Data;
-using MCAPI.McWorld.Shared.Persistence;
-using MCAPI.McWorld.Shared.ServicesBus;
+using McWorld.Shared.Data;
+using McWorld.Shared.Persistence;
+using McWorld.Shared.ServicesBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace WebApplication1
+namespace McWorld.Web
 {
     public class Startup
     {
@@ -32,7 +33,7 @@ namespace WebApplication1
             });
 
             services.AddDbContext<McDbContext>(options =>
-          options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
+         options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
 
             //Add DI Services
             services.AddScoped<IServiceBus, ServiceBus>();

@@ -1,5 +1,4 @@
-﻿
-namespace MCAPI.McWorld.Shared.IRepository
+﻿namespace McWorld.Shared.IRepository
 {
     using System;
     using System.Collections.Generic;

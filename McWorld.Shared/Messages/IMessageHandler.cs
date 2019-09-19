@@ -1,4 +1,4 @@
-﻿namespace MCAPI.McWorld.Shared.Messages
+﻿namespace McWorld.Shared.Messages
 {
     using System.Threading.Tasks;
     public interface IMessageHandler<in T>

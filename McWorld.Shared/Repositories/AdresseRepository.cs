@@ -1,9 +1,8 @@
-﻿
-namespace MCAPI.McWorld.Shared.Repository
+﻿namespace McWorld.Shared.Repository
 {
-    using MCAPI.McWorld.Shared.Data;
-    using MCAPI.McWorld.Shared.IRepository;
-    using MCAPI.McWorld.Shared.Models;
+    using McWorld.Shared.Data;
+    using McWorld.Shared.IRepository;
+    using McWorld.Shared.Models;
     using System;
     public class AdresseRepository : Repository<Address>, IAdresseRepository
     {

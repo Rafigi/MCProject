@@ -1,6 +1,6 @@
-﻿namespace MCAPI.McWorld.Shared.Persistence
+﻿namespace McWorld.Shared.Persistence
 {
-    using MCAPI.McWorld.Shared.IRepository;
+    using McWorld.Shared.IRepository;
     using System;
     public interface IUnitOfWork : IDisposable
     {

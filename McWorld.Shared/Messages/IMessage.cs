@@ -1,4 +1,4 @@
-﻿namespace MCAPI.McWorld.Shared.Messages
+﻿namespace McWorld.Shared.Messages
 {
     public interface IMessage
     {

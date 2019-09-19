@@ -1,4 +1,4 @@
-﻿namespace MCAPI.McWorld.Shared.Factory
+﻿namespace McWorld.Shared.Factory
 {
     public interface IFactory<TType> where TType : class
     {

@@ -1,5 +1,4 @@
-﻿
-namespace MCAPI.McWorld.Shared.Factory
+﻿namespace McWorld.Shared.Factory
 {
     using System;
     public class Factory : IFactory<Type>

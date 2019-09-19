@@ -1,7 +1,6 @@
-﻿
-namespace MCAPI.McWorld.Shared.Factory
+﻿namespace McWorld.Shared.Factory
 {
-    using MCAPI.McWorld.Shared.Models;
+    using McWorld.Shared.Models;
     public interface IUserFactory : IFactory<User>
     {
     }

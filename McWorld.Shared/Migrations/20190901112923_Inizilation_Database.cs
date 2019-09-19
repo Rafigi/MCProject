@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace MCAPI.Migrations
+namespace McWorld.Shared.Migrations
 {
     public partial class Inizilation_Database : Migration
     {

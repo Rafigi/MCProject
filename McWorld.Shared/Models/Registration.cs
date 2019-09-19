@@ -1,5 +1,4 @@
-﻿
-namespace MCAPI.McWorld.Shared.Models
+﻿namespace McWorld.Shared.Models
 {
     using System;
     public class Registration

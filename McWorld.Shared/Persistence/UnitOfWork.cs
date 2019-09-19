@@ -1,9 +1,8 @@
-﻿
-namespace MCAPI.McWorld.Shared.Persistence
+﻿namespace McWorld.Shared.Persistence
 {
-    using MCAPI.McWorld.Shared.Data;
-    using MCAPI.McWorld.Shared.IRepository;
-    using MCAPI.McWorld.Shared.Repository;
+    using McWorld.Shared.Data;
+    using McWorld.Shared.IRepository;
+    using McWorld.Shared.Repository;
 
     public class UnitOfWork : IUnitOfWork
     {
