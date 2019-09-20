@@ -3,3 +3,5 @@ mono: none
 dotnet: 2.2
 script:
  - dotnet restore
+ - msbuild /p:Configuration=Release MCProject.sln
+ - mono ./testrunner/NUnit.ConsoleRunner.3.15.1"/tools/nunit3-console.exe ./Route/bin/Release/MCRoute.Test.dll
