@@ -3,3 +3,4 @@ mono: none
 dotnet: 2.2
 script:
  - dotnet restore
+ - dotnet test Route/MCRoute.Test.csproj
