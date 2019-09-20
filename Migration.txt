@@ -1,0 +1,4 @@
+This is how the migration will work from now on!
+Remember to choose the McWolrd.Web as the solution starter.!
+------------------------------------------------------------------------
+Add-Migration InitialCreate -Context McDbContext -Project McWorld.Shared

@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace McWorld.Shared.Migrations
 {
-    public partial class Inizilation_Database : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,8 +33,8 @@ namespace McWorld.Shared.Migrations
                     Username = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
-                    Birthdate = table.Column<string>(nullable: true),
-                    Created = table.Column<string>(nullable: false)
+                    Birthdate = table.Column<string>(nullable: false),
+                    Created = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

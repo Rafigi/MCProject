@@ -17,7 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{20B7C274
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWorld.Web", "McWorld.Web\McWorld.Web.csproj", "{7BF47AF4-2050-4662-9E1F-3B68D0802955}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McWorld.User", "McWorld.User\McWorld.User.csproj", "{3584D1E4-2EBC-4781-95B7-D509B98D3561}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWorld.User", "McWorld.User\McWorld.User.csproj", "{3584D1E4-2EBC-4781-95B7-D509B98D3561}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{FA9C5FC5-B7B9-4D2A-AE89-804B9BD93D7B}"
+	ProjectSection(SolutionItems) = preProject
+		Migration.txt = Migration.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
