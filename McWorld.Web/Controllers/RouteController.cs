@@ -23,27 +23,29 @@
             _routeFactory = routeFactory;
             _routeRepository = routeRepository;
         }
-        // GET: api/Route
+
+        // GET: api/Route/GetAll
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Route> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return _routeRepository.GetAll();
         }
 
+
         // GET: api/Route/5
-        [HttpGet("{id}", Name = "Get")]
-        public Route Get(Guid id)
+        [HttpGet("{id}")]
+        public Route GetById(Guid id)
         {
             return _routeRepository.GetRouteByID(id);
         }
 
-        // POST: api/Route
+        // POST: api/Route/Create
         [HttpPost]
         public IActionResult Create([FromBody] Route route)
         {
             var _route = _routeFactory.Create(route);
 
-            _serviceBus.Add(new CreateAddressCommand(_route.Address));
+            _serviceBus.Add(new CreateAddressCommand(_route.Addresses));
             _serviceBus.Add(new CreateRouteCommand(_route));
             _serviceBus.Complete();
             return Ok();

@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
     public class Address
     {
         [Key]
-        public Guid AddressID { get; set; }
+        public Guid AddressId { get; set; }
         [Required]
         public string StreetName { get; set; }
         [Required]
@@ -20,7 +21,5 @@
         public string Latitude { get; set; }
         public string Longitude { get; set; }
 
-        //One to Many Relationship
-        public List<Route> Routes { get; set; }
     }
 }

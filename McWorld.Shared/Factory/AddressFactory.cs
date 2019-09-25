@@ -9,7 +9,7 @@ namespace McWorld.Shared.Factory
         {
             return new Address()
             {
-                AddressID = Guid.NewGuid(),
+                AddressId = Guid.NewGuid(),
                 StreetName = address.StreetName,
                 StreetNumber = address.StreetNumber,
                 City = address.City,

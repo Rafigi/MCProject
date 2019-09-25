@@ -28,14 +28,14 @@
 
         // GET: api/Event
         [HttpGet]
-        public IEnumerable<Event> Get()
+        public IEnumerable<Event> GetAll()
         {
             return _eventRepository.GetAll();
         }
 
         // GET: api/Event/5
-        [HttpGet("{id}", Name = "Get")]
-        public Event Get(Guid id)
+        [HttpGet("{id}")]
+        public Event GetById(Guid id)
         {
             return _eventRepository.GetEventByID(id);
         }
@@ -47,7 +47,7 @@
             var _event = _eventFactory.Create(@event);
             _serviceBus.Add(new CreateEventCommand(_event));
             _serviceBus.Add(new CreateRouteCommand(_event.Route));
-            _serviceBus.Add(new CreateAddressCommand(_event.Route.Address));
+            //_serviceBus.Add(new CreateAddressCommand(_event.Route.RouteAddresses));
         }
 
         // PUT: api/Event/5

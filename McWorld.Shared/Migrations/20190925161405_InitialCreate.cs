@@ -8,24 +8,6 @@ namespace McWorld.Shared.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Adresses",
-                columns: table => new
-                {
-                    AddressID = table.Column<Guid>(nullable: false),
-                    StreetName = table.Column<string>(nullable: false),
-                    StreetNumber = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    Zipcode = table.Column<int>(nullable: false),
-                    Country = table.Column<string>(nullable: false),
-                    Latitude = table.Column<string>(nullable: true),
-                    Longitude = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Adresses", x => x.AddressID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -51,24 +33,42 @@ namespace McWorld.Shared.Migrations
                     Ferry = table.Column<bool>(nullable: false),
                     Toll = table.Column<bool>(nullable: false),
                     Created = table.Column<string>(nullable: false),
-                    UserID = table.Column<Guid>(nullable: true),
-                    AddressID = table.Column<Guid>(nullable: false)
+                    UserID = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Routes", x => x.RouteID);
-                    table.ForeignKey(
-                        name: "FK_Routes_Adresses_AddressID",
-                        column: x => x.AddressID,
-                        principalTable: "Adresses",
-                        principalColumn: "AddressID",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Routes_Users_UserID",
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Address",
+                columns: table => new
+                {
+                    AddressId = table.Column<Guid>(nullable: false),
+                    StreetName = table.Column<string>(nullable: false),
+                    StreetNumber = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    Zipcode = table.Column<int>(nullable: false),
+                    Country = table.Column<string>(nullable: false),
+                    Latitude = table.Column<string>(nullable: true),
+                    Longitude = table.Column<string>(nullable: true),
+                    RouteID = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Address", x => x.AddressId);
+                    table.ForeignKey(
+                        name: "FK_Address_Routes_RouteID",
+                        column: x => x.RouteID,
+                        principalTable: "Routes",
+                        principalColumn: "RouteID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,6 +129,11 @@ namespace McWorld.Shared.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Address_RouteID",
+                table: "Address",
+                column: "RouteID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Events_RouteID",
                 table: "Events",
                 column: "RouteID");
@@ -144,11 +149,6 @@ namespace McWorld.Shared.Migrations
                 column: "EventID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Routes_AddressID",
-                table: "Routes",
-                column: "AddressID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Routes_UserID",
                 table: "Routes",
                 column: "UserID");
@@ -157,6 +157,9 @@ namespace McWorld.Shared.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Address");
+
+            migrationBuilder.DropTable(
                 name: "Registration");
 
             migrationBuilder.DropTable(
@@ -164,9 +167,6 @@ namespace McWorld.Shared.Migrations
 
             migrationBuilder.DropTable(
                 name: "Routes");
-
-            migrationBuilder.DropTable(
-                name: "Adresses");
 
             migrationBuilder.DropTable(
                 name: "Users");

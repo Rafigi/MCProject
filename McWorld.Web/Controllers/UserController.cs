@@ -23,16 +23,16 @@ namespace McWorld.Web.Controllers
             _userFactory = userFactory;
             _userRepository = userRepository;
         }
-        // GET: api/User
+        // GET: api/User/GetAll
         [HttpGet]
-        public IEnumerable<User> Get()
+        public IEnumerable<User> GetAll()
         {
             return _userRepository.GetAll();
         }
 
         // GET: api/User/5
-        [HttpGet("{id}", Name = "Get")]
-        public User Get(Guid id)
+        [HttpGet("{id}")]
+        public User GetById(Guid id)
         {
             return _userRepository.GetUserByID(id);
         }

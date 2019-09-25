@@ -21,8 +21,8 @@
         //ForeignKeys! Types have to be there!
         public Guid? UserID { get; set; }
         public User User { get; set; }
-        public Guid AddressID { get; set; }
-        public Address Address { get; set; }
+
+        public ICollection<Address>  Addresses { get; set; }
 
         //A One to many relationship
         public List<Event> Events { get; set; }

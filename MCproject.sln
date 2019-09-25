@@ -22,6 +22,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{FA9C5FC5-B7B9-4D2A-AE89-804B9BD93D7B}"
 	ProjectSection(SolutionItems) = preProject
 		Migration.txt = Migration.txt
+		Scaffolding.txt = Scaffolding.txt
 	EndProjectSection
 EndProject
 Global

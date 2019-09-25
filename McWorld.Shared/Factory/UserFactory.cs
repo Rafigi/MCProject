@@ -11,6 +11,7 @@
                 UserID = Guid.NewGuid(),
                 Password = user.Password,
                 Username = user.Username,
+                Birthdate = user.Birthdate,
                 Email = user.Email,
                 Created = user.Created
             };

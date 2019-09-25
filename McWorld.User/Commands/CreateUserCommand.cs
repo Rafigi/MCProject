@@ -7,10 +7,10 @@
 
     public class CreateUserCommand : ICommand
     {
-        public User user { get; set; }
+        public User _user { get; private set; }
         public CreateUserCommand(User user)
         {
-            user = new User
+            _user = new User()
             {
                 UserID = user.UserID,
                 Username = user.Username,
@@ -23,7 +23,7 @@
         }
         public Task Execute(IUnitOfWork unitOfWork)
         {
-            unitOfWork.Users.Add(user);
+            unitOfWork.Users.Add(_user);
             return Task.CompletedTask;
         }
     }

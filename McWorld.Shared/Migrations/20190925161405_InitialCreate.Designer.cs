@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace McWorld.Shared.Migrations
 {
     [DbContext(typeof(McDbContext))]
-    [Migration("20190920145819_InitialCreate")]
+    [Migration("20190925161405_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,34 +20,6 @@ namespace McWorld.Shared.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("McWorld.Shared.Models.Address", b =>
-                {
-                    b.Property<Guid>("AddressID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("City")
-                        .IsRequired();
-
-                    b.Property<string>("Country")
-                        .IsRequired();
-
-                    b.Property<string>("Latitude");
-
-                    b.Property<string>("Longitude");
-
-                    b.Property<string>("StreetName")
-                        .IsRequired();
-
-                    b.Property<string>("StreetNumber")
-                        .IsRequired();
-
-                    b.Property<int>("Zipcode");
-
-                    b.HasKey("AddressID");
-
-                    b.ToTable("Adresses");
-                });
 
             modelBuilder.Entity("McWorld.Shared.Models.Event", b =>
                 {
@@ -108,8 +80,6 @@ namespace McWorld.Shared.Migrations
                     b.Property<Guid>("RouteID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AddressID");
-
                     b.Property<string>("Created")
                         .IsRequired();
 
@@ -124,8 +94,6 @@ namespace McWorld.Shared.Migrations
                     b.Property<Guid?>("UserID");
 
                     b.HasKey("RouteID");
-
-                    b.HasIndex("AddressID");
 
                     b.HasIndex("UserID");
 
@@ -182,14 +150,46 @@ namespace McWorld.Shared.Migrations
 
             modelBuilder.Entity("McWorld.Shared.Models.Route", b =>
                 {
-                    b.HasOne("McWorld.Shared.Models.Address", "Address")
-                        .WithMany("Routes")
-                        .HasForeignKey("AddressID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("McWorld.Shared.Models.User", "User")
                         .WithMany("Routes")
                         .HasForeignKey("UserID");
+
+                    b.OwnsMany("McWorld.Shared.Models.Address", "Addresses", b1 =>
+                        {
+                            b1.Property<Guid>("AddressId")
+                                .ValueGeneratedOnAdd();
+
+                            b1.Property<string>("City")
+                                .IsRequired();
+
+                            b1.Property<string>("Country")
+                                .IsRequired();
+
+                            b1.Property<string>("Latitude");
+
+                            b1.Property<string>("Longitude");
+
+                            b1.Property<Guid>("RouteID");
+
+                            b1.Property<string>("StreetName")
+                                .IsRequired();
+
+                            b1.Property<string>("StreetNumber")
+                                .IsRequired();
+
+                            b1.Property<int>("Zipcode");
+
+                            b1.HasKey("AddressId");
+
+                            b1.HasIndex("RouteID");
+
+                            b1.ToTable("Address");
+
+                            b1.HasOne("McWorld.Shared.Models.Route")
+                                .WithMany("Addresses")
+                                .HasForeignKey("RouteID")
+                                .OnDelete(DeleteBehavior.Cascade);
+                        });
                 });
 #pragma warning restore 612, 618
         }
