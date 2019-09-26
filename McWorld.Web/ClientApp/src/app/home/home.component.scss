@@ -1,0 +1,21 @@
+.bg {
+  /* Full height */
+  /* Center and scale the image nicely   */
+  height: 58rem;
+  background-size: cover;
+  background-image: url("/../../assets/HomeBackground.jpg");
+}
+
+.HomeButton {
+  width: 10rem;
+  height: 15rem;
+  background-color: rgb(255,255,255);
+  opacity: 0.75;
+  border-radius: 50%;
+  font-size: 5rem;
+  font-family: 'Handlee', cursive;
+}
+
+.HomeButton:hover {
+  opacity: 0.9;
+}
