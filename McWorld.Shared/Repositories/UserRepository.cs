@@ -21,7 +21,7 @@
             return McDbContext.Users.Single(x => x.UserID == id);
         }
 
-        public string GetUsernameByID(Guid id)
+        public string GetUsernameByID(Guid? id)
         {
             return McDbContext.Users.Single(x => x.UserID == id).Username;
         }
