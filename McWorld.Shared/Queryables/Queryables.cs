@@ -24,7 +24,7 @@
             _userRepository = userRepository;
             _adresseRepository = adresseRepository;
             _routeRepository = routeRepository;
-            _eventRepository = eventRepository
+            _eventRepository = eventRepository;
         }
 
         public IEnumerable<EventRouteDto> GetAllEventsWithRoutes()
