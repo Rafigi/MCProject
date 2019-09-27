@@ -1,5 +1,4 @@
-﻿
-namespace McWorld.Shared.Factory
+﻿namespace McWorld.Shared.Factory
 {
     using McWorld.Shared.Models;
     using System;
