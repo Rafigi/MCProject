@@ -27,16 +27,16 @@
             _eventRepository = eventRepository;
         }
 
-        public IEnumerable<EventRouteDto> GetAllEventsWithRoutes()
+        public IEnumerable<EventDto> GetAllEventsWithRoutes()
         {
-            List<EventRouteDto> eventList = new List<EventRouteDto>();
+            List<EventDto> eventList = new List<EventDto>();
             var events = _eventRepository.GetAllEvents();
             var routes = _routeRepository.GetAllRoutes();
             var addressess = _adresseRepository.GetAll();
             // TODO Is the user registered?! 
             foreach (var @event in events)
             {
-                eventList.Add(new EventRouteDto
+                eventList.Add(new EventDto
                 {
                     EventID = @event.EventID,
                     Description = @event.Description,
@@ -54,15 +54,15 @@
             }
             return eventList;
         }
-        public IEnumerable<RouteAdressesDto> GetAllRoutesWithAddress()
+        public IEnumerable<RouteDto> GetAllRoutesWithAddress()
         {
             var routes = _routeRepository.GetAllRoutes();
             var addressess = _adresseRepository.GetAll();
-            List<RouteAdressesDto> routeList = new List<RouteAdressesDto>();
+            List<RouteDto> routeList = new List<RouteDto>();
 
             foreach (var route in routes)
             {
-                routeList.Add(new RouteAdressesDto
+                routeList.Add(new RouteDto
                 {
                     RouteID = route.RouteID,
                     Created = route.Created,
@@ -76,15 +76,15 @@
             return routeList;
         }
 
-        public IEnumerable<EventRouteDto> GetAllUserCreatedEvents(Guid userId)
+        public IEnumerable<EventDto> GetAllUserCreatedEvents(Guid userId)
         {
-            List<EventRouteDto> eventList = new List<EventRouteDto>();
+            List<EventDto> eventList = new List<EventDto>();
             var events = _eventRepository.GetEventsCreatedByUser(userId);
             var routes = _routeRepository.GetAllRoutes();
             // TODO Is the user registered?! 
             foreach (var @event in events)
             {
-                eventList.Add(new EventRouteDto
+                eventList.Add(new EventDto
                 {
                     EventID = @event.EventID,
                     Description = @event.Description,
@@ -103,14 +103,14 @@
             return eventList;
         }
 
-        public IEnumerable<RouteAdressesDto> GetAllUserCreatedRoutes(Guid userId)
+        public IEnumerable<RouteDto> GetAllUserCreatedRoutes(Guid userId)
         {
             var routes = _routeRepository.GetUserCreatedRoutesByID(userId);
-            List<RouteAdressesDto> routeList = new List<RouteAdressesDto>();
+            List<RouteDto> routeList = new List<RouteDto>();
 
             foreach (var route in routes)
             {
-                routeList.Add(new RouteAdressesDto
+                routeList.Add(new RouteDto
                 {
                     RouteID = route.RouteID,
                     Created = route.Created,

@@ -5,10 +5,10 @@
     using System.Collections.Generic;
     public interface IQueryables
     {
-        IEnumerable<RouteAdressesDto> GetAllRoutesWithAddress();
-        IEnumerable<EventRouteDto> GetAllEventsWithRoutes();
-        IEnumerable<EventRouteDto> GetAllUserCreatedEvents(Guid userId);
-        IEnumerable<RouteAdressesDto> GetAllUserCreatedRoutes(Guid userId);
+        IEnumerable<RouteDto> GetAllRoutesWithAddress();
+        IEnumerable<EventDto> GetAllEventsWithRoutes();
+        IEnumerable<EventDto> GetAllUserCreatedEvents(Guid userId);
+        IEnumerable<RouteDto> GetAllUserCreatedRoutes(Guid userId);
         IEnumerable<RegistrationDto> GetAllUserRegisteredEvents();
     }
 }

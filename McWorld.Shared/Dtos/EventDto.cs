@@ -5,7 +5,7 @@ using System.Text;
 
 namespace McWorld.Shared.Dtos
 {
-    public class EventRouteDto
+    public class EventDto
     {
         public Guid EventID { get; set; }
         public string Headline { get; set; }

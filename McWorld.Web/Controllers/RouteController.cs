@@ -9,6 +9,9 @@
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
+    using McWorld.Shared.Queryables;
+    using McWorld.Shared.Dtos;
+
     [Route("api/[controller]")]
     [ApiController]
     public class RouteController : ControllerBase
@@ -16,19 +19,27 @@
         private readonly IServiceBus _serviceBus;
         private readonly IRouteFactory _routeFactory;
         private readonly IRouteRepository _routeRepository;
+        private readonly IQueryables _queryables;
 
-        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IRouteRepository routeRepository)
+        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IRouteRepository routeRepository, IQueryables queryables)
         {
             _serviceBus = serviceBus;
             _routeFactory = routeFactory;
             _routeRepository = routeRepository;
+            _queryables = queryables;
         }
 
         // GET: api/Route/GetAll
         [HttpGet]
-        public IEnumerable<Route> GetAll()
+        public IEnumerable<RouteDto> GetAll()
         {
-            return _routeRepository.GetAll();
+            return _queryables.GetAllRoutesWithAddress();
+        }
+
+        [HttpGet]
+        public IEnumerable<RouteDto> GetAllUserCreatedRoutes(Guid userId)
+        {
+            return _queryables.GetAllUserCreatedRoutes(userId);
         }
 
 
