@@ -14,7 +14,7 @@
         {
             Event = new Event()
             {
-                EventID = Guid.NewGuid(),
+                EventID = @event.EventID,
                 Headline = @event.Headline,
                 Description = @event.Description,
                 Created = @event.Created,
@@ -23,7 +23,8 @@
                 StartTime = @event.StartTime,
                 EndDate = @event.EndDate,
                 EndTime = @event.EndTime,
-                RouteID = @event.RouteID
+                RouteID = @event.RouteID,
+                RegistrationCount = 0
             };
         }
 

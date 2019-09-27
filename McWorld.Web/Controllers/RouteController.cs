@@ -9,6 +9,9 @@
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
+    using McWorld.Shared.Queryables;
+    using McWorld.Shared.Dtos;
+
     [Route("api/[controller]")]
     [ApiController]
     public class RouteController : ControllerBase
@@ -16,34 +19,44 @@
         private readonly IServiceBus _serviceBus;
         private readonly IRouteFactory _routeFactory;
         private readonly IRouteRepository _routeRepository;
+        private readonly IQueryables _queryables;
 
-        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IRouteRepository routeRepository)
+        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IRouteRepository routeRepository, IQueryables queryables)
         {
             _serviceBus = serviceBus;
             _routeFactory = routeFactory;
             _routeRepository = routeRepository;
-        }
-        // GET: api/Route
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            _queryables = queryables;
         }
 
+        // GET: api/Route/GetAll
+        [HttpGet]
+        public IEnumerable<RouteDto> GetAll()
+        {
+            return _queryables.GetAllRoutesWithAddress();
+        }
+
+        [HttpGet]
+        public IEnumerable<RouteDto> GetAllUserCreatedRoutes(Guid userId)
+        {
+            return _queryables.GetAllUserCreatedRoutes(userId);
+        }
+
+
         // GET: api/Route/5
-        [HttpGet("{id}", Name = "Get")]
-        public Route Get(Guid id)
+        [HttpGet("{id}")]
+        public Route GetById(Guid id)
         {
             return _routeRepository.GetRouteByID(id);
         }
 
-        // POST: api/Route
+        // POST: api/Route/Create
         [HttpPost]
         public IActionResult Create([FromBody] Route route)
         {
             var _route = _routeFactory.Create(route);
 
-            _serviceBus.Add(new CreateAddressCommand(_route.Address));
+            _serviceBus.Add(new CreateAddressCommand(_route.Addresses));
             _serviceBus.Add(new CreateRouteCommand(_route));
             _serviceBus.Complete();
             return Ok();

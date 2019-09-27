@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=(localdb)\\mssqllocaldb;Database=McWorldDatabase;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir QueryStack -Context "McDbContext"

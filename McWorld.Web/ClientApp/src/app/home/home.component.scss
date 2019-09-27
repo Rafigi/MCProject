@@ -1,0 +1,24 @@
+.bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  min-height: 500px;
+  background-image: url("/../../assets/HomeBackground.jpg");
+}
+
+
+.homeButton {
+  height: 15rem;
+  background-color: rgb(255,255,255);
+  opacity: 0.75;
+  border-radius: 50%;
+  font-size: 3rem;
+  font-family: 'Handlee', cursive;
+}
+
+
+.homeButton:hover {
+  opacity: 0.9;
+  font-size: 4rem;
+}

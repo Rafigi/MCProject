@@ -10,6 +10,9 @@
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
+    using McWorld.Shared.Queryables;
+    using McWorld.Shared.Dtos;
+
     [Route("api/[controller]")]
     [ApiController]
     public class EventController : ControllerBase
@@ -18,24 +21,32 @@
         private readonly IServiceBus _serviceBus;
         private readonly IEventFactory _eventFactory;
         private readonly IEventRepository _eventRepository;
+        private readonly IQueryables _queryables;
 
-        public EventController(IServiceBus serviceBus, IEventFactory eventFactory, IEventRepository eventRepository)
+        public EventController(IServiceBus serviceBus, IEventFactory eventFactory, IEventRepository eventRepository, IQueryables queryables)
         {
             _serviceBus = serviceBus;
             _eventFactory = eventFactory;
             _eventRepository = eventRepository;
+            _queryables = queryables;
         }
 
         // GET: api/Event
         [HttpGet]
-        public IEnumerable<Event> Get()
+        public IEnumerable<EventDto> GetAll()
         {
-            return _eventRepository.GetAll();
+            return _queryables.GetAllEventsWithRoutes();
+        }
+        
+        [HttpGet("{id}")]
+        public IEnumerable<EventDto> GetAllUserCreatedEvents(Guid userId)
+        {
+            return _queryables.GetAllUserCreatedEvents(userId);
         }
 
         // GET: api/Event/5
-        [HttpGet("{id}", Name = "Get")]
-        public Event Get(Guid id)
+        [HttpGet("{id}")]
+        public Event GetById(Guid id)
         {
             return _eventRepository.GetEventByID(id);
         }
@@ -47,7 +58,7 @@
             var _event = _eventFactory.Create(@event);
             _serviceBus.Add(new CreateEventCommand(_event));
             _serviceBus.Add(new CreateRouteCommand(_event.Route));
-            _serviceBus.Add(new CreateAddressCommand(_event.Route.Address));
+            //_serviceBus.Add(new CreateAddressCommand(_event.Route.RouteAddresses));
         }
 
         // PUT: api/Event/5

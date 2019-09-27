@@ -1,31 +1,34 @@
 ﻿namespace McWorld.Address
 {
-    using McWorld.Shared.Models;
     using McWorld.Shared.Messages;
+    using McWorld.Shared.Models;
     using McWorld.Shared.Persistence;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     public class CreateAddressCommand : ICommand
     {
-        public Address Address { get; private set; }
-
-        public CreateAddressCommand(Address address)
+        private ICollection<Address> _addressList;
+        public CreateAddressCommand(ICollection<Address> addresses)
         {
-            Address = new Address()
+            foreach (var address in addresses)
             {
-                AddressID = address.AddressID,
-                StreetName = address.StreetName,
-                StreetNumber = address.StreetNumber,
-                City = address.City,
-                Country = address.Country,
-                Zipcode = address.Zipcode,
-                Latitude = address.Latitude,
-                Longitude = address.Longitude
-            };
+                _addressList.Add(new Address()
+                {
+                    AddressId = address.AddressId,
+                    StreetName = address.StreetName,
+                    StreetNumber = address.StreetNumber,
+                    City = address.City,
+                    Country = address.Country,
+                    Zipcode = address.Zipcode,
+                    Latitude = address.Latitude,
+                    Longitude = address.Longitude
+                });
+            }
         }
 
         public Task Execute(IUnitOfWork unitOfWork)
         {
-            unitOfWork.Adresses.Add(Address);
+            unitOfWork.Adresses.AddRange(_addressList);
             return Task.CompletedTask;
         }
     }

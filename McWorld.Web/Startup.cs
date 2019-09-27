@@ -1,9 +1,12 @@
 using McWorld.Shared.Data;
+using McWorld.Shared.Factory;
+using McWorld.Shared.IRepository;
 using McWorld.Shared.Persistence;
+using McWorld.Shared.Queryables;
+using McWorld.Shared.Repository;
 using McWorld.Shared.ServicesBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -36,9 +39,14 @@ namespace McWorld.Web
          options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
 
             //Add DI Services
-            services.AddScoped<IServiceBus, ServiceBus>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
+            services.AddTransient(typeof(IServiceBus), typeof(ServiceBus));
+            services.AddScoped(typeof(IQueryables), typeof(Queryables));
+            services.AddScoped(typeof(IUserFactory), typeof(UserFactory));
+            services.AddScoped(typeof(IRouteFactory), typeof(RouteFactory));
+            services.AddScoped(typeof(IEventFactory), typeof(EventFactory));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -2,12 +2,30 @@
 {
     using McWorld.Shared.Models;
     using System;
+    using System.Collections.Generic;
+
     public class EventFactory : IEventFactory
     {
+        private List<Address> _addresses;
         public Event Create(Event @event)
         {
-            Guid routeID = Guid.NewGuid();
-            Guid addressID = Guid.NewGuid();
+            Guid _routeID = Guid.NewGuid();
+
+            //Creating all the addresses, there are connected to the route
+            foreach (var Address in @event.Route.Addresses)
+            {
+                _addresses.Add(new Address()
+                {
+                    AddressId = Guid.NewGuid(),
+                    StreetName = Address.StreetName,
+                    StreetNumber = Address.StreetNumber,
+                    City = Address.City,
+                    Country = Address.Country,
+                    Zipcode = Address.Zipcode,
+                    Latitude = Address.Latitude,
+                    Longitude = Address.Longitude,
+                }); 
+            }
 
             return new Event()
             {
@@ -20,30 +38,18 @@
                 StartTime = @event.StartTime,
                 EndDate = @event.EndDate,
                 EndTime = @event.EndTime,
-                RouteID = routeID,
+                RouteID = _routeID,
 
                 Route = new Route()
                 {
-                    RouteID = Guid.NewGuid(),
-                    AddressID = addressID,
+                    RouteID = _routeID,
                     Created = @event.Route.Created,
                     Distance = @event.Route.Distance,
                     Ferry = @event.Route.Ferry,
                     Motorway = @event.Route.Motorway,
                     Toll = @event.Route.Toll,
                     UserID = @event.Route.UserID,
-
-                    Address = new Address()
-                    {
-                        AddressID = addressID,
-                        StreetName = @event.Route.Address.StreetName,
-                        StreetNumber = @event.Route.Address.StreetNumber,
-                        City = @event.Route.Address.City,
-                        Country = @event.Route.Address.Country,
-                        Zipcode = @event.Route.Address.Zipcode,
-                        Latitude = @event.Route.Address.Latitude,
-                        Longitude = @event.Route.Address.Longitude
-                    }
+                    Addresses = _addresses
                 }
             };
         }

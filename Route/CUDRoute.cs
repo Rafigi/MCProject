@@ -5,6 +5,8 @@ namespace Tests.MCRoute.Test
     using McWorld.User;
     using NUnit.Framework;
     using System;
+    using System.Collections.Generic;
+
     public class CUDRoute
     {
         [SetUp]
@@ -15,24 +17,21 @@ namespace Tests.MCRoute.Test
         [Test]
         public void CreateRoute()
         {
-            var address = new Address
+            List<Address> _addressList = new List<Address>();
+            _addressList.Add(new Address
             {
-                AddressID = Guid.NewGuid(),
                 City = "Vejle",
                 Country = "Denmark",
                 Zipcode = 7100,
                 StreetName = "Vejlevej",
                 StreetNumber = "22",
                 Latitude = "dewfwefweffwef",
-                Longitude = "dqewdwefwefdew",
-                Routes = null
-            };
+                Longitude = "dqewdwefwefdew"
+            });
 
             var route = new Route
             {
                 RouteID = Guid.NewGuid(),
-                Address = address,
-                AddressID = Guid.NewGuid(),
                 Created = "11/09/19",
                 Distance = 200,
                 Events = null,
@@ -40,15 +39,15 @@ namespace Tests.MCRoute.Test
                 Motorway = false,
                 Toll = false,
                 User = null,
-                UserID = Guid.NewGuid()
+                UserID = Guid.NewGuid(),
+                Addresses = _addressList
             };
 
 
             CreateRouteCommand createRouteCommand = new CreateRouteCommand(route);
             Assert.IsFalse(route.Ferry, "Ferry should be false");
             Assert.IsFalse(route.Motorway, "Motorway should be false");
-            Assert.IsNotNull(route.Address, "Address should not be null");
-            Assert.AreNotEqual(route, address, "Route and Address are not Equal");
+            Assert.IsNotNull(route.Addresses, "Address should not be null");
             Assert.Positive(route.Distance, "Distance can be positive");
             Assert.NotZero(route.Distance, "Distance can not be 0");
         }
