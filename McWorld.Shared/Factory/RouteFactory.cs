@@ -21,7 +21,7 @@
                     Country = Address.Country,
                     Zipcode = Address.Zipcode,
                     Latitude = Address.Latitude,
-                    Longitude = Address.Longitude,
+                    Longitude = Address.Longitude
                 });
                 
             }

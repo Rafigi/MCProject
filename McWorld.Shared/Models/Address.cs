@@ -20,7 +20,7 @@
         public string Country { get; set; }
         public string Latitude { get; set; }
         public string Longitude { get; set; }
-        public int AddressNumber { get; set; }
+        //public int AddressNumber { get; set; } Maybe later with this input
 
     }
 }

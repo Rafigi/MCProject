@@ -57,7 +57,6 @@
         public IEnumerable<RouteDto> GetAllRoutesWithAddress()
         {
             var routes = _routeRepository.GetAllRoutes();
-            var addressess = _adresseRepository.GetAll();
             List<RouteDto> routeList = new List<RouteDto>();
 
             foreach (var route in routes)

@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
     public class CreateAddressCommand : ICommand
     {
-        private ICollection<Address> _addressList;
+        List<Address> _addressList = new List<Address>();
         public CreateAddressCommand(ICollection<Address> addresses)
         {
             foreach (var address in addresses)
