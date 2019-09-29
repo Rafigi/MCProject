@@ -42,6 +42,10 @@ namespace McWorld.Web
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
+            services.AddTransient(typeof(IEventRepository), typeof(EventRepository));
+            services.AddTransient(typeof(IAdresseRepository), typeof(AdresseRepository));
+            services.AddTransient(typeof(IRouteRepository), typeof(RouteRepository));
+
             services.AddTransient(typeof(IServiceBus), typeof(ServiceBus));
             services.AddScoped(typeof(IQueryables), typeof(Queryables));
             services.AddScoped(typeof(IUserFactory), typeof(UserFactory));
