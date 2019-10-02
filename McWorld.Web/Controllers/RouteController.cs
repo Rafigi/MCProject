@@ -2,15 +2,14 @@
 {
     using McWorld.Address;
     using McWorld.Route;
+    using McWorld.Shared.Dtos;
     using McWorld.Shared.Factory;
-    using McWorld.Shared.IRepository;
-    using McWorld.Shared.ServicesBus;
     using McWorld.Shared.Models;
+    using McWorld.Shared.Queryables;
+    using McWorld.Shared.ServicesBus;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
-    using McWorld.Shared.Queryables;
-    using McWorld.Shared.Dtos;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -18,19 +17,17 @@
     {
         private readonly IServiceBus _serviceBus;
         private readonly IRouteFactory _routeFactory;
-        private readonly IRouteRepository _routeRepository;
         private readonly IQueryables _queryables;
 
-        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IRouteRepository routeRepository, IQueryables queryables)
+        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IQueryables queryables)
         {
             _serviceBus = serviceBus;
             _routeFactory = routeFactory;
-            _routeRepository = routeRepository;
             _queryables = queryables;
         }
 
         // GET: api/Route/GetAll
-        [HttpGet]
+        [HttpGet("GetAll")]
         public IEnumerable<RouteDto> GetAll()
         {
             return _queryables.GetAllRoutesWithAddress();
@@ -47,16 +44,17 @@
         [HttpGet("{id}")]
         public Route GetById(Guid id)
         {
-            return _routeRepository.GetRouteByID(id);
+            return null;
         }
 
         // POST: api/Route/Create
         [HttpPost]
         public IActionResult Create([FromBody] Route route)
         {
+            //For creating a mock data
+            //var _route = CreateDefaultValues();
+            
             var _route = _routeFactory.Create(route);
-
-            _serviceBus.Add(new CreateAddressCommand(_route.Addresses));
             _serviceBus.Add(new CreateRouteCommand(_route));
             _serviceBus.Complete();
             return Ok();
@@ -72,7 +70,51 @@
         [HttpDelete]
         public void Delete(Guid id)
         {
-          
+
+        }
+
+        Route CreateDefaultValues()
+        {
+            List<Address> _addresses = new List<Address>();
+
+            _addresses.Add(new Address()
+            {
+                AddressId = Guid.NewGuid(),
+                StreetName = "Jyllingevej",
+                StreetNumber = "2",
+                City = "Kolding",
+                Country = "Denmark",
+                Zipcode = 6000,
+                Latitude = "12132654132432",
+                Longitude = "6546546546545"
+            });
+
+            _addresses.Add(new Address()
+            {
+                AddressId = Guid.NewGuid(),
+                StreetName = "Vejlevej",
+                StreetNumber = "34",
+                City = "Vejle",
+                Country = "Denmark",
+                Zipcode = 7100,
+                Latitude = "16554654654564",
+                Longitude = "8794546546465"
+            });
+
+            var route = new Route()
+            {
+                RouteID = Guid.NewGuid(),
+                Distance = 132,
+                Created = new DateTime().ToShortDateString(),
+                Ferry = false,
+                Toll = false,
+                Motorway = true,
+                UserID = Guid.Parse("12864cd9-5da3-4124-a837-04717b90784d"),
+                Events = null,
+                Addresses = _addresses
+            };
+
+            return route;
         }
     }
 }

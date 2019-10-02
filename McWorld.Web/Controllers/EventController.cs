@@ -58,7 +58,6 @@
             var _event = _eventFactory.Create(@event);
             _serviceBus.Add(new CreateEventCommand(_event));
             _serviceBus.Add(new CreateRouteCommand(_event.Route));
-            //_serviceBus.Add(new CreateAddressCommand(_event.Route.RouteAddresses));
         }
 
         // PUT: api/Event/5

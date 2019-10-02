@@ -27,6 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\switch.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\McWorld.Address\McWorld.Address.csproj" />
     <ProjectReference Include="..\McWorld.Event\McWorld.Event.csproj" />
     <ProjectReference Include="..\MCWorld.Route\McWorld.Route.csproj" />
