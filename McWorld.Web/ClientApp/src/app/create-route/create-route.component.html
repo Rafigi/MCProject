@@ -1,38 +1,42 @@
 <div class="bg col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-  <div class="d-flex justify-content-center col-12">
-    <div class="box container d-flex justify-content-lg-center col-lg-7 mt-5">
+  <div class="d-flex col-lg-12">
+    <div class="box container justify-content-lg-center col-lg-7 mt-lg-5">
       <div class="col-lg-12">
-        <h1 class="text-center headline">Create Route</h1>
-        <p class="lead text-center">This is the place to where you create one of many routes!</p>
+        <h1 class="text-center headline mt-3">Create Route</h1>
+        <p class="text-center">This is the place where you create one of many routes for your journey!</p>
 
-        <hr class="my-5">
+        <div class="container inputBox col-lg-12 d-flex justify-content-between pt-lg-4">
+          <input class="input text-center col-lg-5 ml-lg-5" />
+          <input class="input text-center col-lg-5 mr-lg-5" />
+        </div>
 
-        <div class="col-lg-12 row ">
+        <div class="container col-lg-10 d-flex justify-content-center mt-lg-2">
 
-          <div class="col-lg-4">
-
-            <div class="inputBox1 mb-5">
-              <div class="row justify-content-center">
-                <h4 class="col-lg-8 text-center mt-2">Start Address</h4>
-                <input class="mt-1 col-lg-8 input text-center" placeholder="Street"/>
-                <input class="mt-1 col-lg-8 input text-center" placeholder="City" disabled/>
-                <input class="mt-1 col-lg-8 input text-center" placeholder="Country" disabled/>
-              </div>
-
-            </div>
-
-            <div class="inputBox2 mt-5">
-              <div class="row justify-content-center">
-                <h4 class="col-lg-8 text-center mt-2">Destination</h4>
-                <input class="mt-1 col-lg-8 input text-center" placeholder="Street" />
-                <input class="mt-1 col-lg-8 input text-center" placeholder="City" disabled />
-                <input class="mt-1 col-lg-8 input text-center" placeholder="Country" disabled />
-              </div>
-            </div>
-
+          <div class="col-lg-3 borderSideBox text-center">
+            <div class="h6">Motorway</div>
+            <app-toggle [on]="off" (toggled)="MotorwaySwitch($event)"></app-toggle>
           </div>
 
-          <div class="col-lg-8 mapBox mt-2"></div>
+          <div class="col-lg-3 borderSideBox text-center">
+            <div class="h6">Toll</div>
+            <app-toggle [on]="off" (toggled)="TollSwitch($event)"></app-toggle>
+          </div>
 
+          <div class="col-lg-3 borderSideBox text-center">
+            <div class="h6">Ferry</div>
+            <app-toggle [on]="off" (toggled)="FerrySwitch($event)"></app-toggle>
+          </div>
+
+        </div>
+
+        <div class="mapBox col-lg-12 mt-lg-2"></div>
+
+        <div class="container col-lg-4 justify-content-center ">
+          <button class="mt-lg-3 mb-lg-3 pt-2 col-lg-10 CreateBtn">
+            <p>Create Route</p>
+          </button>
+        </div>
       </div>
     </div>
+  </div>
+</div>

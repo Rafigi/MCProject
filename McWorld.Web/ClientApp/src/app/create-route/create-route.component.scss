@@ -9,71 +9,93 @@
 }
 
 .box {
-  background-color: rgba(111, 111, 101, 0.80);
-  -webkit-box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.90);
-  box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.90);
+  background-color: rgba(111, 111, 101, 0.50);
+  -webkit-box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.80);
+  box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.80);
   border-style: none;
-  height: 45rem;
 }
 
 .headline {
   font-family: 'Handlee', cursive;
-  font-size: 4rem;
+  font-size: 2.5rem;
   opacity: 1;
   color: rgb(182, 182, 182);
 }
 
 p {
-    font-family: 'Handlee', cursive;
-    color: rgb(182, 182, 182);
-}
-
-
-
-.inputBox1 {
-  background-color: rgba(159, 204, 239, 0.20);
-  -webkit-box-shadow: 48px 30px 20px 20px rgba(159,204,239,0.20);
-  box-shadow: 48px 30px 20px 20px rgba(159,204,239,0.20);
-  min-height: 200px;
-  min-width: 325px;
-  border-radius:20%;
-}
-
-.inputBox2 {
-  background-color: rgba(159, 204, 239, 0.20);
-  -webkit-box-shadow: 48px -50px 35px 20px rgba(159,204,239,0.20);
-  box-shadow: 48px -50px 35px 20px rgba(159,204,239,0.20);
-  min-height: 200px;
-  min-width: 325px;
-  border-radius:20%;
+  font-family: 'Handlee', cursive;
+  color: rgb(182, 182, 182);
+  font-size: 1.2rem;
 }
 
 .mapBox {
-  height: 430px;
-  background-color: rgba(255, 255, 255, 0.80);
-  -webkit-box-shadow: -50px 0px 35px 20px rgba(159,204,239,0.20);
-  box-shadow: -50px 0px 35px 20px rgba(159,204,239,0.20);
-  border-radius: 20%;
+  height: 20rem;
+  background-color: rgba(255, 255, 255, 0.70);
+  -webkit-box-shadow: -0px 20px 35px 20px rgba(159,204,239,0.20);
+  box-shadow: 0px 20px 35px 20px rgba(159,204,239,0.20);
+}
+
+.mapBox:hover {
+  background-color: rgba(255, 255, 255, 0.90);
+  -webkit-box-shadow: 0px 20px 35px 20px rgba(159,204,239,0.20);
+  box-shadow: 0px 20px 35px 20px rgba(159,204,239,0.20);
+}
+
+.inputBox{
+  border-top: solid 0.1rem rgb(221, 241, 220);
+  opacity: 0.50;
 }
 
 .input {
-  border-radius: 10%;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
   height: 2.5rem;
-  background-color: rgba(249, 248, 247, 0.60);
+
+  background-color: rgb(159, 204, 239);
+  opacity: 0.30;
+  box-shadow: 0px 20px 45px 15px rgba(159, 204, 239, 0.60);
+  border-style: none;
 }
 
 .input:focus {
-  background-color: rgba(249, 248, 247, 0.90);
+  background-color: rgb(159, 204, 239);
+  opacity: 0.95;
 }
 
+.borderSideBox {
+  border-style: solid;
+  border-left: solid 0.1rem rgb(159, 204, 239);
+  border-right: solid 0.1rem rgb(159, 204, 239);
+  border-top: none;
+  border-bottom: none;
+}
 
-.btnCreate {
-  border-radius: 50%;
-  font-family: 'Handlee', cursive;
-  background-color: rgb(0, 205, 35);
-  opacity: 0.90;
+.CreateBtn {
   height: 3rem;
-  width: 20rem;
-  box-shadow: 2rem 2rem 4rem rgba(15, 15, 15, 0.20);
-  font-size: 1.6rem;
+  background-color: rgba(255, 255, 255, 0.20);
+  box-shadow: 0px 30px 30px 0px rgb(131, 115, 99);
+  border-style: solid;
+  border-color: rgb(107, 97, 85);
+  border-width: 3px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+
+}
+
+.CreateBtn p {
+  color: rgb(255, 255, 255);
+}
+
+.CreateBtn:hover {
+  background-color: rgba(255, 255, 255, 0.80);
+}
+
+.CreateBtn p:hover {
+  color: black;
+}
+
+.CreateBtn:active {
+  background-color: rgba(255, 255, 255, 0.95);
 }
