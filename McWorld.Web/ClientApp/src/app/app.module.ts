@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { CreateRouteComponent } from './create-route/create-route.component';
 import { ToggleComponent } from './CustomComponents/toggle/toggle.component';
 import { SwitchComponent } from './CustomComponents/switch/switch.component';
+import { BtnMcWorldComponent } from './CustomComponents/btn-mc-world/btn-mc-world.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SwitchComponent } from './CustomComponents/switch/switch.component';
     HomeComponent,
     CreateRouteComponent,
     ToggleComponent,
-    SwitchComponent
+    SwitchComponent,
+    BtnMcWorldComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
