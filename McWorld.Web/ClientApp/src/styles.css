@@ -15,3 +15,27 @@ a.mat-menu-item > mat-icon {
   height: 100%;
   width: 100%;
 }
+
+
+/*Invisible Card*/
+.InvisibleCard {
+  background-color: rgba(111, 111, 101, 0.60);
+  -webkit-box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.80);
+  box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.80);
+  border-style: none;
+}
+
+.headline {
+  font-family: 'Handlee', cursive;
+  font-size: 2.5rem;
+  opacity: 1;
+  color: rgb(182, 182, 182);
+}
+
+Underheadline {
+  font-family: 'Handlee', cursive;
+  color: rgb(182, 182, 182);
+  font-size: 1.2rem;
+}
+
+

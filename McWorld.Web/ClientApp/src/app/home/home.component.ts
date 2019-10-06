@@ -1,14 +1,14 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss']
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 /** Home component*/
 export class HomeComponent {
-    /** Home ctor */
-    constructor() {
+  /** Home ctor */
+  constructor() {
 
-    }
+  }
 }
