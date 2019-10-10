@@ -8,26 +8,6 @@
   background-image: url("/../../assets/CreateBackground.jpg");
 }
 
-.box {
-  background-color: rgba(111, 111, 101, 0.50);
-  -webkit-box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.80);
-  box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.80);
-  border-style: none;
-}
-
-.headline {
-  font-family: 'Handlee', cursive;
-  font-size: 2.5rem;
-  opacity: 1;
-  color: rgb(182, 182, 182);
-}
-
-p {
-  font-family: 'Handlee', cursive;
-  color: rgb(182, 182, 182);
-  font-size: 1.2rem;
-}
-
 .mapBox {
   height: 20rem;
   background-color: rgba(255, 255, 255, 0.70);
@@ -41,7 +21,7 @@ p {
   box-shadow: 0px 20px 35px 20px rgba(159,204,239,0.20);
 }
 
-.inputBox{
+.inputBox {
   border-top: solid 0.1rem rgb(221, 241, 220);
   opacity: 0.50;
 }
@@ -51,51 +31,26 @@ p {
   -moz-border-radius: 50px;
   border-radius: 50px;
   height: 2.5rem;
-
-  background-color: rgb(159, 204, 239);
-  opacity: 0.30;
+  background-color: rgba(159, 204, 239, 0.30);
   box-shadow: 0px 20px 45px 15px rgba(159, 204, 239, 0.60);
   border-style: none;
 }
+
+input::placeholder {
+  color: white;
+  opacity: 1;
+}
+
 
 .input:focus {
   background-color: rgb(159, 204, 239);
   opacity: 0.95;
 }
 
-.borderSideBox {
+.borderSideBoxLines {
   border-style: solid;
   border-left: solid 0.1rem rgb(159, 204, 239);
   border-right: solid 0.1rem rgb(159, 204, 239);
   border-top: none;
   border-bottom: none;
-}
-
-.CreateBtn {
-  height: 3rem;
-  background-color: rgba(255, 255, 255, 0.20);
-  box-shadow: 0px 30px 30px 0px rgb(131, 115, 99);
-  border-style: solid;
-  border-color: rgb(107, 97, 85);
-  border-width: 3px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  border-radius: 50px;
-
-}
-
-.CreateBtn p {
-  color: rgb(255, 255, 255);
-}
-
-.CreateBtn:hover {
-  background-color: rgba(255, 255, 255, 0.80);
-}
-
-.CreateBtn p:hover {
-  color: black;
-}
-
-.CreateBtn:active {
-  background-color: rgba(255, 255, 255, 0.95);
 }
