@@ -1,0 +1,215 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+
+.material-icons {
+  position: relative;
+  display: table-cell;
+  width: 60px;
+  height: 36px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 30px;
+}
+
+
+.main-menu:hover, nav.main-menu.expanded {
+  width: 250px;
+  overflow: visible;
+}
+
+.main-menu {
+  background: #212121;
+  opacity: 0.75;
+  border-right: 1px solid #e5e5e5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  width: 60px;
+  padding-top: 1rem;
+  overflow: hidden;
+  -webkit-transition: width .05s linear;
+  transition: width .05s linear;
+  -webkit-transform: translateZ(0) scale(1,1);
+  z-index: 1000;
+}
+
+.main-menu > ul {
+  margin: 7px 0;
+}
+
+.main-menu li {
+  position: relative;
+  display: block;
+  width: 300px;
+}
+
+.main-menu li > a {
+  position: relative;
+  display: table;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: #999;
+  font-family: arial;
+  font-size: 14px;
+  text-decoration: none;
+  -webkit-transform: translateZ(0) scale(1,1);
+  -webkit-transition: all .1s linear;
+  transition: all .1s linear;
+}
+
+
+.main-menu .nav-text {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  width: 190px;
+  font-family: 'Handlee', cursive;
+  font-size: 1.6rem;
+}
+
+.main-menu > ul.logout {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-right: 3rem;
+
+}
+
+.no-touch .scrollable.hover {
+  overflow-y: hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+  overflow-y: auto;
+  overflow: visible;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+nav {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+nav ul, nav li {
+  outline: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu li:hover > a, nav.main-menu li.active > a, .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a, .dashboard-page nav.dashboard-menu ul li.active a {
+  color: #fff;
+  background-color: #5fa2db;
+}
+
+.area {
+  float: left;
+  background: #e2e2e2;
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*._sidenav {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  transition: 0.5s;
+  padding-top: 60px;
+
+  ._mainNavBtn {
+    height: 6rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 20px 40px 15px 0px rgb(2, 22, 28);
+    border-style: none;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    padding-top: 1.5rem;
+    width: 14rem;
+  }
+
+  ._subNavBtn {
+    height: 3rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 10px 30px 15px 0px rgb(2, 22, 28);
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    border-style: none;
+    padding-top: 0.6rem;
+    width: 10rem;
+  }
+
+  p {
+    color: rgb(0, 0, 0);
+    font-family: 'Handlee', cursive;
+    font-size: 1.3rem;
+  }
+
+  ._subNavBtn:hover {
+    background-color: rgba(230, 230, 230, 0.5);
+    border-color: rgba(255, 255, 255, 0.9);
+    border: 4rem;
+    transition: 0.8s;
+  }
+
+  ._mainNavBtn:hover {
+    background-color: rgba(230, 230, 230, 0.5);
+    border-color: rgba(255, 255, 255, 0.9);
+    border: 4rem;
+    transition: 0.8s;
+  }
+
+  .dropdown {
+    margin-left: 10rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    background-color: #f1f1f1;
+    z-index: 1;
+  }
+
+  .dropdown-content p {
+    color: black;
+    text-decoration: none;
+    display: block;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+}*/
