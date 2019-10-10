@@ -9,6 +9,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 //Components
+import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { CreateRouteComponent } from './create-route/create-route.component';
 import { CreateEventComponent } from './create-event/create-event.component';
@@ -24,6 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [
     AppComponent,
+    MenuComponent,
     HomeComponent,
     CreateRouteComponent,
     CreateEventComponent,

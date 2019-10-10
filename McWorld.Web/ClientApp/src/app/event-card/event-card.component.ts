@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 /** EventCard component*/
 export class EventCardComponent {
-  btntext: string = ´"Show Event";
+  btntext: string = "Show Event";
 
   constructor() {
 

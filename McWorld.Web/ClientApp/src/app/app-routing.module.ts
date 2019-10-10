@@ -9,8 +9,8 @@ import { EventCardComponent } from './event-card/event-card.component';
 
 
 const appRoutes: Routes = [
-  { path: 'route', component: CreateRouteComponent },
-  { path: 'event', component: CreateEventComponent },
+  { path: 'create-route', component: CreateRouteComponent },
+  { path: 'create-event', component: CreateEventComponent },
   { path: 'home', component: HomeComponent },
   { path: 'eventcard', component: EventCardComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
