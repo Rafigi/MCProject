@@ -21,7 +21,7 @@
   background: #212121;
   opacity: 0.75;
   border-right: 1px solid #e5e5e5;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
   height: 100%;
@@ -73,7 +73,6 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  margin-right: 3rem;
 
 }
 
