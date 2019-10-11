@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { CreateRouteComponent } from './create-route/create-route.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { EventCardComponent } from './event-card/event-card.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 
 const appRoutes: Routes = [
@@ -13,6 +14,7 @@ const appRoutes: Routes = [
   { path: 'create-event', component: CreateEventComponent },
   { path: 'home', component: HomeComponent },
   { path: 'eventcard', component: EventCardComponent },
+  { path: 'events', component: EventListComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { CreateRouteComponent } from './create-route/create-route.component';
 import { CreateEventComponent } from './create-event/create-event.component';
 import { EventCardComponent } from './event-card/event-card.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 //Custom Components
 import { ToggleComponent } from './CustomComponents/toggle/toggle.component';
@@ -32,7 +33,8 @@ import { AppRoutingModule } from './app-routing.module';
     ToggleComponent,
     SwitchComponent,
     BtnMcWorldComponent,
-    EventCardComponent
+    EventCardComponent,
+    EventListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
