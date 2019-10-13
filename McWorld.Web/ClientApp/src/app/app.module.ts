@@ -11,15 +11,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //Components
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
-import { CreateRouteComponent } from './create-route/create-route.component';
-import { CreateEventComponent } from './create-event/create-event.component';
-import { EventCardComponent } from './event-card/event-card.component';
-import { EventListComponent } from './event-list/event-list.component';
+//Event
+import { CreateEventComponent } from './event/create-event/create-event.component';
+import { CreateEventCardComponent } from './event/create-event-card/create-event-card.component';
+import { EventCardComponent } from './event/event-card/event-card.component';
+import { EventListComponent } from './event/event-list/event-list.component';
+//Route
+import { CreateRouteCardComponent } from './route/create-route-card/create-route-card.component';
+import { CreateRouteComponent } from './route/create-route/create-route.component';
 
 //Custom Components
 import { ToggleComponent } from './CustomComponents/toggle/toggle.component';
 import { SwitchComponent } from './CustomComponents/switch/switch.component';
 import { BtnMcWorldComponent } from './CustomComponents/btn-mc-world/btn-mc-world.component';
+import { ModalComponent } from './CustomComponents/modal/modal.component';
+import { InvisibleCardComponent } from './CustomComponents/invisible-card/invisible-card.component';
+
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -34,7 +41,11 @@ import { AppRoutingModule } from './app-routing.module';
     SwitchComponent,
     BtnMcWorldComponent,
     EventCardComponent,
-    EventListComponent
+    EventListComponent,
+    ModalComponent,
+    CreateEventCardComponent,
+    CreateRouteCardComponent,
+    InvisibleCardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

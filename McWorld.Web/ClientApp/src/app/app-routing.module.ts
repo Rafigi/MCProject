@@ -3,19 +3,40 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Components
 import { HomeComponent } from './home/home.component';
-import { CreateRouteComponent } from './create-route/create-route.component';
-import { CreateEventComponent } from './create-event/create-event.component';
-import { EventCardComponent } from './event-card/event-card.component';
-import { EventListComponent } from './event-list/event-list.component';
+import { CreateRouteComponent } from './route/create-route/create-route.component';
+import { CreateEventComponent } from './event/create-event/create-event.component';
+import { EventListComponent } from './event/event-list/event-list.component';
 
 
 const appRoutes: Routes = [
-  { path: 'create-route', component: CreateRouteComponent },
-  { path: 'create-event', component: CreateEventComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'eventcard', component: EventCardComponent },
-  { path: 'events', component: EventListComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  {
+    path: 'event',
+    children: [
+      {
+        path: 'create',
+        component: CreateEventComponent
+      },
+      {
+        path: 'all',
+        component: EventListComponent
+      },
+      {
+      path: 'addroute',
+      component: CreateRouteComponent
+      }
+    ],
+  },
+  {
+    path: 'route',
+    children: [
+      {
+        path: 'create',
+        component: CreateRouteComponent
+      }
+    ]
+  },
 ];
 
 @NgModule({

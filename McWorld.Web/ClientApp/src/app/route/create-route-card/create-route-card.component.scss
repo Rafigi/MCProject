@@ -1,0 +1,46 @@
+.mapBox {
+  height: 20rem;
+  background-color: rgba(255, 255, 255, 0.70);
+  -webkit-box-shadow: -0px 20px 35px 20px rgba(159,204,239,0.20);
+  box-shadow: 0px 20px 35px 20px rgba(159,204,239,0.20);
+}
+
+.mapBox:hover {
+  background-color: rgba(255, 255, 255, 0.90);
+  -webkit-box-shadow: 0px 20px 35px 20px rgba(159,204,239,0.20);
+  box-shadow: 0px 20px 35px 20px rgba(159,204,239,0.20);
+}
+
+.inputBox {
+  border-top: solid 0.1rem rgb(221, 241, 220);
+  opacity: 0.50;
+}
+
+.input {
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  border-radius: 50px;
+  height: 2.5rem;
+  background-color: rgba(159, 204, 239, 0.30);
+  box-shadow: 0px 20px 45px 15px rgba(159, 204, 239, 0.60);
+  border-style: none;
+}
+
+input::placeholder {
+  color: white;
+  opacity: 1;
+}
+
+
+.input:focus {
+  background-color: rgb(159, 204, 239);
+  opacity: 0.95;
+}
+
+.borderSideBoxLines {
+  border-style: solid;
+  border-left: solid 0.1rem rgb(159, 204, 239);
+  border-right: solid 0.1rem rgb(159, 204, 239);
+  border-top: none;
+  border-bottom: none;
+}
