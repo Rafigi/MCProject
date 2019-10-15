@@ -12,7 +12,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 //Event
-import { CreateEventComponent } from './event/create-event/create-event.component';
 import { CreateEventCardComponent } from './event/create-event-card/create-event-card.component';
 import { EventCardComponent } from './event/event-card/event-card.component';
 import { EventListComponent } from './event/event-list/event-list.component';
@@ -36,7 +35,6 @@ import { AppRoutingModule } from './app-routing.module';
     MenuComponent,
     HomeComponent,
     CreateRouteComponent,
-    CreateEventComponent,
     ToggleComponent,
     SwitchComponent,
     BtnMcWorldComponent,

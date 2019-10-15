@@ -9,9 +9,13 @@ import Flatpickr from "flatpickr";
 /** create-event-card component*/
 export class CreateEventCardComponent implements OnInit {
   //Variables
-  btnAdd: string = "Add Route";
+  btnAddRoute: string = "Add Route";
   btnchangeRoute: string = "Change Route";
-  btnCreate: string = "Create Event";
+  btnCreateEvent: string = "Create Event";
+  showRouteWhenCreated: Boolean = false;
+  showCreateRouteCard: boolean = false;
+
+
 
   //Input & Output
   @Input() addRoute: string;
@@ -33,8 +37,12 @@ export class CreateEventCardComponent implements OnInit {
     console.log("Event Created");
   }
 
-  AddRoute() {
+  AddOrChangeRoute() {
     console.log("Event ");
+  }
+
+  ShowCreatRouteCard() {
+    this.showCreateRouteCard = true;
   }
 
 

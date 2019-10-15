@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 /** create-route-card component*/
 export class CreateRouteCardComponent {
-  btntext: string;
+  AddORChangeRoute: string;
   private ferry: boolean = false;
   private toll: boolean = false;
   private motorway: boolean = false;
@@ -19,20 +19,20 @@ export class CreateRouteCardComponent {
   }
 
   controlUrlRoute() {
-    if (this.router.url === "/event/addroute") {
-      this.btntext = "Add Route";
+    if (this.router.url === "/event/create") {
+      this.AddORChangeRoute = "Add Route";
     }
     if (this.router.url === "/route/create") {
-      this.btntext = "Create Route";
+      this.AddORChangeRoute = "Create Route";
     }
   }
 
   //TODO: Need to do the right thing!
   CreateOrAddRoute() {
-    if (this.btntext === "Add Route") {
+    if (this.AddORChangeRoute === "Add Route") {
       console.log("Add route")
     }
-    if (this.btntext === "Create Route") {
+    if (this.AddORChangeRoute === "Create Route") {
       console.log("Create route")
     }
   }
