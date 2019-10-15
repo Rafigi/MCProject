@@ -1,5 +1,5 @@
 <div class="bg col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-  <div class="d-flex col-lg-12">
+  <div *ngIf="!showCreateRouteCard" class="d-flex col-lg-12">
     <div class="InvisibleCard container justify-content-lg-center col-lg-7 mt-lg-5">
       <div class="col-lg-12">
         <h1 class="text-center headline mt-3">Create Event</h1>
@@ -64,10 +64,13 @@
           </div>
         </div>
         <div class="container my-lg-3 d-flex justify-content-between">
-          <app-btn-mc-world [btnText]="btnAddRoute" [btnWidth]="10" (click)="ShowCreatRouteCard()"></app-btn-mc-world>
+          <app-btn-mc-world [btnText]="btnAddRoute" [btnWidth]="10" (click)="ShowCreateRouteCard()"></app-btn-mc-world>
           <app-btn-mc-world [btnText]="btnCreateEvent" [btnWidth]="10" (click)="CreateEvent()"></app-btn-mc-world>
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="showCreateRouteCard">
+    <app-create-route-card></app-create-route-card>
   </div>
 </div>

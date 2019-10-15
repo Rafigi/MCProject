@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import Flatpickr from "flatpickr";
 
 @Component({
@@ -12,7 +12,7 @@ export class CreateEventCardComponent implements OnInit {
   btnAddRoute: string = "Add Route";
   btnchangeRoute: string = "Change Route";
   btnCreateEvent: string = "Create Event";
-  showRouteWhenCreated: Boolean = false;
+  showRouteWhenCreated: boolean = false;
   showCreateRouteCard: boolean = false;
 
 
@@ -22,12 +22,11 @@ export class CreateEventCardComponent implements OnInit {
 
 
   /** create-event-card ctor */
-  constructor() {
-
-
+  constructor(private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.ref.detectChanges();
     this.SetPickTimerAndDateTimer();
   }
 
@@ -38,10 +37,10 @@ export class CreateEventCardComponent implements OnInit {
   }
 
   AddOrChangeRoute() {
-    console.log("Event ");
+    this.showCreateRouteCard = false;
   }
 
-  ShowCreatRouteCard() {
+  ShowCreateRouteCard() {
     this.showCreateRouteCard = true;
   }
 
