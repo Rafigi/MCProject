@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import event from '../Event';
+import route from '../../route/Models/Route';
 import Flatpickr from "flatpickr";
 
 @Component({
@@ -11,10 +13,11 @@ import Flatpickr from "flatpickr";
 export class CreateEventCardComponent implements OnInit {
   //Variables
   btnAddRoute: string = "Add Route";
-  btnchangeRoute: string = "Change Route";
   btnCreateEvent: string = "Create Event";
-  showRouteWhenCreated: boolean = false;
-  showCreateRouteCard: boolean = false;
+  _showRouteWhenCreated: boolean = false;
+  _showCreateRouteCard: boolean = false;
+  private _route: route;
+  private _event: event = null;
 
   //Input & Output
 
@@ -29,8 +32,12 @@ export class CreateEventCardComponent implements OnInit {
   }
 
   getRoute(route) {
-    this.showCreateRouteCard = false;
-    console.log(route);
+    this._showCreateRouteCard = false;
+    this._showRouteWhenCreated = true;
+    this._route = route;
+    console.log(this._route);
+    this.btnAddRoute = 'Change Route';
+
   }
 
 
@@ -51,12 +58,8 @@ export class CreateEventCardComponent implements OnInit {
     console.log(this.EventForm.value);
   }
 
-  AddOrChangeRoute() {
-    this.showCreateRouteCard = false;
-  }
-
   ShowCreateRouteCard() {
-    this.showCreateRouteCard = true;
+    this._showCreateRouteCard = true;
   }
 
   //Set the date

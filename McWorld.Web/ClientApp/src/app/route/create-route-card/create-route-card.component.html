@@ -14,17 +14,17 @@
 
           <div class="col-lg-3 borderSideBoxLines text-center">
             <div class="h6">Motorway</div>
-            <app-toggle [on]="off" (toggled)="MotorwaySwitch($event)"></app-toggle>
+            <app-toggle [on]="_motorway" (toggled)="MotorwaySwitch($event)"></app-toggle>
           </div>
 
           <div class="col-lg-3 borderSideBoxLines text-center">
             <div class="h6">Toll</div>
-            <app-toggle [on]="off" (toggled)="TollSwitch($event)"></app-toggle>
+            <app-toggle [on]="_toll" (toggled)="TollSwitch($event)"></app-toggle>
           </div>
 
           <div class="col-lg-3 borderSideBoxLines text-center">
             <div class="h6">Ferry</div>
-            <app-toggle [on]="off" (toggled)="FerrySwitch($event)"></app-toggle>
+            <app-toggle [on]="_ferry" (toggled)="FerrySwitch($event)"></app-toggle>
           </div>
 
         </div>

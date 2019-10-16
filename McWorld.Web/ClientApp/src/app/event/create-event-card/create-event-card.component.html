@@ -1,5 +1,5 @@
 <div class="bg col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-  <div *ngIf="!showCreateRouteCard" class="d-flex col-lg-12">
+  <div *ngIf="!_showCreateRouteCard" class="d-flex col-lg-12">
     <div [formGroup]="EventForm" class="InvisibleCard container justify-content-lg-center col-lg-7 mt-lg-5">
       <div class="col-lg-12">
         <h1 class="text-center headline mt-3">Create Event</h1>
@@ -41,7 +41,7 @@
         </div>
 
         <!--When Route is created, this should be showed-->
-        <div *ngIf="showRouteWhenCreated" class="col-lg-12 d-flex justify-content-center mt-lg-3">
+        <div *ngIf="_showRouteWhenCreated" class="col-lg-12 d-flex justify-content-center mt-lg-3">
           <div class="col-lg-10 d-flex justify-content-center">
 
             <div class="col-lg-6 row d-flex justify-content-center">
@@ -70,7 +70,7 @@
       </div>
     </div>
   </div>
-  <div *ngIf="showCreateRouteCard">
-    <app-create-route-card (AddRoute)='getRoute($event)'></app-create-route-card>
+  <div *ngIf="_showCreateRouteCard">
+    <app-create-route-card [_route]="_route" (AddRoute)='getRoute($event)'></app-create-route-card>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import route from '../Models/Route';
@@ -14,12 +14,18 @@ export class CreateRouteCardComponent {
   private _ferry: boolean = false;
   private _toll: boolean = false;
   private _motorway: boolean = false;
-  private _route: route;
   @Output() AddRoute = new EventEmitter();
+  @Input() _route: route;
 
   /** create-route-card ctor */
   constructor(private router: Router) {
     this.controlUrlRoute();
+  }
+
+  ngOnInit() {
+    this._ferry = this._route.Ferry;
+    this._toll = this._route.Toll;
+    this._motorway = this._route.Motorway;
   }
 
   controlUrlRoute() {
@@ -38,7 +44,6 @@ export class CreateRouteCardComponent {
     endAddress: new FormControl('')
   });
 
-  //TODO: Need to do the right thing!
   CreateOrAddRoute() {
     if (this.AddORChangeRoute === "Add Route") {
       this._route = {
