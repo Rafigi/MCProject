@@ -1,16 +1,16 @@
 <div class="bg col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
   <div *ngIf="!showCreateRouteCard" class="d-flex col-lg-12">
-    <div class="InvisibleCard container justify-content-lg-center col-lg-7 mt-lg-5">
+    <div [formGroup]="EventForm" class="InvisibleCard container justify-content-lg-center col-lg-7 mt-lg-5">
       <div class="col-lg-12">
         <h1 class="text-center headline mt-3">Create Event</h1>
         <p class="text-center underheadline">This is the place where you create one of many events for your journey!</p>
 
         <div class="col-lg-12 d-flex justify-content-center">
-          <input class=" text-center col-lg-8 input text-white" placeholder="Write your title here" />
+          <input formControlName="headline" class=" text-center col-lg-8 input text-white" placeholder="Write your title here" />
         </div>
 
         <div class="col-lg-12 d-flex justify-content-center mt-lg-3">
-          <textarea placeholder="Descripe your event here" class="description text-center p-lg-3" cols="60" rows="3"></textarea>
+          <textarea formControlName="description" placeholder="Descripe your event here" class="description text-center p-lg-3" cols="60" rows="3"></textarea>
         </div>
 
         <!--Time picker and Date Picker-->
@@ -20,20 +20,20 @@
             <div class="col-lg-6 my-lg-2 borderRight">
               <p class="col-lg-12 text-center">Start Event</p>
               <div class="col-lg-12 d-flex justify-content-lg-center">
-                <input class="text-center" id="startTime" />
+                <input formControlName="startTime" class="text-center" id="startTime" />
               </div>
               <div class="col-lg-12">
-                <input class="text-center col-lg-12" id="startDatetime" />
+                <input formControlName="startDateTime" class="text-center col-lg-12" id="startDatetime" />
               </div>
             </div>
 
             <div class="col-lg-6 my-lg-2">
               <p class="col-lg-12 text-center">End Event</p>
               <div class="col-lg-12 d-flex justify-content-lg-center">
-                <input class="text-center" id="endTime" />
+                <input formControlName="endTime" class="text-center" id="endTime" />
               </div>
               <div class="col-lg-12">
-                <input class="text-center col-lg-12" id="endDatetime" />
+                <input formControlName="endDateTime" class="text-center col-lg-12" id="endDatetime" />
               </div>
             </div>
 

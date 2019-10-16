@@ -7,8 +7,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
-//Components
+/*Components*/
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 //Event
@@ -52,7 +53,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatSlideToggleModule,
     FormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

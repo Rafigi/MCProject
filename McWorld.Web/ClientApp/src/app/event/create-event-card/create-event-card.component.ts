@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import Flatpickr from "flatpickr";
 
 @Component({
@@ -15,10 +16,7 @@ export class CreateEventCardComponent implements OnInit {
   showRouteWhenCreated: boolean = false;
   showCreateRouteCard: boolean = false;
 
-
-
   //Input & Output
-  @Input() addRoute: string;
 
 
   /** create-event-card ctor */
@@ -30,10 +28,22 @@ export class CreateEventCardComponent implements OnInit {
     this.SetPickTimerAndDateTimer();
   }
 
+
+  //Reactiveform
+  EventForm = new FormGroup({
+    headline: new FormControl(''),
+    description: new FormControl(''),
+    startDateTime: new FormControl(new Date().toLocaleDateString()),
+    startTime: new FormControl(this.SetTimeOfTheDay()),
+    endDateTime: new FormControl(new Date().toLocaleDateString()),
+    endTime: new FormControl(this.SetTimeWithOneMoreHour())
+  });
+
+
   //Metodes
   //TODO: Need to do the right thing!
   CreateEvent() {
-    console.log("Event Created");
+    console.log(this.EventForm.value);
   }
 
   AddOrChangeRoute() {
@@ -44,14 +54,13 @@ export class CreateEventCardComponent implements OnInit {
     this.showCreateRouteCard = true;
   }
 
-
+  //Set the date
   SetPickTimerAndDateTimer() {
     Flatpickr("#startTime", {
       enableTime: true,
       noCalendar: true,
       dateFormat: "H:i",
-      time_24hr: true,
-      defaultDate: this.SetTimeOfDay()
+      time_24hr: true
     });
 
     Flatpickr("#startDatetime", {
@@ -59,15 +68,14 @@ export class CreateEventCardComponent implements OnInit {
       altFormat: "F j, Y",
       dateFormat: "d.m.Y",
       minDate: "today",
-      defaultDate: this.SetDateOfDay()
+      weekNumbers: true
     });
 
     Flatpickr("#endTime", {
       enableTime: true,
       noCalendar: true,
       dateFormat: "H:i",
-      time_24hr: true,
-      defaultDate: this.SetTimeOfDay()
+      time_24hr: true
     });
 
     Flatpickr("#endDatetime", {
@@ -75,17 +83,21 @@ export class CreateEventCardComponent implements OnInit {
       altFormat: "F j, Y",
       dateFormat: "d.m.Y",
       minDate: "today",
-      defaultDate: this.SetDateOfDay()
+      weekNumbers: true
     });
+
   }
 
-  SetTimeOfDay(): string {
+  SetTimeOfTheDay(): string {
     var hour = new Date().getHours();
     var minut = new Date().getMinutes();
     return hour + ":" + minut;
   }
 
-  SetDateOfDay(): string {
-    return new Date().toLocaleDateString();
+
+  SetTimeWithOneMoreHour(): string {
+    var hour = new Date().getHours();
+    var minut = new Date().getMinutes();
+    return hour + 1 + ":" + minut;
   }
 }
