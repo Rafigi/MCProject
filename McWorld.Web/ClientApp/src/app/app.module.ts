@@ -18,7 +18,6 @@ import { EventCardComponent } from './event/event-card/event-card.component';
 import { EventListComponent } from './event/event-list/event-list.component';
 //Route
 import { CreateRouteCardComponent } from './route/create-route-card/create-route-card.component';
-import { CreateRouteComponent } from './route/create-route/create-route.component';
 
 //Custom Components
 import { ToggleComponent } from './CustomComponents/toggle/toggle.component';
@@ -35,7 +34,6 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     MenuComponent,
     HomeComponent,
-    CreateRouteComponent,
     ToggleComponent,
     SwitchComponent,
     BtnMcWorldComponent,

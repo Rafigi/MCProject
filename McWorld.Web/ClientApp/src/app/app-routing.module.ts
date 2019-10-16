@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //Components
 import { HomeComponent } from './home/home.component';
-import { CreateRouteComponent } from './route/create-route/create-route.component';
+import { CreateRouteCardComponent } from './route/create-route-card/create-route-card.component';
 import { CreateEventCardComponent } from './event/create-event-card/create-event-card.component';
 import { EventListComponent } from './event/event-list/event-list.component';
 
@@ -21,10 +21,6 @@ const appRoutes: Routes = [
       {
         path: 'all',
         component: EventListComponent
-      },
-      {
-      path: 'addroute',
-      component: CreateRouteComponent
       }
     ],
   },
@@ -33,7 +29,7 @@ const appRoutes: Routes = [
     children: [
       {
         path: 'create',
-        component: CreateRouteComponent
+        component: CreateRouteCardComponent
       }
     ]
   },

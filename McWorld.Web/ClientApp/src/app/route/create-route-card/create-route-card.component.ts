@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
+import route from '../Models/Route';
 
 @Component({
-    selector: 'app-create-route-card',
-    templateUrl: './create-route-card.component.html',
-    styleUrls: ['./create-route-card.component.scss']
+  selector: 'app-create-route-card',
+  templateUrl: './create-route-card.component.html',
+  styleUrls: ['./create-route-card.component.scss']
 })
 /** create-route-card component*/
 export class CreateRouteCardComponent {
   AddORChangeRoute: string;
-  private ferry: boolean = false;
-  private toll: boolean = false;
-  private motorway: boolean = false;
+  private _ferry: boolean = false;
+  private _toll: boolean = false;
+  private _motorway: boolean = false;
+  private _route: route;
 
-    /** create-route-card ctor */
+  /** create-route-card ctor */
   constructor(private router: Router) {
     this.controlUrlRoute();
   }
@@ -27,10 +30,27 @@ export class CreateRouteCardComponent {
     }
   }
 
+
+  //Reactiveform
+  RouteForm = new FormGroup({
+    startAddress: new FormControl(''),
+    endAddress: new FormControl('')
+  });
+
   //TODO: Need to do the right thing!
   CreateOrAddRoute() {
     if (this.AddORChangeRoute === "Add Route") {
-      console.log("Add route")
+      this._route = {
+        Toll: this._toll,
+        Motorway: this._motorway,
+        Ferry: this._ferry,
+        Distance: null,
+        Created: new Date().toLocaleDateString(),
+        UserID: undefined,
+        RouteID: undefined,
+        Addresses: this.RouteForm.get("startAddress").value
+      }
+      console.log(this._route, this.RouteForm.value);
     }
     if (this.AddORChangeRoute === "Create Route") {
       console.log("Create route")
@@ -38,14 +58,14 @@ export class CreateRouteCardComponent {
   }
 
 
-  //Switch to select som thing for the route.
+  //Switch to select som things for the route.
   MotorwaySwitch(value) {
-    this.motorway = value;
+    this._motorway = value;
   }
   TollSwitch(value) {
-    this.toll = value;
+    this._toll = value;
   }
   FerrySwitch(value) {
-    this.ferry = value;
+    this._ferry = value;
   }
 }
