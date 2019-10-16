@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import route from '../Models/Route';
@@ -15,6 +15,7 @@ export class CreateRouteCardComponent {
   private _toll: boolean = false;
   private _motorway: boolean = false;
   private _route: route;
+  @Output() AddRoute = new EventEmitter();
 
   /** create-route-card ctor */
   constructor(private router: Router) {
@@ -50,7 +51,7 @@ export class CreateRouteCardComponent {
         RouteID: undefined,
         Addresses: this.RouteForm.get("startAddress").value
       }
-      console.log(this._route, this.RouteForm.value);
+      this.AddRoute.emit(this._route);
     }
     if (this.AddORChangeRoute === "Create Route") {
       console.log("Create route")

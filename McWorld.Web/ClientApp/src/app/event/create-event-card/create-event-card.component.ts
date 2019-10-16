@@ -28,6 +28,11 @@ export class CreateEventCardComponent implements OnInit {
     this.SetPickTimerAndDateTimer();
   }
 
+  getRoute(route) {
+    this.showCreateRouteCard = false;
+    console.log(route);
+  }
+
 
   //Reactiveform
   EventForm = new FormGroup({
