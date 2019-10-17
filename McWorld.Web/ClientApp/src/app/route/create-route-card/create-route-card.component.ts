@@ -57,25 +57,32 @@ export class CreateRouteCardComponent {
   CreateOrAddRoute() {
     if (this.AddORChangeRoute === "Add Route") {
 
-      this._route = {
-        Toll: this._toll,
-        Motorway: this._motorway,
-        Ferry: this._ferry,
-        Distance: null,
-        Created: undefined,
-        UserID: undefined,
-        RouteID: undefined,
-        Addresses: [
-          this.SplitAddress(this.RouteForm.get("startAddress").value),
-          this.SplitAddress(this.RouteForm.get("endAddress").value)]
-      }
+      this.BuildRoute();
 
       this.AddRoute.emit(this._route);
     }
     if (this.AddORChangeRoute === "Create Route") {
-      console.log("Create route")
+      this.BuildRoute();
     }
   }
+
+
+  BuildRoute() {
+    this._route = {
+      Toll: this._toll,
+      Motorway: this._motorway,
+      Ferry: this._ferry,
+      Distance: null,
+      Created: undefined,
+      UserID: undefined,
+      RouteID: undefined,
+      Addresses: [
+        this.SplitAddress(this.RouteForm.get("startAddress").value),
+        this.SplitAddress(this.RouteForm.get("endAddress").value)]
+    }
+  }
+
+
 
   GlueAddressTogether() {
     let start = this._route.Addresses[0];
