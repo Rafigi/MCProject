@@ -19,9 +19,6 @@ export class CreateEventCardComponent implements OnInit {
   private _route: route;
   private _event: event = null;
 
-  //Input & Output
-
-
   /** create-event-card ctor */
   constructor(private ref: ChangeDetectorRef) {
   }
@@ -29,15 +26,15 @@ export class CreateEventCardComponent implements OnInit {
   ngOnInit() {
     this.ref.detectChanges();
     this.SetPickTimerAndDateTimer();
+
   }
 
-  getRoute(route) {
+
+  getRouteFromRouteCard(route) {
     this._showCreateRouteCard = false;
     this._showRouteWhenCreated = true;
     this._route = route;
-    console.log(this._route);
     this.btnAddRoute = 'Change Route';
-
   }
 
 

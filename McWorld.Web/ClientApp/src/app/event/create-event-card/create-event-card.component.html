@@ -71,6 +71,6 @@
     </div>
   </div>
   <div *ngIf="_showCreateRouteCard">
-    <app-create-route-card [_route]="_route" (AddRoute)='getRoute($event)'></app-create-route-card>
+    <app-create-route-card [_route]="_route" (AddRoute)='getRouteFromRouteCard($event)'></app-create-route-card>
   </div>
 </div>

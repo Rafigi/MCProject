@@ -1,4 +1,3 @@
-import Address from './Address';
 export default interface Route {
   RouteID: number;
   Distance: number;
@@ -7,5 +6,5 @@ export default interface Route {
   Toll: boolean;
   Created: string;
   UserID: number;
-  Addresses: Address;
+  Addresses: any;
 }
