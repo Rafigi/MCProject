@@ -1,21 +1,21 @@
 ﻿/// <reference path="../../../../node_modules/@types/jasmine/index.d.ts" />
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { BrowserModule, By } from "@angular/platform-browser";
-import { CreateRouteComponent } from './create-route.component';
+import { ModalComponent } from './modal.component';
 
-let component: CreateRouteComponent;
-let fixture: ComponentFixture<CreateRouteComponent>;
+let component: ModalComponent;
+let fixture: ComponentFixture<ModalComponent>;
 
-describe('CreateRoute component', () => {
+describe('Modal component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ CreateRouteComponent ],
+            declarations: [ ModalComponent ],
             imports: [ BrowserModule ],
             providers: [
                 { provide: ComponentFixtureAutoDetect, useValue: true }
             ]
         });
-        fixture = TestBed.createComponent(CreateRouteComponent);
+        fixture = TestBed.createComponent(ModalComponent);
         component = fixture.componentInstance;
     }));
 

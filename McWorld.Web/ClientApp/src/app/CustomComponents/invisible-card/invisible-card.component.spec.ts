@@ -1,21 +1,21 @@
-﻿/// <reference path="../../../../node_modules/@types/jasmine/index.d.ts" />
+﻿/// <reference path="../../../../../node_modules/@types/jasmine/index.d.ts" />
 import { TestBed, async, ComponentFixture, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { BrowserModule, By } from "@angular/platform-browser";
-import { CreateEventComponent } from './create-event.component';
+import { InvisibleCardComponent } from './invisible-card.component';
 
-let component: CreateEventComponent;
-let fixture: ComponentFixture<CreateEventComponent>;
+let component: InvisibleCardComponent;
+let fixture: ComponentFixture<InvisibleCardComponent>;
 
-describe('CreateEvent component', () => {
+describe('InvisibleCard component', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ CreateEventComponent ],
+            declarations: [ InvisibleCardComponent ],
             imports: [ BrowserModule ],
             providers: [
                 { provide: ComponentFixtureAutoDetect, useValue: true }
             ]
         });
-        fixture = TestBed.createComponent(CreateEventComponent);
+        fixture = TestBed.createComponent(InvisibleCardComponent);
         component = fixture.componentInstance;
     }));
 

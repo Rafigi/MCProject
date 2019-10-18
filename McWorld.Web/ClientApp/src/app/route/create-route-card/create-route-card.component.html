@@ -1,38 +1,40 @@
 <div class="bg col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
   <div class="d-flex col-lg-12">
-    <div class="InvisibleCard container justify-content-lg-center col-lg-7 mt-lg-5">
+    <div [formGroup]="RouteForm" class="InvisibleCard container justify-content-lg-center col-lg-7 mt-lg-5">
       <div class="col-lg-12">
         <h1 class="text-center headline mt-3">Create Route</h1>
         <p class="text-center underheadline">This is the place where you create one of many routes for your journey!</p>
 
         <div class="container inputBox col-lg-12 d-flex justify-content-between pt-lg-4">
-          <input class="input text-center col-lg-5 ml-lg-5" placeholder="Start Address" />
-          <input class="input text-center col-lg-5 mr-lg-5" placeholder="End Address" />
+          <input formControlName="startAddress" class="input text-center col-lg-5 ml-lg-5" placeholder="Start Address" />
+          <input formControlName="endAddress" class="input text-center col-lg-5 mr-lg-5" placeholder="End Address" />
         </div>
 
         <div class="container col-lg-10 d-flex justify-content-center mt-lg-2">
 
           <div class="col-lg-3 borderSideBoxLines text-center">
             <div class="h6">Motorway</div>
-            <app-toggle [on]="off" (toggled)="MotorwaySwitch($event)"></app-toggle>
+            <app-toggle [on]="_motorway" (toggled)="MotorwaySwitch($event)"></app-toggle>
           </div>
 
           <div class="col-lg-3 borderSideBoxLines text-center">
             <div class="h6">Toll</div>
-            <app-toggle [on]="off" (toggled)="TollSwitch($event)"></app-toggle>
+            <app-toggle [on]="_toll" (toggled)="TollSwitch($event)"></app-toggle>
           </div>
 
           <div class="col-lg-3 borderSideBoxLines text-center">
             <div class="h6">Ferry</div>
-            <app-toggle [on]="off" (toggled)="FerrySwitch($event)"></app-toggle>
+            <app-toggle [on]="_ferry" (toggled)="FerrySwitch($event)"></app-toggle>
           </div>
 
         </div>
 
         <div class="mapBox col-lg-12 mt-lg-2"></div>
 
-        <div class="container my-lg-3  d-flex justify-content-center">
-            <app-btn-mc-world [btnText]="btntext" [btnWidth]="10" (click)="CreateRoute()"></app-btn-mc-world>
+        <div class="container my-lg-3 d-flex justify-content-center">
+
+          <app-btn-mc-world [btnText]="AddORChangeRoute" [btnWidth]="10" (click)="CreateOrAddRoute()"></app-btn-mc-world>
+
         </div>
       </div>
     </div>

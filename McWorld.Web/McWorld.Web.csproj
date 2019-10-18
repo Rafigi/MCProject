@@ -28,6 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\event\Event.ts" />
+    <None Remove="ClientApp\src\app\route\Models\Address.ts" />
+    <None Remove="ClientApp\src\app\route\Route.ts" />
     <None Remove="ClientApp\src\app\switch.component.ts" />
   </ItemGroup>
 
@@ -37,6 +40,16 @@
     <ProjectReference Include="..\MCWorld.Route\McWorld.Route.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
     <ProjectReference Include="..\McWorld.User\McWorld.User.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\src\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\event\Event.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\route\Models\Address.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\route\Models\Route.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

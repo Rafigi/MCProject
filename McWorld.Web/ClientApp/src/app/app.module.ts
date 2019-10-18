@@ -7,18 +7,25 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
-//Components
+/*Components*/
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
-import { CreateRouteComponent } from './create-route/create-route.component';
-import { CreateEventComponent } from './create-event/create-event.component';
-import { EventCardComponent } from './event-card/event-card.component';
+//Event
+import { CreateEventCardComponent } from './event/create-event-card/create-event-card.component';
+import { EventCardComponent } from './event/event-card/event-card.component';
+import { EventListComponent } from './event/event-list/event-list.component';
+//Route
+import { CreateRouteCardComponent } from './route/create-route-card/create-route-card.component';
 
 //Custom Components
 import { ToggleComponent } from './CustomComponents/toggle/toggle.component';
 import { SwitchComponent } from './CustomComponents/switch/switch.component';
 import { BtnMcWorldComponent } from './CustomComponents/btn-mc-world/btn-mc-world.component';
+import { ModalComponent } from './CustomComponents/modal/modal.component';
+import { InvisibleCardComponent } from './CustomComponents/invisible-card/invisible-card.component';
+
 import { AppRoutingModule } from './app-routing.module';
 
 
@@ -27,12 +34,15 @@ import { AppRoutingModule } from './app-routing.module';
     AppComponent,
     MenuComponent,
     HomeComponent,
-    CreateRouteComponent,
-    CreateEventComponent,
     ToggleComponent,
     SwitchComponent,
     BtnMcWorldComponent,
-    EventCardComponent
+    EventCardComponent,
+    EventListComponent,
+    ModalComponent,
+    CreateEventCardComponent,
+    CreateRouteCardComponent,
+    InvisibleCardComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,7 +51,8 @@ import { AppRoutingModule } from './app-routing.module';
     MatSlideToggleModule,
     FormsModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
