@@ -4,6 +4,9 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    /// <summary>
+    /// This is an Object for the Route, there have a connection to Addresses.
+    /// </summary>
     public class Route
     {
         [Key]
