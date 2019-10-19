@@ -7,8 +7,19 @@ import { Component } from '@angular/core';
 })
 /** Home component*/
 export class HomeComponent {
+  _hidden: boolean = false;
+  editMail: string = "Edit Mail";
+  changePassword: string = "Change Password";
   /** Home ctor */
   constructor() {
 
+  }
+
+  ShowInfoModal() {
+    this._hidden = !this._hidden;
+  }
+
+  ShowHide(value) {
+    this._hidden = value;
   }
 }
