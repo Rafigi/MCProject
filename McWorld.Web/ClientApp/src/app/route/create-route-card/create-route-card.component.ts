@@ -13,7 +13,7 @@ import Address from '../Models/Address';
 /** create-route-card component*/
 export class CreateRouteCardComponent {
   //Variables
-  AddORChangeRoute: string;
+  private addORChangeRoute: string;
   private _ferry: boolean = false;
   private _toll: boolean = false;
   private _motorway: boolean = false;
@@ -52,22 +52,22 @@ export class CreateRouteCardComponent {
 
   UrlCheck() {
     if (this.router.url === "/event/create") {
-      this.AddORChangeRoute = "Add Route";
+      this.addORChangeRoute = "Add Route";
     }
     if (this.router.url === "/route/create") {
-      this.AddORChangeRoute = "Create Route";
+      this.addORChangeRoute = "Create Route";
     }
   }
 
   CreateOrAddRoute() {
-    if (this.AddORChangeRoute === "Add Route") {
+    if (this.addORChangeRoute === "Add Route") {
       let startAddress: Address = this.SplitAddress(this.RouteForm.get("startAddress").value);
       let endAddress: Address = this.SplitAddress(this.RouteForm.get("endAddress").value);
       this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, startAddress, endAddress);
       console.log(this.$event);
       this.AddRoute.emit(this.$event);
     }
-    if (this.AddORChangeRoute === "Create Route") {
+    if (this.addORChangeRoute === "Create Route") {
 
     }
   }

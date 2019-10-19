@@ -11,11 +11,11 @@ import Flatpickr from "flatpickr";
 /** create-event-card component*/
 export class CreateEventCardComponent implements OnInit {
   //Variables
-  btnAddRoute: string = "Add Route";
-  btnCreateEvent: string = "Create Event";
-  _showRouteWhenCreated: boolean = false;
-  _showCreateRouteCard: boolean = false;
-  private _event: Event;
+  private btnAddRoute: string = "Add Route";
+  private btnCreateEvent: string = "Create Event";
+  private _showRouteWhenCreated: boolean = false;
+  private _showCreateRouteCard: boolean = false;
+  private _$event: Event;
 
   /** create-event-card ctor */
   constructor(private ref: ChangeDetectorRef) {
@@ -32,7 +32,7 @@ export class CreateEventCardComponent implements OnInit {
   getRouteFromRouteCard(event: Event) {
     this._showCreateRouteCard = false;
     this._showRouteWhenCreated = true;
-    this._event = event;
+    this._$event = event;
     this.btnAddRoute = 'Change Route';
   }
 
@@ -53,19 +53,19 @@ export class CreateEventCardComponent implements OnInit {
 
   //Creating a Event Object, with some default values and setting the inputs
   GenerateEventObject() {
-    this._event = new Event();
+    this._$event = new Event();
     this.EventForm.setValue({
-      headline: this._event.Headline,
-      description: this._event.Description,
-      startDate: this._event.StartDate,
-      startTime: this._event.StartTime,
-      endDate: this._event.EndDate,
-      endTime: this._event.EndTime
+      headline: this._$event.Headline,
+      description: this._$event.Description,
+      startDate: this._$event.StartDate,
+      startTime: this._$event.StartTime,
+      endDate: this._$event.EndDate,
+      endTime: this._$event.EndTime
     });
   }
 
   ShowCreateRouteCard() {
-    this._event.UpdateEvent(
+    this._$event.UpdateEvent(
       this.EventForm.get("headline").value,
       this.EventForm.get("description").value,
       this.EventForm.get("startDate").value,
