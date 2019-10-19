@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\CustomComponents\modal\index.ts" />
     <None Remove="ClientApp\src\app\event\Event.ts" />
     <None Remove="ClientApp\src\app\route\Models\Address.ts" />
     <None Remove="ClientApp\src\app\route\Route.ts" />

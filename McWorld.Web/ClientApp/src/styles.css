@@ -38,4 +38,9 @@ Underheadline {
   font-size: 1.2rem;
 }
 
+.textBoxModal {
+  border-top: solid 1px rgba(159, 204, 239, 0.70);
+  padding: 0px;
+}
+
 

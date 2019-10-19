@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 /*Components*/
 import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
+import { EditInformationModalComponent } from './edit-information-modal/edit-information-modal.component';
 //Event
 import { CreateEventCardComponent } from './event/create-event-card/create-event-card.component';
 import { EventCardComponent } from './event/event-card/event-card.component';
@@ -39,10 +40,11 @@ import { AppRoutingModule } from './app-routing.module';
     BtnMcWorldComponent,
     EventCardComponent,
     EventListComponent,
-    ModalComponent,
     CreateEventCardComponent,
     CreateRouteCardComponent,
-    InvisibleCardComponent
+    InvisibleCardComponent,
+    EditInformationModalComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
