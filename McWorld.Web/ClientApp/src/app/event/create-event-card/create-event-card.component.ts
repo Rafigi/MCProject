@@ -11,10 +11,10 @@ import Flatpickr from "flatpickr";
 /** create-event-card component*/
 export class CreateEventCardComponent implements OnInit {
   //Variables
-  private btnAddRoute: string = "Add Route";
-  private btnCreateEvent: string = "Create Event";
-  private _showRouteWhenCreated: boolean = false;
-  private _showCreateRouteCard: boolean = false;
+  btnAddRoute: string = "Add Route";
+  btnCreateEvent: string = "Create Event";
+  _showRouteWhenCreated: boolean = false;
+  _showCreateRouteCard: boolean = false;
   private _$event: Event;
 
   /** create-event-card ctor */

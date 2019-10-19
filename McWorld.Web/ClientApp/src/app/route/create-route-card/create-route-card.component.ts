@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import Event from '../../event/Event';
@@ -11,14 +11,15 @@ import Address from '../Models/Address';
   styleUrls: ['./create-route-card.component.scss']
 })
 /** create-route-card component*/
-export class CreateRouteCardComponent {
+export class CreateRouteCardComponent implements OnInit {
   //Variables
-  private addORChangeRoute: string;
-  private _ferry: boolean = false;
-  private _toll: boolean = false;
-  private _motorway: boolean = false;
-  private _startAddress: string;
-  private _endAddress: string;
+  addORChangeRoute: string;
+  _ferry: boolean = false;
+  _toll: boolean = false;
+  _motorway: boolean = false;
+  _startAddress: string;
+  _endAddress: string;
+  private _route: Route;
 
   @Output() AddRoute = new EventEmitter();
   @Input() $event: Event;
@@ -28,7 +29,10 @@ export class CreateRouteCardComponent {
 
   ngOnInit() {
     this.UrlCheck();
-    this.IsRouteDefined(this.$event);
+    if (this.$event != undefined) {
+      this.IsRouteDefined(this.$event);
+    }
+    this._route = new Route();
   }
 
 
@@ -60,15 +64,16 @@ export class CreateRouteCardComponent {
   }
 
   CreateOrAddRoute() {
+    let startAddress: Address = this.SplitAddress(this.RouteForm.get("startAddress").value);
+    let endAddress: Address = this.SplitAddress(this.RouteForm.get("endAddress").value);
+
     if (this.addORChangeRoute === "Add Route") {
-      let startAddress: Address = this.SplitAddress(this.RouteForm.get("startAddress").value);
-      let endAddress: Address = this.SplitAddress(this.RouteForm.get("endAddress").value);
       this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, startAddress, endAddress);
-      console.log(this.$event);
       this.AddRoute.emit(this.$event);
     }
-    if (this.addORChangeRoute === "Create Route") {
 
+    if (this.addORChangeRoute === "Create Route") {
+      this._route.CreateRoute(0, this._ferry, this._toll, this._motorway, startAddress, endAddress);
     }
   }
 
