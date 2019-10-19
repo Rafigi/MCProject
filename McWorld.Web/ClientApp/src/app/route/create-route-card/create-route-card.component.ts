@@ -1,6 +1,7 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import Event from '../../event/Event';
 import Route from '../Models/Route';
 import Address from '../Models/Address';
 
@@ -19,32 +20,15 @@ export class CreateRouteCardComponent {
   private _startAddress: string;
   private _endAddress: string;
 
-
   @Output() AddRoute = new EventEmitter();
-  @Input() _route: Route;
+  @Input() $event: Event;
 
   /** create-route-card ctor */
-  constructor(private router: Router) {
-    this.controlUrlRoute();
-  }
+  constructor(private router: Router) { }
 
   ngOnInit() {
-    if (this._route != undefined) {
-      this._ferry = this._route.Ferry;
-      this._toll = this._route.Toll;
-      this._motorway = this._route.Motorway;
-      this.GlueAddressTogether();
-      this.RouteForm.setValue({ startAddress: this._startAddress, endAddress: this._endAddress });
-    }
-  }
-
-  controlUrlRoute() {
-    if (this.router.url === "/event/create") {
-      this.AddORChangeRoute = "Add Route";
-    }
-    if (this.router.url === "/route/create") {
-      this.AddORChangeRoute = "Create Route";
-    }
+    this.UrlCheck();
+    this.IsRouteDefined(this.$event);
   }
 
 
@@ -54,52 +38,54 @@ export class CreateRouteCardComponent {
     endAddress: new FormControl('')
   });
 
+  //Metodes
+  IsRouteDefined(event: Event) {
+    if (event.Route != undefined) {
+      this._ferry = event.Route.Ferry;
+      this._toll = event.Route.Toll;
+      this._motorway = event.Route.Motorway;
+      this.RouteForm.setValue({ startAddress: this._startAddress, endAddress: this._endAddress });
+    }
+    this.$event.Route = new Route();
+  }
+
+  UrlCheck() {
+    if (this.router.url === "/event/create") {
+      this.AddORChangeRoute = "Add Route";
+    }
+    if (this.router.url === "/route/create") {
+      this.AddORChangeRoute = "Create Route";
+    }
+  }
+
   CreateOrAddRoute() {
     if (this.AddORChangeRoute === "Add Route") {
-
-      this.BuildRoute();
-
-      this.AddRoute.emit(this._route);
+      let startAddress: Address = this.SplitAddress(this.RouteForm.get("startAddress").value);
+      let endAddress: Address = this.SplitAddress(this.RouteForm.get("endAddress").value);
+      this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, startAddress, endAddress);
+      console.log(this.$event);
+      this.AddRoute.emit(this.$event);
     }
     if (this.AddORChangeRoute === "Create Route") {
-      this.BuildRoute();
+
     }
   }
-
-
-  BuildRoute() {
-    this._route = {
-      Toll: this._toll,
-      Motorway: this._motorway,
-      Ferry: this._ferry,
-      Distance: null,
-      Created: undefined,
-      UserID: undefined,
-      RouteID: undefined,
-      Addresses: [
-        this.SplitAddress(this.RouteForm.get("startAddress").value),
-        this.SplitAddress(this.RouteForm.get("endAddress").value)]
-    }
-  }
-
-
 
   GlueAddressTogether() {
-    let start = this._route.Addresses[0];
-    let end = this._route.Addresses[1];
+    let start = this.$event.Route.Addresses[0];
+    let end = this.$event.Route.Addresses[1];
     this._startAddress = start.StreetName + " " + start.StreetNumber + ", " + start.Zipcode + " " + start.City;
     this._endAddress = end.StreetName + " " + end.StreetNumber + ", " + end.Zipcode + " " + end.City
   }
 
 
   SplitAddress(address: string): Address {
-
+    console.log(address);
     let splittedAddress = address.split(",");
     let streetAddressWithNumber = splittedAddress[0].split(" ");
     //Address
     let streetAddressName = streetAddressWithNumber[0];
     let streetNumber = streetAddressWithNumber[1];
-
     //City Because it dotn delete the first array element, we have to start from 1. 0 is a empty string
     let zipCodeWithCity = splittedAddress[1].split(" ");
     let zipCode = zipCodeWithCity[1];
@@ -107,14 +93,14 @@ export class CreateRouteCardComponent {
 
     //Returning the object as it should be
     return {
-     AddressId: null,
-     StreetName: streetAddressName,
-     StreetNumber: streetNumber,
-     City: city,
-     Zipcode: parseInt(zipCode),
-     Country: 'Denmark',
-     Latitude: '00000',
-     Longitude: '00000'
+      AddressId: null,
+      StreetName: streetAddressName,
+      StreetNumber: streetNumber,
+      City: city,
+      Zipcode: parseInt(zipCode),
+      Country: 'Denmark',
+      Latitude: '00000',
+      Longitude: '00000'
     }
 
   }

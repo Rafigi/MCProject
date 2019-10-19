@@ -23,7 +23,7 @@
                 <input formControlName="startTime" class="text-center" id="startTime" />
               </div>
               <div class="col-lg-12">
-                <input formControlName="startDateTime" class="text-center col-lg-12" id="startDatetime" />
+                <input formControlName="startDate" class="text-center col-lg-12" id="startDate" />
               </div>
             </div>
 
@@ -33,7 +33,7 @@
                 <input formControlName="endTime" class="text-center" id="endTime" />
               </div>
               <div class="col-lg-12">
-                <input formControlName="endDateTime" class="text-center col-lg-12" id="endDatetime" />
+                <input formControlName="endDate" class="text-center col-lg-12" id="endDate" />
               </div>
             </div>
 
@@ -71,6 +71,6 @@
     </div>
   </div>
   <div *ngIf="_showCreateRouteCard">
-    <app-create-route-card [_route]="_route" (AddRoute)='getRouteFromRouteCard($event)'></app-create-route-card>
+    <app-create-route-card [$event]="_event" (AddRoute)='getRouteFromRouteCard($event)'></app-create-route-card>
   </div>
 </div>

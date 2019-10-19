@@ -1,4 +1,4 @@
-export default interface Address {
+export default class Address {
   AddressId: number
   StreetName: string;
   StreetNumber: string;
