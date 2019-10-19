@@ -44,6 +44,7 @@ export class CreateRouteCardComponent {
       this._ferry = event.Route.Ferry;
       this._toll = event.Route.Toll;
       this._motorway = event.Route.Motorway;
+      this.GlueAddressTogether();
       this.RouteForm.setValue({ startAddress: this._startAddress, endAddress: this._endAddress });
     }
     this.$event.Route = new Route();
