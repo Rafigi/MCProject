@@ -1,1 +1,13 @@
-﻿<div style="border: 1px solid red">Modal Component</div>
+<div *ngIf="hidden" class="container d-flex justify-content-lg-center col-lg-12">
+  <div class="bg col-lg-5 mt-lg-5" [style.width.rem]="modalWidth">
+    <!--The headline for the modal-->
+    <ng-content select=".headline"></ng-content>
+
+    <div class="col-lg-12 d-flex justify-content-center mt-lg-1">
+
+      <!--The content for the modal-->
+      <ng-content select=".content"></ng-content>
+
+    </div>
+  </div>
+</div>
