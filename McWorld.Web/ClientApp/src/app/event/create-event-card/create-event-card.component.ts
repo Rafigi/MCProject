@@ -11,8 +11,7 @@ import Flatpickr from "flatpickr";
 /** create-event-card component*/
 export class CreateEventCardComponent implements OnInit {
   //Variables
-  btnAddRoute: string = "Add Route";
-  btnCreateEvent: string = "Create Event";
+  btnAddorChangeRoute: string = "Add Route";
   _showRouteWhenCreated: boolean = false;
   _showCreateRouteCard: boolean = false;
   private _$event: Event;
@@ -33,7 +32,7 @@ export class CreateEventCardComponent implements OnInit {
     this._showCreateRouteCard = false;
     this._showRouteWhenCreated = true;
     this._$event = event;
-    this.btnAddRoute = 'Change Route';
+    this.btnAddorChangeRoute = 'Change Route';
   }
 
   EventForm = new FormGroup({

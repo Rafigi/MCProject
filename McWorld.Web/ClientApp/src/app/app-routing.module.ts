@@ -6,13 +6,11 @@ import { HomeComponent } from './home/home.component';
 import { CreateRouteCardComponent } from './route/create-route-card/create-route-card.component';
 import { CreateEventCardComponent } from './event/create-event-card/create-event-card.component';
 import { EventListComponent } from './event/event-list/event-list.component';
-import { EditInformationModalComponent } from './edit-information-modal/edit-information-modal.component';
 
 
 const appRoutes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
-  { path: 'modal', component: EditInformationModalComponent  },
   {
     path: 'event',
     children: [

@@ -10,6 +10,7 @@ export class BtnMcWorldComponent {
 
   @Input() btnText: string;
   @Input() btnWidth: string;
+  @Input() disabled: boolean = false;
 
   constructor() {
 

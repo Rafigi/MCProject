@@ -86,7 +86,6 @@ export class CreateRouteCardComponent implements OnInit {
 
 
   SplitAddress(address: string): Address {
-    console.log(address);
     let splittedAddress = address.split(",");
     let streetAddressWithNumber = splittedAddress[0].split(" ");
     //Address

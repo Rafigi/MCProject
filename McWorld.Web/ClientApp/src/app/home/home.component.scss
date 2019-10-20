@@ -1,4 +1,4 @@
-.bg {
+._bg {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -8,7 +8,7 @@
   background-image: url("/../../assets/HomeBackground.jpg");
 }
 
-.homeButton {
+._homeButton {
   font-size: 1.8rem;
   font-family: 'Handlee', cursive;
   height: 6rem;
@@ -20,7 +20,7 @@
   width: 12rem;
 }
 
-.infoButton {
+._infoButton {
   font-size: 1rem;
   font-family: 'Handlee', cursive;
   height: 3rem;
@@ -34,16 +34,13 @@
 }
 
 
-.homeButton:hover {
+._homeButton:hover {
   opacity: 0.9;
   font-size: 2rem;
 }
 
-.infoButton:hover {
+._infoButton:hover {
   background-color: rgba(255, 255, 255, 0.75);
   font-size: 1.1rem;
 }
 
-.bs {
-  border-style: solid;
-}
