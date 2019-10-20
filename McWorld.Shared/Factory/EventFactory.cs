@@ -6,7 +6,7 @@
 
     public class EventFactory : IEventFactory
     {
-        private List<Address> _addresses;
+        private List<Address> _addresses = new List<Address>();
         public Event Create(Event @event)
         {
             Guid _routeID = Guid.NewGuid();

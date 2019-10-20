@@ -53,7 +53,7 @@
 
         // POST: api/Event
         [HttpPost]
-        public void Post([FromBody] Event @event)
+        public void Create([FromBody] Event @event)
         {
             var _event = _eventFactory.Create(@event);
             _serviceBus.Add(new CreateEventCommand(_event));
