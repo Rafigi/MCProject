@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import event from '../Event';
-import route from '../../route/Models/Route';
+import Event from '../Event';
 import Flatpickr from "flatpickr";
 
 @Component({
@@ -12,57 +11,71 @@ import Flatpickr from "flatpickr";
 /** create-event-card component*/
 export class CreateEventCardComponent implements OnInit {
   //Variables
-  btnAddRoute: string = "Add Route";
-  btnCreateEvent: string = "Create Event";
+  btnAddorChangeRoute: string = "Add Route";
   _showRouteWhenCreated: boolean = false;
   _showCreateRouteCard: boolean = false;
-  private _route: route;
-  private _event: event = null;
-
-  //Input & Output
-
+  private _$event: Event;
 
   /** create-event-card ctor */
   constructor(private ref: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.GenerateEventObject();
     this.ref.detectChanges();
     this.SetPickTimerAndDateTimer();
   }
 
-  getRoute(route) {
+
+  //Getting the Event object back from the CreateRouteCard through a Output event.emit(); 
+  getRouteFromRouteCard(event: Event) {
     this._showCreateRouteCard = false;
     this._showRouteWhenCreated = true;
-    this._route = route;
-    console.log(this._route);
-    this.btnAddRoute = 'Change Route';
-
+    this._$event = event;
+    this.btnAddorChangeRoute = 'Change Route';
   }
 
-
-  //Reactiveform
   EventForm = new FormGroup({
     headline: new FormControl(''),
     description: new FormControl(''),
-    startDateTime: new FormControl(new Date().toLocaleDateString()),
-    startTime: new FormControl(this.SetTimeOfTheDay()),
-    endDateTime: new FormControl(new Date().toLocaleDateString()),
-    endTime: new FormControl(this.SetTimeWithOneMoreHour())
+    startDate: new FormControl(''),
+    startTime: new FormControl(''),
+    endDate: new FormControl(''),
+    endTime: new FormControl('')
   });
 
-
   //Metodes
-  //TODO: Need to do the right thing!
   CreateEvent() {
-    console.log(this.EventForm.value);
+    //let eventCreated = this._event.Created(this._event);
+    console.log("Event Created and sent to DATABASE");
+  }
+
+  //Creating a Event Object, with some default values and setting the inputs
+  GenerateEventObject() {
+    this._$event = new Event();
+    this.EventForm.setValue({
+      headline: this._$event.Headline,
+      description: this._$event.Description,
+      startDate: this._$event.StartDate,
+      startTime: this._$event.StartTime,
+      endDate: this._$event.EndDate,
+      endTime: this._$event.EndTime
+    });
   }
 
   ShowCreateRouteCard() {
+    this._$event.UpdateEvent(
+      this.EventForm.get("headline").value,
+      this.EventForm.get("description").value,
+      this.EventForm.get("startDate").value,
+      this.EventForm.get("startTime").value,
+      this.EventForm.get("endDate").value,
+      this.EventForm.get("endTime").value
+    );
     this._showCreateRouteCard = true;
   }
 
-  //Set the date
+  //Setting the date/time inputs 
   SetPickTimerAndDateTimer() {
     Flatpickr("#startTime", {
       enableTime: true,
@@ -71,7 +84,7 @@ export class CreateEventCardComponent implements OnInit {
       time_24hr: true
     });
 
-    Flatpickr("#startDatetime", {
+    Flatpickr("#startDate", {
       altInput: false,
       altFormat: "F j, Y",
       dateFormat: "d.m.Y",
@@ -86,7 +99,7 @@ export class CreateEventCardComponent implements OnInit {
       time_24hr: true
     });
 
-    Flatpickr("#endDatetime", {
+    Flatpickr("#endDate", {
       altInput: false,
       altFormat: "F j, Y",
       dateFormat: "d.m.Y",
@@ -94,18 +107,5 @@ export class CreateEventCardComponent implements OnInit {
       weekNumbers: true
     });
 
-  }
-
-  SetTimeOfTheDay(): string {
-    var hour = new Date().getHours();
-    var minut = new Date().getMinutes();
-    return hour + ":" + minut;
-  }
-
-
-  SetTimeWithOneMoreHour(): string {
-    var hour = new Date().getHours();
-    var minut = new Date().getMinutes();
-    return hour + 1 + ":" + minut;
   }
 }

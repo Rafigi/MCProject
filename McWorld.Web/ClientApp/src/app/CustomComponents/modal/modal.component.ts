@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'app-modal',
@@ -7,8 +7,12 @@
 })
 /** Modal component*/
 export class ModalComponent {
+  @Input() hidden: boolean;
+  @Input() modalWidth: string;
+
     /** Modal ctor */
     constructor() {
 
-    }
+  }
+
 }

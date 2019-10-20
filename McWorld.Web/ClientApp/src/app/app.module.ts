@@ -39,10 +39,10 @@ import { AppRoutingModule } from './app-routing.module';
     BtnMcWorldComponent,
     EventCardComponent,
     EventListComponent,
-    ModalComponent,
     CreateEventCardComponent,
     CreateRouteCardComponent,
-    InvisibleCardComponent
+    InvisibleCardComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

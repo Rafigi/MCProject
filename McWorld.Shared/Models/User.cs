@@ -3,6 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    /// <summary>
+    /// This is an Object for the User, There have connections to Route, Event, Registration
+    /// </summary>
     public class User
     {
         [Key]

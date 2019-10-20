@@ -4,6 +4,10 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
+
+    /// <summary>
+    /// This and Object for the Addresses
+    /// </summary>
     public class Address
     {
         [Key]

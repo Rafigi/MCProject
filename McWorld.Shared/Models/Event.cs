@@ -3,6 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    /// <summary>
+    /// A Event, Where a Route with 2 Addresses is Connected
+    /// </summary>
     public class Event
     {
         [Key]

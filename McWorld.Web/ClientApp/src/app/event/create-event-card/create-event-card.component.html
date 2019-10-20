@@ -23,7 +23,7 @@
                 <input formControlName="startTime" class="text-center" id="startTime" />
               </div>
               <div class="col-lg-12">
-                <input formControlName="startDateTime" class="text-center col-lg-12" id="startDatetime" />
+                <input formControlName="startDate" class="text-center col-lg-12" id="startDate" />
               </div>
             </div>
 
@@ -33,7 +33,7 @@
                 <input formControlName="endTime" class="text-center" id="endTime" />
               </div>
               <div class="col-lg-12">
-                <input formControlName="endDateTime" class="text-center col-lg-12" id="endDatetime" />
+                <input formControlName="endDate" class="text-center col-lg-12" id="endDate" />
               </div>
             </div>
 
@@ -46,9 +46,17 @@
 
             <div class="col-lg-6 row d-flex justify-content-center">
               <div class="col-lg-12">
-                <p class="text-lg-center text-white borderBottom">Valløesgade 29, 7100 Vejle, Denmark</p>
-                <p class="text-lg-center text-white">Valløesgade 29, 7100 Vejle, Denmark</p>
-                <p class="text-lg-center text-white">200 km</p>
+                <p class="text-lg-center text-white borderBottom">
+                  {{_$event.Route.Addresses[0].StreetName}} {{_$event.Route.Addresses[0].StreetNumber}},
+                  {{_$event.Route.Addresses[0].Zipcode }} {{_$event.Route.Addresses[0].City}},
+                  {{_$event.Route.Addresses[0].Country}}
+                </p>
+                <p class="text-lg-center text-white">
+                  {{_$event.Route.Addresses[1].StreetName}} {{_$event.Route.Addresses[1].StreetNumber}},
+                  {{_$event.Route.Addresses[1].Zipcode }} {{_$event.Route.Addresses[1].City}},
+                  {{_$event.Route.Addresses[1].Country}}
+                </p>
+                <p class="text-lg-center text-white">{{_$event.Route.Distance}}</p>
               </div>
 
             </div>
@@ -64,13 +72,13 @@
           </div>
         </div>
         <div class="container my-lg-3 d-flex justify-content-between">
-          <app-btn-mc-world [btnText]="btnAddRoute" [btnWidth]="10" (click)="ShowCreateRouteCard()"></app-btn-mc-world>
-          <app-btn-mc-world [btnText]="btnCreateEvent" [btnWidth]="10" (click)="CreateEvent()"></app-btn-mc-world>
+          <app-btn-mc-world [btnText]="btnAddorChangeRoute" [btnWidth]="10" (click)="ShowCreateRouteCard()"></app-btn-mc-world>
+          <app-btn-mc-world [btnText]="'Create Event'" [btnWidth]="10" (click)="CreateEvent()"></app-btn-mc-world>
         </div>
       </div>
     </div>
   </div>
   <div *ngIf="_showCreateRouteCard">
-    <app-create-route-card [_route]="_route" (AddRoute)='getRoute($event)'></app-create-route-card>
+    <app-create-route-card [$event]="_$event" (AddRoute)='getRouteFromRouteCard($event)'></app-create-route-card>
   </div>
 </div>
