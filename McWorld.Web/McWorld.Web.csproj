@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Autofac.WebApi2" Version="4.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
@@ -36,15 +37,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\McWorld.Address\McWorld.Address.csproj" />
+    <Folder Include="ClientApp\src\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\McWorld.Event\McWorld.Event.csproj" />
     <ProjectReference Include="..\MCWorld.Route\McWorld.Route.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
     <ProjectReference Include="..\McWorld.User\McWorld.User.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\Services\" />
   </ItemGroup>
 
   <ItemGroup>

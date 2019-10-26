@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="4.9.4" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Autofac.Extras.FakeItEasy" Version="5.0.1" />
     <PackageReference Include="AutoFixture" Version="4.11.0" />
     <PackageReference Include="AutoFixture.AutoFakeItEasy" Version="4.11.0" />
     <PackageReference Include="AutoFixture.AutoFoq" Version="4.11.0" />

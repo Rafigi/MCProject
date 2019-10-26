@@ -4,12 +4,12 @@ namespace Tests.MCRoute.Test
     using FakeItEasy;
     using global::MCRoute.Test;
     using McWorld.Event;
+    using McWorld.Route;
     using McWorld.Shared.Factory;
     using McWorld.Shared.Models;
     using McWorld.Shared.ServicesBus;
     using McWorld.Web.Controllers;
     using NUnit.Framework;
-    using System.Collections.Generic;
 
     public class CreateEvent_Test
     {
@@ -20,40 +20,58 @@ namespace Tests.MCRoute.Test
 
         [Test]
         [AutoCreateTestInput]
-        public void Create_Event_Factory(Event @event)
+        public void Create_Event_Factory(
+            [Frozen] IEventFactory eventFactory,
+            Event @event)
         {
-            EventFactory eventFactory = new EventFactory();
+            //Information
             var _event = eventFactory.Create(@event);
+
+            //Act
+            A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
+
+            //Test
             Assert.AreNotEqual(@event.EventID, _event.EventID);
         }
 
         [Test]
         [AutoCreateTestInput]
-        public void Create_Event_With_Factory_Route_Added()
+        public void Send_Event_With_ServiceBus(
+            [Frozen] IEventFactory eventFactory,
+            [Frozen] IServiceBus serviceBus,
+            EventController eventController,
+            Event @event)
         {
-            Event @event = new Event();
-            @event.Route = new Route();
-            @event.Route.Addresses = new List<Address>();
-            @event.Route.Addresses.Add(new Address());
-            @event.Route.Addresses.Add(new Address());
+            //Information
+            A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
 
-            EventFactory eventFactory = new EventFactory();
-            var _event = eventFactory.Create(@event);
-            Assert.AreNotEqual(_event.Route.RouteID, @event.Route.RouteID, "ID Is Added");
+            //Act
+            eventController.Create(@event);
+
+            //Test
+            A.CallTo(() => serviceBus.Add(A<CreateEventCommand>.Ignored))
+                .MustHaveHappened();
         }
 
-        //[Test]
-        //[AutoCreateTestInput]
-        //public void Send_Event_With_ServiceBus(
-        //    [Frozen] IServiceBus serviceBus,
-        //    EventController eventController,
-        //    Event @event)
-        //{
+        [Test]
+        [AutoCreateTestInput]
+        public void Send_Route_With_ServiceBus(
+        [Frozen] IEventFactory eventFactory,
+        [Frozen] IServiceBus serviceBus,
+        EventController eventController,
+        Event @event
+            )
+        {
+            //Information
+            A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
 
-        //    eventController.Create(@event);
+            //Act
+            eventController.Create(@event);
 
-        //    A.CallTo(() => serviceBus.Add(new CreateEventCommand(@event))).MustHaveHappened();
-        //}
+            //Test
+            A.CallTo(() => serviceBus.Add(A<CreateRouteCommand>.Ignored))
+                .MustHaveHappened();
+        }
 
     }
 }

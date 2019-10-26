@@ -1,17 +1,16 @@
 ﻿namespace McWorld.Web.Controllers
 {
-    using McWorld.Address;
     using McWorld.Event;
     using McWorld.Route;
+    using McWorld.Shared.Dtos;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
-    using McWorld.Shared.ServicesBus;
     using McWorld.Shared.Models;
+    using McWorld.Shared.Queryables;
+    using McWorld.Shared.ServicesBus;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
-    using McWorld.Shared.Queryables;
-    using McWorld.Shared.Dtos;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -37,7 +36,7 @@
         {
             return _queryables.GetAllEventsWithRoutes();
         }
-        
+
         [HttpGet("{id}")]
         public IEnumerable<EventDto> GetAllUserCreatedEvents(Guid userId)
         {
@@ -58,6 +57,7 @@
             var _event = _eventFactory.Create(@event);
             _serviceBus.Add(new CreateEventCommand(_event));
             _serviceBus.Add(new CreateRouteCommand(_event.Route));
+            _serviceBus.Complete();
         }
 
         // PUT: api/Event/5

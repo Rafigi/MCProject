@@ -1,6 +1,5 @@
 ﻿namespace McWorld.Web.Controllers
 {
-    using McWorld.Address;
     using McWorld.Route;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Factory;
@@ -53,7 +52,7 @@
         {
             //For creating a mock data
             //var _route = CreateDefaultValues();
-            
+
             var _route = _routeFactory.Create(route);
             _serviceBus.Add(new CreateRouteCommand(_route));
             _serviceBus.Complete();
@@ -73,6 +72,7 @@
 
         }
 
+        //Only for test purpose.
         Route CreateDefaultValues()
         {
             List<Address> _addresses = new List<Address>();
