@@ -37,6 +37,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
     "material-design-icons": "^3.0.1",
+    "ngx-google-places-autocomplete": "^2.0.4",
     "popper.js": "^1.15.0",
     "rxjs": "^6.5.3",
     "tail.datetime": "^0.4.13",
