@@ -1,17 +1,19 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using McWorld.Shared.Data;
 using McWorld.Shared.Factory;
 using McWorld.Shared.IRepository;
 using McWorld.Shared.Persistence;
-using McWorld.Shared.Queryables;
 using McWorld.Shared.Repository;
 using McWorld.Shared.ServicesBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Reflection;
 
 namespace McWorld.Web
 {
@@ -23,11 +25,12 @@ namespace McWorld.Web
         }
 
         public IConfiguration Configuration { get; }
+        public ILifetimeScope AutofacContainer { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddControllersAsServices();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -36,23 +39,34 @@ namespace McWorld.Web
             });
 
             services.AddDbContext<McDbContext>(options =>
-         options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
 
-            //Add DI Services
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
-            services.AddTransient(typeof(IUserRepository), typeof(UserRepository));
-            services.AddTransient(typeof(IEventRepository), typeof(EventRepository));
-            services.AddTransient(typeof(IAdresseRepository), typeof(AdresseRepository));
-            services.AddTransient(typeof(IRouteRepository), typeof(RouteRepository));
+            //Now register our services with Autofac container
+            var builder = new ContainerBuilder();
+            builder.RegisterType<ServiceBus>().As<IServiceBus>();
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
 
-            services.AddTransient(typeof(IServiceBus), typeof(ServiceBus));
-            services.AddScoped(typeof(IQueryables), typeof(Queryables));
-            services.AddScoped(typeof(IUserFactory), typeof(UserFactory));
-            services.AddScoped(typeof(IRouteFactory), typeof(RouteFactory));
-            services.AddScoped(typeof(IEventFactory), typeof(EventFactory));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //This is for getting the assembly where Repository Class is hide - McWorld.Shared
+            var dataAccess = Assembly.GetAssembly(typeof(Repository<>));
+            builder.RegisterAssemblyTypes(dataAccess)
+                   .Where(t => t.Name.EndsWith("Repository"))
+                   .AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(dataAccess)
+                 .Where(t => t.Name.EndsWith("Factory"))
+                 .AsImplementedInterfaces();
+            builder.Populate(services);
+            var container = builder.Build();
+
+            //Create the IServiceProvider based on the container.
+            return new AutofacServiceProvider(container);
+
+
+            // Creating a new AutofacServiceProvider makes the container
+            // available to your app using the Microsoft IServiceProvider
+            // interface so you can use those abstractions rather than
+            // binding directly to Autofac.
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

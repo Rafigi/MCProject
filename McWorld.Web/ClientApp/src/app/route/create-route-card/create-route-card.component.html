@@ -6,8 +6,8 @@
         <p class="text-center underheadline">This is the place where you create one of many routes for your journey!</p>
 
         <div class="container inputBox col-lg-12 d-flex justify-content-between pt-lg-4">
-          <input formControlName="startAddress" class="input text-center col-lg-5 ml-lg-5" placeholder="Start Address" />
-          <input formControlName="endAddress" class="input text-center col-lg-5 mr-lg-5" placeholder="End Address" />
+          <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleStartAddressChange($event)" formControlName="startAddress" class="input text-center col-lg-5 ml-lg-5" placeholder="Start Address" />
+          <input ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleEndAddressChange($event)" formControlName="endAddress" class="input text-center col-lg-5 mr-lg-5" placeholder="End Address" />
         </div>
 
         <div class="container col-lg-10 d-flex justify-content-center mt-lg-2">

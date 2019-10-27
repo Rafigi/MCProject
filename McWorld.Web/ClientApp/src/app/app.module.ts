@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 /*Components*/
 import { MenuComponent } from './menu/menu.component';
@@ -52,7 +53,8 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GooglePlaceModule
   ],
   providers: [],
   bootstrap: [AppComponent]

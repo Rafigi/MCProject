@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import Event from '../../event/Event';
@@ -17,15 +17,107 @@ export class CreateRouteCardComponent implements OnInit {
   _ferry: boolean = false;
   _toll: boolean = false;
   _motorway: boolean = false;
-  _startAddress: string;
-  _endAddress: string;
+  _startAddress: Address;
+  _endAddress: Address;
   private _route: Route;
+
+  options = {
+    types: [],
+    componentRestrictions: { country: 'DK' },
+  }
 
   @Output() AddRoute = new EventEmitter();
   @Input() $event: Event;
 
   /** create-route-card ctor */
   constructor(private router: Router) { }
+
+  public handleStartAddressChange(address: any) {
+    console.log(address);
+    let addressArray: Array<any>[] = address['address_components'];
+    if (addressArray.length <= 3) {
+      this._startAddress = {
+        AddressId: null,
+        StreetName: null,
+        StreetNumber: null,
+        City: addressArray[0]['long_name'],
+        Zipcode: parseInt(addressArray[2]['long_name']),
+        Country: addressArray[1]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+
+      }
+    }
+
+    if (addressArray.length == 4) {
+      this._startAddress = {
+        AddressId: null,
+        StreetName: addressArray[0]['long_name'],
+        StreetNumber: null,
+        City: addressArray[2]['long_name'],
+        Zipcode: null,
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+
+    }
+    if (addressArray.length >= 6) {
+      this._startAddress = {
+        AddressId: null,
+        StreetName: addressArray[0]['long_name'],
+        StreetNumber: addressArray[0]['long_name'],
+        City: addressArray[3]['long_name'],
+        Zipcode: parseInt(addressArray[4]['long_name']),
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+    }
+  }
+
+  public handleEndAddressChange(address: any) {
+    let addressArray: Array<any>[] = address['address_components'];
+    if (addressArray.length <= 3) {
+      this._endAddress = {
+        AddressId: null,
+        StreetName: null,
+        StreetNumber: null,
+        City: addressArray[0]['long_name'],
+        Zipcode: parseInt(addressArray[2]['long_name']),
+        Country: addressArray[1]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+
+      }
+    }
+
+    if (addressArray.length == 4) {
+      this._endAddress = {
+        AddressId: null,
+        StreetName: addressArray[0]['long_name'],
+        StreetNumber: null,
+        City: addressArray[2]['long_name'],
+        Zipcode: null,
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+
+    }
+    if (addressArray.length >= 6) {
+      this._endAddress = {
+        AddressId: null,
+        StreetName: addressArray[0]['long_name'],
+        StreetNumber: addressArray[0]['long_name'],
+        City: addressArray[3]['long_name'],
+        Zipcode: parseInt(addressArray[4]['long_name']),
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+    }
+  }
 
   ngOnInit() {
     this.UrlCheck();
@@ -64,51 +156,24 @@ export class CreateRouteCardComponent implements OnInit {
   }
 
   CreateOrAddRoute() {
-    let startAddress: Address = this.SplitAddress(this.RouteForm.get("startAddress").value);
-    let endAddress: Address = this.SplitAddress(this.RouteForm.get("endAddress").value);
 
     if (this.addORChangeRoute === "Add Route") {
-      this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, startAddress, endAddress);
+      this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
       this.AddRoute.emit(this.$event);
     }
 
     if (this.addORChangeRoute === "Create Route") {
-      this._route.CreateRoute(0, this._ferry, this._toll, this._motorway, startAddress, endAddress);
+      this._route.CreateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
     }
   }
 
   GlueAddressTogether() {
     let start = this.$event.Route.Addresses[0];
     let end = this.$event.Route.Addresses[1];
-    this._startAddress = start.StreetName + " " + start.StreetNumber + ", " + start.Zipcode + " " + start.City;
-    this._endAddress = end.StreetName + " " + end.StreetNumber + ", " + end.Zipcode + " " + end.City
+    //this._startAddress = start.StreetName + " " + start.StreetNumber + ", " + start.Zipcode + " " + start.City;
+    //this._endAddress = end.StreetName + " " + end.StreetNumber + ", " + end.Zipcode + " " + end.City
   }
 
-
-  SplitAddress(address: string): Address {
-    let splittedAddress = address.split(",");
-    let streetAddressWithNumber = splittedAddress[0].split(" ");
-    //Address
-    let streetAddressName = streetAddressWithNumber[0];
-    let streetNumber = streetAddressWithNumber[1];
-    //City Because it dotn delete the first array element, we have to start from 1. 0 is a empty string
-    let zipCodeWithCity = splittedAddress[1].split(" ");
-    let zipCode = zipCodeWithCity[1];
-    let city = zipCodeWithCity[2];
-
-    //Returning the object as it should be
-    return {
-      AddressId: null,
-      StreetName: streetAddressName,
-      StreetNumber: streetNumber,
-      City: city,
-      Zipcode: parseInt(zipCode),
-      Country: 'Denmark',
-      Latitude: '00000',
-      Longitude: '00000'
-    }
-
-  }
 
   //Switch to select som things for the route.
   MotorwaySwitch(value) {
