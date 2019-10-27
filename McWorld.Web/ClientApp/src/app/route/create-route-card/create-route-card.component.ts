@@ -38,21 +38,34 @@ export class CreateRouteCardComponent implements OnInit {
     if (addressArray.length <= 3) {
       this._startAddress = {
         AddressId: null,
-        StreetName: addressArray[2]['long_name'],
+        StreetName: null,
         StreetNumber: null,
-        City: null,
-        Zipcode: parseInt(addressArray[1]['long_name']),
-        Country: addressArray[0]['long_name'],
+        City: addressArray[0]['long_name'],
+        Zipcode: parseInt(addressArray[2]['long_name']),
+        Country: addressArray[1]['long_name'],
         Latitude: '00000',
         Longitude: '00000'
 
       }
     }
 
-    if (addressArray.length >= 3) {
+    if (addressArray.length == 4) {
       this._startAddress = {
         AddressId: null,
-        StreetName: addressArray[1]['long_name'],
+        StreetName: addressArray[0]['long_name'],
+        StreetNumber: null,
+        City: addressArray[2]['long_name'],
+        Zipcode: null,
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+
+    }
+    if (addressArray.length >= 6) {
+      this._startAddress = {
+        AddressId: null,
+        StreetName: addressArray[0]['long_name'],
         StreetNumber: addressArray[0]['long_name'],
         City: addressArray[3]['long_name'],
         Zipcode: parseInt(addressArray[4]['long_name']),
@@ -66,24 +79,38 @@ export class CreateRouteCardComponent implements OnInit {
 
   public handleEndAddressChange(address: any) {
     let addressArray: Array<any>[] = address['address_components'];
+    console.log(addressArray);
     if (addressArray.length <= 3) {
       this._endAddress = {
         AddressId: null,
-        StreetName: addressArray[2]['long_name'],
+        StreetName: null,
         StreetNumber: null,
-        City: null,
-        Zipcode: parseInt(addressArray[1]['long_name']),
-        Country: addressArray[0]['long_name'],
+        City: addressArray[0]['long_name'],
+        Zipcode: parseInt(addressArray[2]['long_name']),
+        Country: addressArray[1]['long_name'],
         Latitude: '00000',
         Longitude: '00000'
 
       }
     }
 
-    if (addressArray.length >= 3) {
+    if (addressArray.length == 4) {
       this._endAddress = {
         AddressId: null,
-        StreetName: addressArray[1]['long_name'],
+        StreetName: addressArray[0]['long_name'],
+        StreetNumber: null,
+        City: addressArray[2]['long_name'],
+        Zipcode: null,
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+
+    }
+    if (addressArray.length >= 6) {
+      this._endAddress = {
+        AddressId: null,
+        StreetName: addressArray[0]['long_name'],
         StreetNumber: addressArray[0]['long_name'],
         City: addressArray[3]['long_name'],
         Zipcode: parseInt(addressArray[4]['long_name']),
@@ -92,88 +119,72 @@ export class CreateRouteCardComponent implements OnInit {
         Longitude: '00000'
       }
     }
-}
-
-ngOnInit() {
-  this.UrlCheck();
-  if (this.$event != undefined) {
-    this.IsRouteDefined(this.$event);
-  }
-  this._route = new Route();
-}
-
-
-//Reactiveform
-RouteForm = new FormGroup({
-  startAddress: new FormControl(''),
-  endAddress: new FormControl('')
-});
-
-//Metodes
-IsRouteDefined(event: Event) {
-  if (event.Route != undefined) {
-    this._ferry = event.Route.Ferry;
-    this._toll = event.Route.Toll;
-    this._motorway = event.Route.Motorway;
-    this.GlueAddressTogether();
-    this.RouteForm.setValue({ startAddress: this._startAddress, endAddress: this._endAddress });
-  }
-  this.$event.Route = new Route();
-}
-
-UrlCheck() {
-  if (this.router.url === "/event/create") {
-    this.addORChangeRoute = "Add Route";
-  }
-  if (this.router.url === "/route/create") {
-    this.addORChangeRoute = "Create Route";
-  }
-}
-
-CreateOrAddRoute() {
-
-  if (this.addORChangeRoute === "Add Route") {
-    this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
-    this.AddRoute.emit(this.$event);
   }
 
-  if (this.addORChangeRoute === "Create Route") {
-    this._route.CreateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
+  ngOnInit() {
+    this.UrlCheck();
+    if (this.$event != undefined) {
+      this.IsRouteDefined(this.$event);
+    }
+    this._route = new Route();
   }
-}
-
-GlueAddressTogether() {
-  let start = this.$event.Route.Addresses[0];
-  let end = this.$event.Route.Addresses[1];
-  //this._startAddress = start.StreetName + " " + start.StreetNumber + ", " + start.Zipcode + " " + start.City;
-  //this._endAddress = end.StreetName + " " + end.StreetNumber + ", " + end.Zipcode + " " + end.City
-}
 
 
-//SplitAddress(address: string): Address {
+  //Reactiveform
+  RouteForm = new FormGroup({
+    startAddress: new FormControl(''),
+    endAddress: new FormControl('')
+  });
 
-//  //Returning the object as it should be
-//  return {
-//    AddressId: null,
-//    StreetName: streetAddressName,
-//    StreetNumber: streetNumber,
-//    City: city,
-//    Zipcode: parseInt(zipCode),
-//    Country: 'Denmark',
-//    Latitude: '00000',
-//    Longitude: '00000'
-//  }
+  //Metodes
+  IsRouteDefined(event: Event) {
+    if (event.Route != undefined) {
+      this._ferry = event.Route.Ferry;
+      this._toll = event.Route.Toll;
+      this._motorway = event.Route.Motorway;
+      this.GlueAddressTogether();
+      this.RouteForm.setValue({ startAddress: this._startAddress, endAddress: this._endAddress });
+    }
+    this.$event.Route = new Route();
+  }
 
-//}
+  UrlCheck() {
+    if (this.router.url === "/event/create") {
+      this.addORChangeRoute = "Add Route";
+    }
+    if (this.router.url === "/route/create") {
+      this.addORChangeRoute = "Create Route";
+    }
+  }
 
-//Switch to select som things for the route.
-MotorwaySwitch(value) {
-  this._motorway = value;
-}
-TollSwitch(value) {
-  this._toll = value;
-}
-FerrySwitch(value) {
-  this._ferry = value;
-}
+  CreateOrAddRoute() {
+
+    if (this.addORChangeRoute === "Add Route") {
+      this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
+      this.AddRoute.emit(this.$event);
+    }
+
+    if (this.addORChangeRoute === "Create Route") {
+      this._route.CreateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
+    }
+  }
+
+  GlueAddressTogether() {
+    let start = this.$event.Route.Addresses[0];
+    let end = this.$event.Route.Addresses[1];
+    //this._startAddress = start.StreetName + " " + start.StreetNumber + ", " + start.Zipcode + " " + start.City;
+    //this._endAddress = end.StreetName + " " + end.StreetNumber + ", " + end.Zipcode + " " + end.City
+  }
+
+
+  //Switch to select som things for the route.
+  MotorwaySwitch(value) {
+    this._motorway = value;
+  }
+  TollSwitch(value) {
+    this._toll = value;
+  }
+  FerrySwitch(value) {
+    this._ferry = value;
+  }
 }
