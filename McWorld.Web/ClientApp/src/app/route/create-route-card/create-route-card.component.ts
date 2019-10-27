@@ -33,8 +33,8 @@ export class CreateRouteCardComponent implements OnInit {
   constructor(private router: Router) { }
 
   public handleStartAddressChange(address: any) {
+    console.log(address);
     let addressArray: Array<any>[] = address['address_components'];
-    console.log(addressArray);
     if (addressArray.length <= 3) {
       this._startAddress = {
         AddressId: null,
@@ -76,10 +76,8 @@ export class CreateRouteCardComponent implements OnInit {
     }
   }
 
-
   public handleEndAddressChange(address: any) {
     let addressArray: Array<any>[] = address['address_components'];
-    console.log(addressArray);
     if (addressArray.length <= 3) {
       this._endAddress = {
         AddressId: null,
