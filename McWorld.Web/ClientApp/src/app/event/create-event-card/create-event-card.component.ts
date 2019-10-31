@@ -3,6 +3,8 @@ import { FormGroup, FormControl } from '@angular/forms';
 import Event from '../Event';
 import Flatpickr from "flatpickr";
 
+declare const google;
+
 @Component({
   selector: 'app-create-event-card',
   templateUrl: './create-event-card.component.html',
@@ -24,7 +26,56 @@ export class CreateEventCardComponent implements OnInit {
     this.GenerateEventObject();
     this.ref.detectChanges();
     this.SetPickTimerAndDateTimer();
+
   }
+
+  CreateGoogleMap() {
+    var myOptions = {
+      zoom: 1,
+      center: new google.maps.LatLng(55.84, 9.25),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    // Draw the map
+    var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRequest = {
+      origin: this.ConvertAddressToStringWithIndex(0),
+      destination: this.ConvertAddressToStringWithIndex(1),
+      travelMode: google.maps.DirectionsTravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: this._$event.Route.Motorway,
+      avoidFerries: this._$event.Route.Ferry,
+      avoidTolls: this._$event.Route.Toll
+    };
+
+    directionsService.route(
+      directionsRequest,
+      function (response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          new google.maps.DirectionsRenderer({
+            map: mapObject,
+            directions: response
+          });
+        }
+        else
+          console.log("Crap");
+      }
+    );
+  }
+
+
+  ConvertAddressToStringWithIndex(index: number): string {
+    let addressString = this._$event.Route.Addresses[index].StreetName
+      + " " +
+      this._$event.Route.Addresses[index].StreetNumber
+      + ", " +
+      this._$event.Route.Addresses[index].Zipcode
+      + " " +
+      this._$event.Route.Addresses[index].City;
+    return addressString;
+  }
+
 
 
   //Getting the Event object back from the CreateRouteCard through a Output event.emit(); 
@@ -32,6 +83,7 @@ export class CreateEventCardComponent implements OnInit {
     this._showCreateRouteCard = false;
     this._showRouteWhenCreated = true;
     this._$event = event;
+    this.CreateGoogleMap();
     this.btnAddorChangeRoute = 'Change Route';
   }
 

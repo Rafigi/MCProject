@@ -5,6 +5,8 @@ import Event from '../../event/Event';
 import Route from '../Models/Route';
 import Address from '../Models/Address';
 
+declare const google;
+
 @Component({
   selector: 'app-create-route-card',
   templateUrl: './create-route-card.component.html',
@@ -21,6 +23,9 @@ export class CreateRouteCardComponent implements OnInit {
   _endAddress: Address;
   private _route: Route;
 
+  FormattedStartAddress: string = "";
+  formattedEndAddress: string = "";
+
   options = {
     types: [],
     componentRestrictions: { country: 'DK' },
@@ -32,99 +37,49 @@ export class CreateRouteCardComponent implements OnInit {
   /** create-route-card ctor */
   constructor(private router: Router) { }
 
-  public handleStartAddressChange(address: any) {
-    console.log(address);
-    let addressArray: Array<any>[] = address['address_components'];
-    if (addressArray.length <= 3) {
-      this._startAddress = {
-        AddressId: null,
-        StreetName: null,
-        StreetNumber: null,
-        City: addressArray[0]['long_name'],
-        Zipcode: parseInt(addressArray[2]['long_name']),
-        Country: addressArray[1]['long_name'],
-        Latitude: '00000',
-        Longitude: '00000'
-
-      }
-    }
-
-    if (addressArray.length == 4) {
-      this._startAddress = {
-        AddressId: null,
-        StreetName: addressArray[0]['long_name'],
-        StreetNumber: null,
-        City: addressArray[2]['long_name'],
-        Zipcode: null,
-        Country: addressArray[3]['long_name'],
-        Latitude: '00000',
-        Longitude: '00000'
-      }
-
-    }
-    if (addressArray.length >= 6) {
-      this._startAddress = {
-        AddressId: null,
-        StreetName: addressArray[0]['long_name'],
-        StreetNumber: addressArray[0]['long_name'],
-        City: addressArray[3]['long_name'],
-        Zipcode: parseInt(addressArray[4]['long_name']),
-        Country: addressArray[3]['long_name'],
-        Latitude: '00000',
-        Longitude: '00000'
-      }
-    }
-  }
-
-  public handleEndAddressChange(address: any) {
-    let addressArray: Array<any>[] = address['address_components'];
-    if (addressArray.length <= 3) {
-      this._endAddress = {
-        AddressId: null,
-        StreetName: null,
-        StreetNumber: null,
-        City: addressArray[0]['long_name'],
-        Zipcode: parseInt(addressArray[2]['long_name']),
-        Country: addressArray[1]['long_name'],
-        Latitude: '00000',
-        Longitude: '00000'
-
-      }
-    }
-
-    if (addressArray.length == 4) {
-      this._endAddress = {
-        AddressId: null,
-        StreetName: addressArray[0]['long_name'],
-        StreetNumber: null,
-        City: addressArray[2]['long_name'],
-        Zipcode: null,
-        Country: addressArray[3]['long_name'],
-        Latitude: '00000',
-        Longitude: '00000'
-      }
-
-    }
-    if (addressArray.length >= 6) {
-      this._endAddress = {
-        AddressId: null,
-        StreetName: addressArray[0]['long_name'],
-        StreetNumber: addressArray[0]['long_name'],
-        City: addressArray[3]['long_name'],
-        Zipcode: parseInt(addressArray[4]['long_name']),
-        Country: addressArray[3]['long_name'],
-        Latitude: '00000',
-        Longitude: '00000'
-      }
-    }
-  }
-
   ngOnInit() {
     this.UrlCheck();
     if (this.$event != undefined) {
       this.IsRouteDefined(this.$event);
     }
     this._route = new Route();
+  }
+
+  CreateGoogleMap() {
+    var myOptions = {
+      zoom: 10,
+      center: new google.maps.LatLng(55.84, 9.25),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    // Draw the map
+    var mapObject = new google.maps.Map(document.getElementById("map"), myOptions);
+
+    var directionsService = new google.maps.DirectionsService();
+    var directionsRequest = {
+      origin: this.FormattedStartAddress,
+      destination: this.formattedEndAddress,
+      travelMode: google.maps.DirectionsTravelMode.DRIVING,
+      unitSystem: google.maps.UnitSystem.METRIC,
+      avoidHighways: this._motorway,
+      avoidFerries: this._ferry,
+      avoidTolls: this._toll
+    };
+
+    directionsService.route(
+      directionsRequest,
+      function (response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+          new google.maps.DirectionsRenderer({
+            map: mapObject,
+            directions: response
+          });
+        }
+        else
+          console.log("Crap");
+      }
+    );
+
+
   }
 
 
@@ -140,7 +95,6 @@ export class CreateRouteCardComponent implements OnInit {
       this._ferry = event.Route.Ferry;
       this._toll = event.Route.Toll;
       this._motorway = event.Route.Motorway;
-      this.GlueAddressTogether();
       this.RouteForm.setValue({ startAddress: this._startAddress, endAddress: this._endAddress });
     }
     this.$event.Route = new Route();
@@ -167,22 +121,55 @@ export class CreateRouteCardComponent implements OnInit {
     }
   }
 
-  GlueAddressTogether() {
-    let start = this.$event.Route.Addresses[0];
-    let end = this.$event.Route.Addresses[1];
-    //this._startAddress = start.StreetName + " " + start.StreetNumber + ", " + start.Zipcode + " " + start.City;
-    //this._endAddress = end.StreetName + " " + end.StreetNumber + ", " + end.Zipcode + " " + end.City
+  public handleStartAddressChange(address: any) {
+    console.log(address["formatted_address"]);
+    this.FormattedStartAddress = address["formatted_address"];
+    this.CreateGoogleMap();
+    let addressArray: Array<any>[] = address['address_components'];
+    console.log(address);
+    if (addressArray.length >= 5) {
+      this._startAddress = {
+        AddressId: null,
+        StreetName: addressArray[1]['long_name'],
+        StreetNumber: addressArray[0]['long_name'],
+        City: addressArray[2]['long_name'],
+        Zipcode: parseInt(addressArray[4]['long_name']),
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+    }
   }
 
+  public handleEndAddressChange(address: any) {
+    this.formattedEndAddress = address["formatted_address"];
+    this.CreateGoogleMap();
+    let addressArray: Array<any>[] = address['address_components'];
+    if (addressArray.length >= 5) {
+      this._endAddress = {
+        AddressId: null,
+        StreetName: addressArray[1]['long_name'],
+        StreetNumber: addressArray[0]['long_name'],
+        City: addressArray[2]['long_name'],
+        Zipcode: parseInt(addressArray[4]['long_name']),
+        Country: addressArray[3]['long_name'],
+        Latitude: '00000',
+        Longitude: '00000'
+      }
+    }
+  }
 
   //Switch to select som things for the route.
   MotorwaySwitch(value) {
     this._motorway = value;
+    this.CreateGoogleMap();
   }
   TollSwitch(value) {
     this._toll = value;
+    this.CreateGoogleMap();
   }
   FerrySwitch(value) {
     this._ferry = value;
+    this.CreateGoogleMap();
   }
 }
