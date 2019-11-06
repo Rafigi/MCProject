@@ -49,6 +49,25 @@ export class CreateEventCardComponent implements OnInit {
       avoidTolls: this._$event.Route.Toll
     };
 
+    var service = new google.maps.DistanceMatrixService();
+
+    service.getDistanceMatrix(
+      {
+        origins: this.ConvertAddressToStringWithIndex(0),
+        destinations: this.ConvertAddressToStringWithIndex(1),
+        travelMode: google.maps.DirectionsTravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC,
+        avoidHighways: this._$event.Route.Motorway,
+        avoidFerries: this._$event.Route.Ferry,
+        avoidTolls: this._$event.Route.Toll
+      }, callback);
+
+    function callback(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+        console.log(response);
+      }
+    }
+
     directionsService.route(
       directionsRequest,
       function (response, status) {

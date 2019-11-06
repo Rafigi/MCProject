@@ -73,11 +73,13 @@ export class CreateRouteCardComponent implements OnInit {
             map: mapObject,
             directions: response
           });
+          console.log(response);
         }
         else
           console.log("Crap");
       }
     );
+
 
 
   }
@@ -122,11 +124,9 @@ export class CreateRouteCardComponent implements OnInit {
   }
 
   public handleStartAddressChange(address: any) {
-    console.log(address["formatted_address"]);
     this.FormattedStartAddress = address["formatted_address"];
     this.CreateGoogleMap();
     let addressArray: Array<any>[] = address['address_components'];
-    console.log(address);
     if (addressArray.length >= 5) {
       this._startAddress = {
         AddressId: null,
