@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Route = /** @class */ (function () {
     function Route() {
         this.RouteID = undefined;
-        this.Distance = 0;
+        this.Distance = "0";
         this.Motorway = false;
         this.Ferry = false;
         this.Toll = false;

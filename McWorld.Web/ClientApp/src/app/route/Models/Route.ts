@@ -1,7 +1,7 @@
 import Address from '../Models/Address';
 export default class Route {
   RouteID: number = undefined;
-  Distance: number = 0;
+  Distance: string = "0";
   Motorway: boolean = false;
   Ferry: boolean = false;
   Toll: boolean = false;
@@ -11,7 +11,7 @@ export default class Route {
 
   constructor() { }
 
-  CreateRoute(distance: number, ferry: boolean, toll: boolean, motorway: boolean, startAddress: Address, endAddress: Address) {
+  CreateRoute(distance: string, ferry: boolean, toll: boolean, motorway: boolean, startAddress: Address, endAddress: Address) {
     this.Distance = distance;
     this.Ferry = ferry;
     this.Toll = toll;

@@ -19,9 +19,11 @@ export class CreateRouteCardComponent implements OnInit {
   _ferry: boolean = false;
   _toll: boolean = false;
   _motorway: boolean = false;
+  _distance: string = "0";
   _startAddress: Address;
   _endAddress: Address;
   private _route: Route;
+
 
   FormattedStartAddress: string = "";
   formattedEndAddress: string = "";
@@ -65,24 +67,26 @@ export class CreateRouteCardComponent implements OnInit {
       avoidTolls: this._toll
     };
 
+    if (directionsRequest.destination == "" || directionsRequest.origin == "") return;
+
+    var result = undefined;
+    var render = new google.maps.DirectionsRenderer();
+
     directionsService.route(
       directionsRequest,
-      function (response, status) {
+      (response, status) => {
+        if (status == google.maps.DirectionsStatus.NOT_FOUND) return;
         if (status == google.maps.DirectionsStatus.OK) {
-          new google.maps.DirectionsRenderer({
-            map: mapObject,
-            directions: response
-          });
-          console.log(response);
+          render.setMap(mapObject);
+          render.setDirections(response);
+          result = "OK"
         }
-        else
-          console.log("Crap");
-      }
-    );
-
-
-
+        if (result == "OK") {
+          this._distance = response.routes[0].legs[0].distance.text;
+        }
+      })
   }
+
 
 
   //Reactiveform
@@ -114,12 +118,12 @@ export class CreateRouteCardComponent implements OnInit {
   CreateOrAddRoute() {
 
     if (this.addORChangeRoute === "Add Route") {
-      this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
+      this.$event.UpdateRoute(this._distance, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
       this.AddRoute.emit(this.$event);
     }
 
     if (this.addORChangeRoute === "Create Route") {
-      this._route.CreateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
+      this._route.CreateRoute(this._distance, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
     }
   }
 
