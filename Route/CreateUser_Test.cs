@@ -3,8 +3,6 @@ namespace Tests.MCRoute.Test
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
-    using McWorld.Event;
-    using McWorld.Route;
     using McWorld.Shared.Factory;
     using McWorld.Shared.Models;
     using McWorld.Shared.ServicesBus;
@@ -18,23 +16,6 @@ namespace Tests.MCRoute.Test
         public void Setup()
         {
         }
-
-        [Test]
-        [AutoCreateTestInput]
-        public void Create_User_Factory(
-            [Frozen] IUserFactory userFactory,
-            User user)
-        {
-            //Information
-            var _user = userFactory.Create(user);
-
-            //Act
-            A.CallTo(() => userFactory.Create(A<User>.Ignored)).Returns(user);
-
-            //Test
-            Assert.AreNotEqual(_user.UserID, user.UserID);
-        }
-
 
         [Test]
         [AutoCreateTestInput]
@@ -54,6 +35,24 @@ namespace Tests.MCRoute.Test
             //Test
             A.CallTo(() => serviceBus.Add(A<CreateUserCommand>.Ignored))
                 .MustHaveHappened();
+        }
+
+
+
+        [Test]
+        [AutoCreateTestInput]
+        public void CreateUser_withFactoryAndNewGuid()
+        {
+            //Information
+            UserFactory userFactory = new UserFactory();
+            User user = new User();
+            var newUser = userFactory.Create(user);
+
+
+            //Act
+
+            //Test
+            Assert.AreNotEqual(user.UserID, newUser.UserID);
         }
 
     }
