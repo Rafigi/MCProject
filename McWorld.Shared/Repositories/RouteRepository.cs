@@ -22,7 +22,7 @@
             return McDbContext.Routes.Single(x => x.RouteID == id);
         }
 
-        public double GetRouteDistance(Guid id)
+        public string GetRouteDistance(Guid id)
         {
             return McDbContext.Routes.Single(x => x.RouteID == id).Distance;
         }

@@ -1300,7 +1300,7 @@ var __importDefault = (undefined && undefined.__importDefault) || function (mod)
 var Route = /** @class */ (function () {
     function Route() {
         this.RouteID = undefined;
-        this.Distance = 0;
+        this.Distance = "0";
         this.Motorway = false;
         this.Ferry = false;
         this.Toll = false;
@@ -1398,6 +1398,7 @@ var CreateRouteCardComponent = /** @class */ (function () {
         this._ferry = false;
         this._toll = false;
         this._motorway = false;
+        this._distance = "0";
         this.FormattedStartAddress = "";
         this.formattedEndAddress = "";
         this.options = {
@@ -1419,6 +1420,7 @@ var CreateRouteCardComponent = /** @class */ (function () {
         this._route = new _Models_Route__WEBPACK_IMPORTED_MODULE_4__["default"]();
     };
     CreateRouteCardComponent.prototype.CreateGoogleMap = function () {
+        var _this = this;
         var myOptions = {
             zoom: 10,
             center: new google.maps.LatLng(55.84, 9.25),
@@ -1436,16 +1438,21 @@ var CreateRouteCardComponent = /** @class */ (function () {
             avoidFerries: this._ferry,
             avoidTolls: this._toll
         };
+        if (directionsRequest.destination == "" || directionsRequest.origin == "")
+            return;
+        var result = undefined;
+        var render = new google.maps.DirectionsRenderer();
         directionsService.route(directionsRequest, function (response, status) {
+            if (status == google.maps.DirectionsStatus.NOT_FOUND)
+                return;
             if (status == google.maps.DirectionsStatus.OK) {
-                new google.maps.DirectionsRenderer({
-                    map: mapObject,
-                    directions: response
-                });
-                console.log(response);
+                render.setMap(mapObject);
+                render.setDirections(response);
+                result = "OK";
             }
-            else
-                console.log("Crap");
+            if (result == "OK") {
+                _this._distance = response.routes[0].legs[0].distance.text;
+            }
         });
     };
     //Metodes
@@ -1468,11 +1475,11 @@ var CreateRouteCardComponent = /** @class */ (function () {
     };
     CreateRouteCardComponent.prototype.CreateOrAddRoute = function () {
         if (this.addORChangeRoute === "Add Route") {
-            this.$event.UpdateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
+            this.$event.UpdateRoute(this._distance, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
             this.AddRoute.emit(this.$event);
         }
         if (this.addORChangeRoute === "Create Route") {
-            this._route.CreateRoute(0, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
+            this._route.CreateRoute(this._distance, this._ferry, this._toll, this._motorway, this._startAddress, this._endAddress);
         }
     };
     CreateRouteCardComponent.prototype.handleStartAddressChange = function (address) {

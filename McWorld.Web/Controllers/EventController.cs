@@ -6,7 +6,6 @@
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Models;
-    using McWorld.Shared.Queryables;
     using McWorld.Shared.ServicesBus;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -20,27 +19,25 @@
         private readonly IServiceBus _serviceBus;
         private readonly IEventFactory _eventFactory;
         private readonly IEventRepository _eventRepository;
-        private readonly IQueryables _queryables;
 
-        public EventController(IServiceBus serviceBus, IEventFactory eventFactory, IEventRepository eventRepository, IQueryables queryables)
-        {
+        public EventController(IServiceBus serviceBus, IEventFactory eventFactory, IEventRepository eventRepository)
+        { 
             _serviceBus = serviceBus;
             _eventFactory = eventFactory;
             _eventRepository = eventRepository;
-            _queryables = queryables;
         }
 
         // GET: api/Event
         [HttpGet]
         public IEnumerable<EventDto> GetAll()
         {
-            return _queryables.GetAllEventsWithRoutes();
+            return null;
         }
 
         [HttpGet("{id}")]
         public IEnumerable<EventDto> GetAllUserCreatedEvents(Guid userId)
         {
-            return _queryables.GetAllUserCreatedEvents(userId);
+            return null;
         }
 
         // GET: api/Event/5

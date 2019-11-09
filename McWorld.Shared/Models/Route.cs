@@ -1,6 +1,5 @@
 ﻿namespace McWorld.Shared.Models
 {
-    using McWorld.Shared.Dtos;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -12,7 +11,7 @@
         [Key]
         public Guid RouteID { get; set; }
         [Required]
-        public double Distance { get; set; }
+        public string Distance { get; set; }
         [Required]
         public bool Motorway { get; set; }
         [Required]

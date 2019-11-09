@@ -4,7 +4,6 @@
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Factory;
     using McWorld.Shared.Models;
-    using McWorld.Shared.Queryables;
     using McWorld.Shared.ServicesBus;
     using Microsoft.AspNetCore.Mvc;
     using System;
@@ -16,26 +15,24 @@
     {
         private readonly IServiceBus _serviceBus;
         private readonly IRouteFactory _routeFactory;
-        private readonly IQueryables _queryables;
 
-        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IQueryables queryables)
+        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory )
         {
             _serviceBus = serviceBus;
             _routeFactory = routeFactory;
-            _queryables = queryables;
         }
 
         // GET: api/Route/GetAll
         [HttpGet("GetAll")]
         public IEnumerable<RouteDto> GetAll()
         {
-            return _queryables.GetAllRoutesWithAddress();
+            return null;
         }
 
         [HttpGet]
         public IEnumerable<RouteDto> GetAllUserCreatedRoutes(Guid userId)
         {
-            return _queryables.GetAllUserCreatedRoutes(userId);
+            return null;
         }
 
 
@@ -104,7 +101,7 @@
             var route = new Route()
             {
                 RouteID = Guid.NewGuid(),
-                Distance = 132,
+                Distance = "132",
                 Created = new DateTime().ToShortDateString(),
                 Ferry = false,
                 Toll = false,
