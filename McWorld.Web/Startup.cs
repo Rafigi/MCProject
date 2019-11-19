@@ -44,6 +44,9 @@ namespace McWorld.Web
             services.AddDbContext<McDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
 
+            services.AddDbContext<QueryContext>(options =>
+          options.UseSqlServer(Configuration.GetConnectionString("McDbConnection")));
+
             //Now register our services with Autofac container
             var builder = new ContainerBuilder();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();

@@ -38,9 +38,9 @@
 
         // GET: api/User/5
         [HttpGet("{id}")]
-        public User GetById(Guid id)
+        public Users GetById(Guid id)
         {
-            return null;
+            return _userQueryables.GetById(id);
         }
 
         // POST: api/User
