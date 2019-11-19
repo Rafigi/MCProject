@@ -1,32 +1,13 @@
 ﻿namespace McWorld.Route
 {
-    using McWorld.Shared.Models;
     using McWorld.Shared.Messages;
-    using McWorld.Shared.Persistence;
-    using System.Threading.Tasks;
+    using McWorld.Shared.Models;
     public class CreateRouteCommand : ICommand
     {
-        public Route Route { get; private set; }
-
         public CreateRouteCommand(Route route)
         {
-            Route = new Route()
-            {
-                RouteID = route.RouteID,
-                Created = route.Created,
-                Distance = route.Distance,
-                Ferry = route.Ferry,
-                Motorway = route.Motorway,
-                Toll = route.Toll,
-                UserID = route.UserID,
-                Addresses = route.Addresses
-            };
+            Route = route;
         }
-
-        public Task Execute(IUnitOfWork unitOfWork)
-        {
-            unitOfWork.Routes.Add(Route);
-            return Task.CompletedTask;
-        }
+        public Route Route { get; private set; }
     }
 }

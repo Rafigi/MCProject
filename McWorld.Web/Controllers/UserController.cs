@@ -1,48 +1,54 @@
-﻿
-namespace McWorld.Web.Controllers
+﻿namespace McWorld.Web.Controllers
 {
-    using McWorld.Shared.Factory;
-    using McWorld.Shared.IRepository;
+    using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
-    using McWorld.Shared.ServicesBus;
-    using Microsoft.AspNetCore.Mvc;
+    using McWorld.Shared.Persistence;
+    using McWorld.Shared.Queryables;
+    using McWorld.Shared.QueryStack;
     using McWorld.User;
+    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
+
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IServiceBus _serviceBus;
-        private readonly IUserFactory _userFactory;
-        private readonly IUserRepository _userRepository;
+        private readonly ICommandHandler<CreateUserCommand> _createUserCommandHandler;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserQueryables _userQueryables;
 
-        public UserController(IServiceBus serviceBus, IUserFactory userFactory, IUserRepository userRepository)
+        public UserController(ICommandHandler<
+            CreateUserCommand> createUserCommandHandler,
+            IUnitOfWork unitOfWork,
+            IUserQueryables userQueryables)
         {
-            _serviceBus = serviceBus;
-            _userFactory = userFactory;
-            _userRepository = userRepository;
+            _createUserCommandHandler = createUserCommandHandler;
+            _unitOfWork = unitOfWork;
+            _userQueryables = userQueryables;
         }
+
+
         // GET: api/User/GetAll
         [HttpGet]
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Users> GetAll()
         {
-            return _userRepository.GetAll();
+            return _userQueryables.GetAll();
         }
 
         // GET: api/User/5
         [HttpGet("{id}")]
         public User GetById(Guid id)
         {
-            return _userRepository.GetUserByID(id);
+            return null;
         }
 
         // POST: api/User
         [HttpPost]
         public IActionResult Create([FromBody] User user)
         {
-            _serviceBus.Add(new CreateUserCommand(_userFactory.Create(user)));
-            _serviceBus.Complete();
+            _createUserCommandHandler.ExecuteAsync(new CreateUserCommand(user));
+            _unitOfWork.Complete();
             return Ok();
         }
 

@@ -3,10 +3,9 @@
     using McWorld.Event;
     using McWorld.Route;
     using McWorld.Shared.Dtos;
-    using McWorld.Shared.Factory;
-    using McWorld.Shared.IRepository;
+    using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
-    using McWorld.Shared.ServicesBus;
+    using McWorld.Shared.Persistence;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -15,16 +14,13 @@
     [ApiController]
     public class EventController : ControllerBase
     {
+        private readonly ICommandHandler<CreateEventCommand> _createEventCommandHandler;
+        private readonly UnitOfWork _unitOfWork;
 
-        private readonly IServiceBus _serviceBus;
-        private readonly IEventFactory _eventFactory;
-        private readonly IEventRepository _eventRepository;
-
-        public EventController(IServiceBus serviceBus, IEventFactory eventFactory, IEventRepository eventRepository)
-        { 
-            _serviceBus = serviceBus;
-            _eventFactory = eventFactory;
-            _eventRepository = eventRepository;
+        public EventController(ICommandHandler<CreateEventCommand> createEventCommandHandler, UnitOfWork unitOfWork)
+        {
+            _createEventCommandHandler = createEventCommandHandler;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/Event
@@ -44,17 +40,15 @@
         [HttpGet("{id}")]
         public Event GetById(Guid id)
         {
-            return _eventRepository.GetEventByID(id);
+            return null;
         }
 
         // POST: api/Event
         [HttpPost]
         public void Create([FromBody] Event @event)
         {
-            var _event = _eventFactory.Create(@event);
-            _serviceBus.Add(new CreateEventCommand(_event));
-            _serviceBus.Add(new CreateRouteCommand(_event.Route));
-            _serviceBus.Complete();
+            _createEventCommandHandler.ExecuteAsync(new CreateEventCommand(@event));
+            _unitOfWork.Complete();
         }
 
         // PUT: api/Event/5

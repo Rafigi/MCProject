@@ -14,19 +14,24 @@
         {
         }
 
-        public IEnumerable<Event> GetAllEvents()
+        public IEnumerable<Event> GetAll()
         {
             return McDbContext.Events.ToList();
         }
 
-        public Event GetEventByID(Guid id)
+        public Event GetByID(Guid id)
         {
             return McDbContext.Events.Single(x => x.EventID == id);
         }
 
-        public IEnumerable<Event> GetEventsCreatedByUser(Guid id)
+        public IEnumerable<Event> GetCreatedByUser(Guid id)
         {
             return McDbContext.Events.Where(x => x.User.UserID == id).ToList();
+        }
+
+        public Event GetById(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public McDbContext McDbContext

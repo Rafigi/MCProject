@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\McWorld.Address\McWorld.Address.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
   </ItemGroup>
 

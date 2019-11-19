@@ -3,8 +3,9 @@
     using McWorld.Route;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Factory;
+    using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
-    using McWorld.Shared.ServicesBus;
+    using McWorld.Shared.Persistence;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -13,13 +14,18 @@
     [ApiController]
     public class RouteController : ControllerBase
     {
-        private readonly IServiceBus _serviceBus;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IRouteFactory _routeFactory;
+        private readonly ICommandHandler<CreateRouteCommand> _createRouteCommandHandler;
 
-        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory )
+        public RouteController(
+            UnitOfWork unitOfWork,
+            IRouteFactory routeFactory,
+            ICommandHandler<CreateRouteCommand> CreateRouteCommandHandler)
         {
-            _serviceBus = serviceBus;
+            _unitOfWork = unitOfWork;
             _routeFactory = routeFactory;
+            _createRouteCommandHandler = CreateRouteCommandHandler;
         }
 
         // GET: api/Route/GetAll
@@ -47,12 +53,8 @@
         [HttpPost]
         public IActionResult Create([FromBody] Route route)
         {
-            //For creating a mock data
-            //var _route = CreateDefaultValues();
-
-            var _route = _routeFactory.Create(route);
-            _serviceBus.Add(new CreateRouteCommand(_route));
-            _serviceBus.Complete();
+            _createRouteCommandHandler.ExecuteAsync(new CreateRouteCommand(route));
+            _unitOfWork.Complete();
             return Ok();
         }
 

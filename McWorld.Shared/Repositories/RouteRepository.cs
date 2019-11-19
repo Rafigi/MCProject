@@ -12,29 +12,25 @@
         {
         }
 
-        public IEnumerable<Route> GetAllRoutes()
+        public IEnumerable<Route> GetAll()
         {
             return McDbContext.Routes.ToList();
         }
 
-        public Route GetRouteByID(Guid id)
+        public Route GetByID(Guid id)
         {
             return McDbContext.Routes.Single(x => x.RouteID == id);
         }
 
-        public string GetRouteDistance(Guid id)
-        {
-            return McDbContext.Routes.Single(x => x.RouteID == id).Distance;
-        }
 
         public IEnumerable<Route> GetRoutesWithSearchCritia(bool motorway, bool ferry, bool toll)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Route> GetUserCreatedRoutesByID(Guid id)
+        public Route GetById(Guid id)
         {
-            return McDbContext.Routes.Where(x => x.User.UserID == id);
+            throw new NotImplementedException();
         }
 
         public McDbContext McDbContext

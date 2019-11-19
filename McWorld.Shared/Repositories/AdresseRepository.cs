@@ -10,14 +10,14 @@
         {
         }
 
-        public Address GetAdresseByID(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public McDbContext McDbContext
         {
             get { return _context as McDbContext; }
+        }
+
+        public Address GetById(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

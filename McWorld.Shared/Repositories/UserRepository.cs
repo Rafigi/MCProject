@@ -16,7 +16,7 @@
             return McDbContext.Users.Single(x => x.UserID == id).Email;
         }
 
-        public User GetUserByID(Guid id)
+        public User GetByID(Guid id)
         {
             return McDbContext.Users.Single(x => x.UserID == id);
         }
@@ -24,6 +24,16 @@
         public string GetUsernameByID(Guid? id)
         {
             return McDbContext.Users.Single(x => x.UserID == id).Username;
+        }
+
+        public User GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public User GetByMail(string mail)
+        {
+            throw new NotImplementedException();
         }
 
         public McDbContext McDbContext

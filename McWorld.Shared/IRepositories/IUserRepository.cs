@@ -4,8 +4,7 @@
     using System;
     public interface IUserRepository : IRepository<User>
     {
-        User GetUserByID(Guid id);
-        string GetUsernameByID(Guid? id);
-        string GetEmailByID(Guid id);
+        User GetById(Guid id);
+        User GetByMail(string mail);
     }
 }

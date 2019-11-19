@@ -3,7 +3,10 @@ using Autofac.Extensions.DependencyInjection;
 using McWorld.Shared.Data;
 using McWorld.Shared.Factory;
 using McWorld.Shared.IRepository;
+using McWorld.Shared.Messages;
 using McWorld.Shared.Persistence;
+using McWorld.Shared.Queryables;
+using McWorld.Shared.QueryStack;
 using McWorld.Shared.Repository;
 using McWorld.Shared.ServicesBus;
 using Microsoft.AspNetCore.Builder;
@@ -43,29 +46,25 @@ namespace McWorld.Web
 
             //Now register our services with Autofac container
             var builder = new ContainerBuilder();
-            builder.RegisterType<ServiceBus>().As<IServiceBus>();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
 
-
             //This is for getting the assembly where Repository Class is hide - McWorld.Shared
-            var dataAccess = Assembly.GetAssembly(typeof(Repository<>));
-            builder.RegisterAssemblyTypes(dataAccess)
-                   .Where(t => t.Name.EndsWith("Repository"))
-                   .AsImplementedInterfaces();
-            builder.RegisterAssemblyTypes(dataAccess)
-                 .Where(t => t.Name.EndsWith("Factory"))
-                 .AsImplementedInterfaces();
-            builder.Populate(services);
-            var container = builder.Build();
+            //var dataAccess = Assembly.GetAssembly(typeof(Repository<>));
+            //builder.RegisterAssemblyTypes(dataAccess)
+            //       .Where(t => t.Name.EndsWith("Repository"))
+            //       .AsImplementedInterfaces();
+            //builder.RegisterAssemblyTypes(dataAccess)
+            //     .Where(t => t.Name.EndsWith("Factory"))
+            //     .AsImplementedInterfaces();
+            //builder.Populate(services);
+            //var container = builder.Build();
 
-            //Create the IServiceProvider based on the container.
+            AssemblyLoader.EnsureAllSimuAssembliesAreLoaded();
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<AutofacAutomaticRegistrations>();
+            containerBuilder.Populate(services);
+            var container = containerBuilder.Build();
             return new AutofacServiceProvider(container);
-
-
-            // Creating a new AutofacServiceProvider makes the container
-            // available to your app using the Microsoft IServiceProvider
-            // interface so you can use those abstractions rather than
-            // binding directly to Autofac.
 
         }
 

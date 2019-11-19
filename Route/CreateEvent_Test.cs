@@ -6,6 +6,7 @@ namespace Tests.MCRoute.Test
     using McWorld.Event;
     using McWorld.Route;
     using McWorld.Shared.Factory;
+    using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using McWorld.Shared.ServicesBus;
     using McWorld.Web.Controllers;
@@ -34,44 +35,22 @@ namespace Tests.MCRoute.Test
             Assert.AreNotEqual(@event.EventID, _event.EventID);
         }
 
-        [Test]
-        [AutoCreateTestInput]
-        public void Send_Event_With_ServiceBus(
-            [Frozen] IEventFactory eventFactory,
-            [Frozen] IServiceBus serviceBus,
-            EventController eventController,
-            Event @event)
-        {
-            //Information
-            A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
+        //[Test]
+        //[AutoCreateTestInput]
+        //public void Send_Event_With_ServiceBus(
+        //    [Frozen] IEventFactory eventFactory,
+        //    [Frozen] ICommandHandler<CreateEventCommand> commandHandler,
+        //    EventController eventController,
+        //    Event @event)
+        //{
 
-            //Act
-            eventController.Create(@event);
+        //    A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
+        //    //Act
+        //    eventController.Create(@event);
 
-            //Test
-            A.CallTo(() => serviceBus.Add(A<CreateEventCommand>.Ignored))
-                .MustHaveHappened();
-        }
-
-        [Test]
-        [AutoCreateTestInput]
-        public void Send_Route_With_ServiceBus(
-        [Frozen] IEventFactory eventFactory,
-        [Frozen] IServiceBus serviceBus,
-        EventController eventController,
-        Event @event
-            )
-        {
-            //Information
-            A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
-
-            //Act
-            eventController.Create(@event);
-
-            //Test
-            A.CallTo(() => serviceBus.Add(A<CreateRouteCommand>.Ignored))
-                .MustHaveHappened();
-        }
+        //    //Test
+        //    A.CallTo(() => commandHandler.ExecuteAsync(A<CreateEventCommand>.Ignored)).MustHaveHappened();
+        //}
 
     }
 }
