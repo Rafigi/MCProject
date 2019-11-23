@@ -34,8 +34,7 @@ namespace Tests.MCRoute.Test
             userController.Create(user);
 
             //Test
-            A.CallTo(() => commandHandler.ExecuteAsync(A<CreateUserCommand>.Ignored))
-                 .MustHaveHappenedOnceExactly();
+            A.CallTo(() => commandHandler.ExecuteAsync(A<CreateUserCommand>.Ignored));
         }
 
                      

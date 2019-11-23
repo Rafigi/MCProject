@@ -14,11 +14,6 @@
         {
         }
 
-        public IEnumerable<Event> GetAll()
-        {
-            return McDbContext.Events.ToList();
-        }
-
         public Event GetByID(Guid id)
         {
             return McDbContext.Events.Single(x => x.EventID == id);

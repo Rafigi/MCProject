@@ -1,9 +1,14 @@
-namespace Tests.MCRoute.Test
+namespace MCRoute.Test.Handlers
 {
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
+    using McWorld.Event;
+    using McWorld.Event.Commands;
+    using McWorld.Route;
     using McWorld.Shared.Factory;
+    using McWorld.Shared.IRepository;
+    using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using NUnit.Framework;
 
@@ -16,36 +21,62 @@ namespace Tests.MCRoute.Test
 
         [Test]
         [AutoCreateTestInput]
-        public void Create_Event_Factory(
+        public void CreateEvent_CallEventFactory(
             [Frozen] IEventFactory eventFactory,
-            Event @event)
+            CreateEventCommand message,
+            Event @event,
+            CreateEventCommandHandler createEventCommandHandler)
         {
             //Information
-            var _event = eventFactory.Create(@event);
+            A.CallTo(() => eventFactory.Create(message.Event)).Returns(@event);
 
             //Act
-            A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
+            createEventCommandHandler.ExecuteAsync(message);
 
             //Test
-            Assert.AreNotEqual(@event.EventID, _event.EventID);
+            A.CallTo(() => eventFactory.Create(message.Event)).MustHaveHappened();
         }
 
-        //[Test]
-        //[AutoCreateTestInput]
-        //public void Send_Event_With_ServiceBus(
-        //    [Frozen] IEventFactory eventFactory,
-        //    [Frozen] ICommandHandler<CreateEventCommand> commandHandler,
-        //    EventController eventController,
-        //    Event @event)
-        //{
+        [Test]
+        [AutoCreateTestInput]
+        public void CreateEvent_AddWithIEventRepository(
+            [Frozen] IEventRepository eventRepository,
+            [Frozen] IEventFactory eventFactory,
+            CreateEventCommand message,
+            Event @event,
+            CreateEventCommandHandler createEventCommandHandler)
+        {
+            //Information
+            A.CallTo(() => eventFactory.Create(message.Event)).Returns(@event);
 
-        //    A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
-        //    //Act
-        //    eventController.Create(@event);
+            //Act
+            createEventCommandHandler.ExecuteAsync(message);
 
-        //    //Test
-        //    A.CallTo(() => commandHandler.ExecuteAsync(A<CreateEventCommand>.Ignored)).MustHaveHappened();
-        //}
+            //Test
+            A.CallTo(() => eventRepository.Add(@event)).MustHaveHappened();
+        }
+
+        [Test]
+        [AutoCreateTestInput]
+        public void CreateEvent_SendICommandHandlerWithCreateRouteCommand(
+            [Frozen] ICommandHandler<CreateRouteCommand> createRouteCommandHandler,
+            [Frozen] IEventRepository eventRepository,
+            [Frozen] IEventFactory eventFactory,
+            CreateEventCommand message,
+            Event @event,
+             CreateEventCommandHandler createEventCommandHandler)
+        {
+            //Information
+            A.CallTo(() => eventFactory.Create(message.Event)).Returns(@event);
+            A.CallTo(() => eventRepository.Add(@event));
+
+            //Act
+            createEventCommandHandler.ExecuteAsync(message);
+
+            //Test
+            A.CallTo(() => createRouteCommandHandler.ExecuteAsync(A<CreateRouteCommand>.Ignored))
+                .MustHaveHappened();
+        }
 
     }
 }

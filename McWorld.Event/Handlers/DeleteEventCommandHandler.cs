@@ -23,8 +23,6 @@
                 throw new ArgumentNullException($"There is no event with the ID {message.EventId}");
 
             _eventRepository.Remove(@event);
-
-
             return Task.CompletedTask;
         }
     }
