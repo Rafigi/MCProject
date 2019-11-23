@@ -17,6 +17,5 @@ namespace McWorld.Shared.QueryStack
                 EndDate = EndDate
             };
         }
-
     }
 }

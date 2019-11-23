@@ -4,7 +4,7 @@
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Models;
     using System;
-    public class AdresseRepository : Repository<Address>, IAdresseRepository
+    class AdresseRepository : Repository<Address>, IAdresseRepository
     {
         public AdresseRepository(McDbContext context) : base(context)
         {

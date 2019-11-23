@@ -6,7 +6,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    public class RouteRepository : Repository<Route>, IRouteRepository
+    class RouteRepository : Repository<Route>, IRouteRepository
     {
         public RouteRepository(McDbContext mcDbContext) : base(mcDbContext)
         {

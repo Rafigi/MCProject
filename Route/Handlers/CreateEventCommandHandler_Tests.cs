@@ -3,16 +3,11 @@ namespace Tests.MCRoute.Test
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
-    using McWorld.Event;
-    using McWorld.Route;
     using McWorld.Shared.Factory;
-    using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
-    using McWorld.Shared.ServicesBus;
-    using McWorld.Web.Controllers;
     using NUnit.Framework;
 
-    public class CreateEvent_Test
+    public class CreateEventCommandHandler_Tests
     {
         [SetUp]
         public void Setup()

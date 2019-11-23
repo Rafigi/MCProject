@@ -6,7 +6,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+
+    class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly McDbContext _context;
 

@@ -26,7 +26,7 @@
             return _queryContext.Events.Single(i => i.EventId == id).AsDto();
         }
 
-        public IEnumerable<EventDto> GetRegistrated(Guid UserId)
+        public IEnumerable<EventDto> GetUsersRegistered(Guid UserId)
         {
             return _queryContext.Events.Include(i => i.Registration)
                 .Where(i => i.Registration.Any(W => W.UserId == UserId)).Select(e => e.AsDto());

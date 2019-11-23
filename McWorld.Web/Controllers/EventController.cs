@@ -17,23 +17,29 @@
         private readonly ICommandHandler<CreateEventCommand> _createEventCommandHandler;
         private readonly ICommandHandler<UpdateEventCommand> _updateEventCommandHandler;
         private readonly ICommandHandler<DeleteEventCommand> _deleteEventCommandHandler;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly ICommandHandler<RegisterUserOnEventCommand> _registerUserOnEventCommand;
+        private readonly ICommandHandler<UnRegisterUserOnEventCommand> _unRegisterUserOnEventCommand;
         private readonly IEventQueryables _eventQueryables;
+        private readonly IUnitOfWork _unitOfWork;
 
         public EventController
             (
-             UnitOfWork unitOfWork,
+             IUnitOfWork unitOfWork,
              IEventQueryables eventQueryables,
             ICommandHandler<CreateEventCommand> createEventCommandHandler,
             ICommandHandler<UpdateEventCommand> updateEventCommandHandler,
-            ICommandHandler<DeleteEventCommand> deleteEventCommandHandler
+            ICommandHandler<DeleteEventCommand> deleteEventCommandHandler,
+            ICommandHandler<RegisterUserOnEventCommand> registerUserOnEventCommand,
+            ICommandHandler<UnRegisterUserOnEventCommand> unRegisterUserOnEventCommand
             )
         {
             _createEventCommandHandler = createEventCommandHandler;
             _updateEventCommandHandler = updateEventCommandHandler;
             _deleteEventCommandHandler = deleteEventCommandHandler;
-            _unitOfWork = unitOfWork;
+            _registerUserOnEventCommand = registerUserOnEventCommand;
+            _unRegisterUserOnEventCommand = unRegisterUserOnEventCommand;
             _eventQueryables = eventQueryables;
+            _unitOfWork = unitOfWork;
         }
 
         // GET: api/Event
@@ -49,18 +55,19 @@
             return _eventQueryables.GetByUser(userId);
         }
 
-        [HttpGet("userRegistrated/{id}")]
-        public IEnumerable<EventDto> GetUserRegistrated(Guid userId)
-        {
-            return _eventQueryables.GetRegistrated(userId);
-        }
-
         // GET: api/Event/5
         [HttpGet("{id}")]
         public EventDto GetById(Guid routeId)
         {
             return _eventQueryables.GetById(routeId);
         }
+
+        [HttpGet("userRegistrated/{id}")]
+        public IEnumerable<EventDto> GetUserRegistrated(Guid userId)
+        {
+            return _eventQueryables.GetUsersRegistered(userId);
+        }
+
 
         // POST: api/Event
         [HttpPost]
@@ -72,14 +79,32 @@
 
         // PUT: api/Event/5
         [HttpPut("update")]
-        public void UpdateEvent([FromBody] Event @event)
+        public void Update([FromBody] Event @event)
         {
             _updateEventCommandHandler.ExecuteAsync(new UpdateEventCommand(@event));
             _unitOfWork.Complete();
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("delete/B{id}")]
+
+        // PUT: api/Event/registerUser
+        [HttpPut("registerUser")]
+        public void RegisterUser([FromBody] Registration registration)
+        {
+            _registerUserOnEventCommand.ExecuteAsync(new RegisterUserOnEventCommand(registration.EventID, registration.UserID));
+            _unitOfWork.Complete();
+        }
+
+
+        // PUT: api/Event/unRegisterUser
+        [HttpPut("unRegisterUser")]
+        public void UnRegisterUser([FromBody] Registration registration)
+        {
+            _unRegisterUserOnEventCommand.ExecuteAsync(new UnRegisterUserOnEventCommand(registration.EventID, registration.UserID));
+            _unitOfWork.Complete();
+        }
+
+        // DELETE: api/event/5
+        [HttpDelete("delete/{id}")]
         public void Delete(Guid id)
         {
             _deleteEventCommandHandler.ExecuteAsync(new DeleteEventCommand(id));

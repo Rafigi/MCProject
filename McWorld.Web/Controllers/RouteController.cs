@@ -3,7 +3,6 @@
     using McWorld.Route;
     using McWorld.Route.Commands;
     using McWorld.Shared.Dtos;
-    using McWorld.Shared.Factory;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using McWorld.Shared.Persistence;
@@ -24,7 +23,7 @@
 
         public RouteController
             (
-            UnitOfWork unitOfWork,
+            IUnitOfWork unitOfWork,
             IRouteQueryables routeQueryables,
             ICommandHandler<CreateRouteCommand> createRouteCommandHandler,
             ICommandHandler<UpdateRouteCommand> updateRouteCommandHandler,

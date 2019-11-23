@@ -8,7 +8,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class EventRepository : Repository<Event>, IEventRepository
+    class EventRepository : Repository<Event>, IEventRepository
     {
         public EventRepository(McDbContext context) : base(context)
         {

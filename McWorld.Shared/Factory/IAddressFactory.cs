@@ -1,7 +1,7 @@
 ﻿namespace McWorld.Shared.Factory
 {
     using McWorld.Shared.Models;
-    interface IAddressFactory : IFactory<Address>
+    public interface IAddressFactory : IFactory<Address>
     {
     }
 }

@@ -19,23 +19,6 @@ namespace Tests.MCRoute.Test
         {
         }
 
-        [Test]
-        [AutoCreateTestInput]
-        public void CreateUser_withFactoryAndNewGuid()
-        {
-            //Information
-            UserFactory userFactory = new UserFactory();
-            User user = new User();
-            var newUser = userFactory.Create(user);
-
-
-            //Act
-
-            //Test
-            Assert.AreNotEqual(user.UserID, newUser.UserID);
-        }
-
-
 
         [Test]
         [AutoCreateTestInput]

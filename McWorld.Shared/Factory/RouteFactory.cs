@@ -4,11 +4,12 @@
     using System;
     using System.Collections.Generic;
 
-    public class RouteFactory : IRouteFactory
+    class RouteFactory : IRouteFactory
     {
         private List<Address> _addresses;
         public Route Create(Route route)
         {
+            _addresses = new List<Address>();
             //Creating all the addresses, there are connected to the route
             foreach (var Address in route.Addresses)
             {
@@ -42,12 +43,6 @@
             };
 
             return _route;
-        }
-
-
-        public Route Update(Route route)
-        {
-            throw new NotImplementedException();
         }
     }
 }

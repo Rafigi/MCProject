@@ -33,7 +33,30 @@
         public Guid RouteID { get; set; }
         public Route Route { get; set; }
 
-        //Is there to make a many og many relation for the registration
+        //Is there to make a many to many relation for the registration
         public ICollection<Registration> Registration { get; set; }
+
+
+               
+        #region Methods
+
+        public void RegisterUser(Guid eventId, Guid userId)
+        {
+            var registration = new Registration(eventId, userId);
+            if (Registration.Contains(registration))
+                throw new InvalidOperationException($"The User with the ID {userId} is aldready registered the Event With {eventId}");
+
+            Registration.Add(registration);
+        }
+        public void UnRegisterUser(Guid eventId, Guid userId)
+        {
+            var registration = new Registration(eventId, userId);
+            if (Registration.Contains(registration))
+                throw new InvalidOperationException($"The User with the ID {userId} is aldready unregistered from the Event With {eventId}");
+
+            Registration.Remove(registration);
+        }
+
+        #endregion
     }
 }

@@ -9,10 +9,10 @@
     class CreateAddressCommandHandler : ICommandHandler<CreateAddressCommand>
     {
         private readonly IAdresseRepository _adresseRepository;
-        private readonly AddressFactory _addressFactory;
+        private readonly IAddressFactory _addressFactory;
         List<Address> addresses = new List<Address>();
 
-        public CreateAddressCommandHandler(IAdresseRepository adresseRepository, AddressFactory addressFactory)
+        public CreateAddressCommandHandler(IAdresseRepository adresseRepository, IAddressFactory addressFactory)
         {
             _adresseRepository = adresseRepository;
             _addressFactory = addressFactory;

@@ -2,7 +2,8 @@
 {
     using McWorld.Shared.Models;
     using System;
-    public class UserFactory : IUserFactory
+
+    class UserFactory : IUserFactory
     {
         public User Create(User user)
         {

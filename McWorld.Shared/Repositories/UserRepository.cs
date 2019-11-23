@@ -5,7 +5,7 @@
     using McWorld.Shared.Models;
     using System;
     using System.Linq;
-    public class UserRepository : Repository<User>, IUserRepository
+    class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(McDbContext context) : base(context)
         {
