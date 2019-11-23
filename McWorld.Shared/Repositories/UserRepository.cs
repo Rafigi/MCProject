@@ -10,25 +10,13 @@
         public UserRepository(McDbContext context) : base(context)
         {
         }
-
-        public string GetEmailByID(Guid id)
-        {
-            return McDbContext.Users.Single(x => x.UserID == id).Email;
-        }
-
         public User GetById(Guid id)
         {
-            return McDbContext.Users.Single(x => x.UserID == id);
+            return McDbContext.Users.SingleOrDefault(x => x.UserID == id);
         }
-
-        public string GetUsernameByID(Guid? id)
-        {
-            return McDbContext.Users.Single(x => x.UserID == id).Username;
-        }
-
         public User GetByMail(string mail)
         {
-            throw new NotImplementedException();
+            return McDbContext.Users.SingleOrDefault(x => x.Email == mail);
         }
 
         public McDbContext McDbContext

@@ -1,13 +1,14 @@
 ﻿namespace McWorld.User.Commands
 {
     using McWorld.Shared.Messages;
-    using McWorld.Shared.Models;
+    using System;
+
     public class DeleteUserCommand : ICommand
     {
-        public User User { get; }
-        public DeleteUserCommand(User user)
+        public Guid Id { get; }
+        public DeleteUserCommand(Guid id)
         {
-            User = user;
+            Id = id;
         }
     }
 }

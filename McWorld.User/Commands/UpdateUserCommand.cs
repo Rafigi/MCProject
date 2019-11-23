@@ -1,13 +1,17 @@
 ﻿namespace McWorld.User.Commands
 {
     using McWorld.Shared.Messages;
-    using McWorld.Shared.Models;
+    using System;
+
     public class UpdateUserCommand : ICommand
     {
-        public User User { get; }
-        public UpdateUserCommand(User user)
+        public Guid UserId { get; private set; }
+        public string Mail { get; private set; }
+
+        public UpdateUserCommand(Guid userId, string mail)
         {
-            User = user;
+            UserId = userId;
+            Mail = mail;
         }
     }
 }

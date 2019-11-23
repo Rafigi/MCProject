@@ -2,21 +2,24 @@
 {
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
+    using McWorld.Shared.Queryables;
     using McWorld.User.Commands;
     using System;
     using System.Threading.Tasks;
-    class UpdateUserMailCommandHandler : ICommandHandler<UpdateUserCommand>
+
+    class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
     {
         private readonly IUserRepository _userRepository;
 
-        public UpdateUserMailCommandHandler(IUserRepository userRepository)
+        public DeleteUserCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
-        public Task ExecuteAsync(UpdateUserCommand message)
+
+        public Task ExecuteAsync(DeleteUserCommand message)
         {
-            var user = _userRepository.GetById(message.User.UserID);
-            
+            var user = _userRepository.GetById(message.Id);
+            _userRepository.Remove(user);
             return Task.CompletedTask;
         }
     }

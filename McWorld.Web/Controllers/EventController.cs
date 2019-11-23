@@ -1,11 +1,11 @@
 ﻿namespace McWorld.Web.Controllers
 {
-    using McWorld.Event;
-    using McWorld.Route;
+    using McWorld.Event.Commands;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using McWorld.Shared.Persistence;
+    using McWorld.Shared.Queryables;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -15,32 +15,51 @@
     public class EventController : ControllerBase
     {
         private readonly ICommandHandler<CreateEventCommand> _createEventCommandHandler;
+        private readonly ICommandHandler<UpdateEventCommand> _updateEventCommandHandler;
+        private readonly ICommandHandler<DeleteEventCommand> _deleteEventCommandHandler;
         private readonly UnitOfWork _unitOfWork;
+        private readonly IEventQueryables _eventQueryables;
 
-        public EventController(ICommandHandler<CreateEventCommand> createEventCommandHandler, UnitOfWork unitOfWork)
+        public EventController
+            (
+             UnitOfWork unitOfWork,
+             IEventQueryables eventQueryables,
+            ICommandHandler<CreateEventCommand> createEventCommandHandler,
+            ICommandHandler<UpdateEventCommand> updateEventCommandHandler,
+            ICommandHandler<DeleteEventCommand> deleteEventCommandHandler
+            )
         {
             _createEventCommandHandler = createEventCommandHandler;
+            _updateEventCommandHandler = updateEventCommandHandler;
+            _deleteEventCommandHandler = deleteEventCommandHandler;
             _unitOfWork = unitOfWork;
+            _eventQueryables = eventQueryables;
         }
 
         // GET: api/Event
         [HttpGet]
         public IEnumerable<EventDto> GetAll()
         {
-            return null;
+            return _eventQueryables.GetAll();
         }
 
         [HttpGet("{id}")]
         public IEnumerable<EventDto> GetAllUserCreatedEvents(Guid userId)
         {
-            return null;
+            return _eventQueryables.GetByUser(userId);
+        }
+
+        [HttpGet("userRegistrated/{id}")]
+        public IEnumerable<EventDto> GetUserRegistrated(Guid userId)
+        {
+            return _eventQueryables.GetRegistrated(userId);
         }
 
         // GET: api/Event/5
         [HttpGet("{id}")]
-        public Event GetById(Guid id)
+        public EventDto GetById(Guid routeId)
         {
-            return null;
+            return _eventQueryables.GetById(routeId);
         }
 
         // POST: api/Event
@@ -52,15 +71,19 @@
         }
 
         // PUT: api/Event/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("update")]
+        public void UpdateEvent([FromBody] Event @event)
         {
+            _updateEventCommandHandler.ExecuteAsync(new UpdateEventCommand(@event));
+            _unitOfWork.Complete();
         }
 
         // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete("delete/B{id}")]
+        public void Delete(Guid id)
         {
+            _deleteEventCommandHandler.ExecuteAsync(new DeleteEventCommand(id));
+            _unitOfWork.Complete();
         }
     }
 }

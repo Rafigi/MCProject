@@ -54,5 +54,10 @@
         {
             return _context.Set<TEntity>().SingleOrDefault(predicate);
         }
+
+        public void Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Update(entity);
+        }
     }
 }

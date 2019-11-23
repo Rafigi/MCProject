@@ -1,11 +1,13 @@
 ﻿namespace McWorld.Web.Controllers
 {
     using McWorld.Route;
+    using McWorld.Route.Commands;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Factory;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using McWorld.Shared.Persistence;
+    using McWorld.Shared.Queryables;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -15,38 +17,46 @@
     public class RouteController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRouteFactory _routeFactory;
+        private readonly IRouteQueryables _routeQueryables;
         private readonly ICommandHandler<CreateRouteCommand> _createRouteCommandHandler;
+        private readonly ICommandHandler<UpdateRouteCommand> _updateRouteCommandHandler;
+        private readonly ICommandHandler<DeleteRouteCommand> _deleteRouteCommandHandler;
 
-        public RouteController(
+        public RouteController
+            (
             UnitOfWork unitOfWork,
-            IRouteFactory routeFactory,
-            ICommandHandler<CreateRouteCommand> CreateRouteCommandHandler)
+            IRouteQueryables routeQueryables,
+            ICommandHandler<CreateRouteCommand> createRouteCommandHandler,
+            ICommandHandler<UpdateRouteCommand> updateRouteCommandHandler,
+            ICommandHandler<DeleteRouteCommand> deleteRouteCommandHandler
+            )
         {
             _unitOfWork = unitOfWork;
-            _routeFactory = routeFactory;
-            _createRouteCommandHandler = CreateRouteCommandHandler;
+            _routeQueryables = routeQueryables;
+            _createRouteCommandHandler = createRouteCommandHandler;
+            _updateRouteCommandHandler = updateRouteCommandHandler;
+            _deleteRouteCommandHandler = deleteRouteCommandHandler;
         }
 
         // GET: api/Route/GetAll
         [HttpGet("GetAll")]
         public IEnumerable<RouteDto> GetAll()
         {
-            return null;
+            return _routeQueryables.GetAll();
         }
 
-        [HttpGet]
+        [HttpGet("userCreated/{id}")]
         public IEnumerable<RouteDto> GetAllUserCreatedRoutes(Guid userId)
         {
-            return null;
+            return _routeQueryables.GetByUser(userId);
         }
 
 
         // GET: api/Route/5
         [HttpGet("{id}")]
-        public Route GetById(Guid id)
+        public RouteDto GetById(Guid id)
         {
-            return null;
+            return _routeQueryables.GetById(id);
         }
 
         // POST: api/Route/Create
@@ -59,16 +69,19 @@
         }
 
         // PUT: api/Route/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("Update")]
+        public void Put([FromBody] Route route)
         {
+            _updateRouteCommandHandler.ExecuteAsync(new UpdateRouteCommand(route));
+            _unitOfWork.Complete();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/route/5
         [HttpDelete]
         public void Delete(Guid id)
         {
-
+            _deleteRouteCommandHandler.ExecuteAsync(new DeleteRouteCommand(id));
+            _unitOfWork.Complete();
         }
 
         //Only for test purpose.

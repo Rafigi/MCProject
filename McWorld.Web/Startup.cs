@@ -1,14 +1,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using McWorld.Shared.Data;
-using McWorld.Shared.Factory;
-using McWorld.Shared.IRepository;
-using McWorld.Shared.Messages;
-using McWorld.Shared.Persistence;
-using McWorld.Shared.Queryables;
 using McWorld.Shared.QueryStack;
-using McWorld.Shared.Repository;
-using McWorld.Shared.ServicesBus;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -16,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Reflection;
 
 namespace McWorld.Web
 {
@@ -49,18 +41,6 @@ namespace McWorld.Web
 
             //Now register our services with Autofac container
             var builder = new ContainerBuilder();
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-
-            //This is for getting the assembly where Repository Class is hide - McWorld.Shared
-            //var dataAccess = Assembly.GetAssembly(typeof(Repository<>));
-            //builder.RegisterAssemblyTypes(dataAccess)
-            //       .Where(t => t.Name.EndsWith("Repository"))
-            //       .AsImplementedInterfaces();
-            //builder.RegisterAssemblyTypes(dataAccess)
-            //     .Where(t => t.Name.EndsWith("Factory"))
-            //     .AsImplementedInterfaces();
-            //builder.Populate(services);
-            //var container = builder.Build();
 
             AssemblyLoader.EnsureAllSimuAssembliesAreLoaded();
             var containerBuilder = new ContainerBuilder();

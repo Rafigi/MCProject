@@ -1,5 +1,6 @@
 ﻿namespace McWorld.Shared.Queryables
 {
+    using McWorld.Shared.Dtos;
     using McWorld.Shared.QueryStack;
     using Microsoft.EntityFrameworkCore;
     using System;
@@ -15,25 +16,25 @@
             _queryContext = queryContext;
         }
 
-        public IQueryable<Events> GetAll()
+        public IEnumerable<EventDto> GetAll()
         {
-            return _queryContext.Events;
+            return _queryContext.Events.Select(e => e.AsDto());
         }
 
-        public Events GetById(Guid id)
+        public EventDto GetById(Guid id)
         {
-            return _queryContext.Events.Single(i => i.EventId == id);
+            return _queryContext.Events.Single(i => i.EventId == id).AsDto();
         }
 
-        public IQueryable<Events> GetRegistrated(Guid UserId)
+        public IEnumerable<EventDto> GetRegistrated(Guid UserId)
         {
             return _queryContext.Events.Include(i => i.Registration)
-                .Where(i => i.Registration.Any(W => W.UserId == UserId));
+                .Where(i => i.Registration.Any(W => W.UserId == UserId)).Select(e => e.AsDto());
         }
 
-        public IQueryable<Events> GetByUser(Guid UserId)
+        public IEnumerable<EventDto> GetByUser(Guid UserId)
         {
-            return _queryContext.Events.Where(i => i.UserId == UserId);
+            return _queryContext.Events.Where(u => u.UserId == UserId).Select(e => e.AsDto());
         }
     }
 }

@@ -20,6 +20,8 @@
         //Is the user registreted for the event
         public bool IsUserRegistered { get; set; }
 
+        Registration registration { get; set; }
+
         //There is only one route to an event
         public Route Route { get; set; }
 

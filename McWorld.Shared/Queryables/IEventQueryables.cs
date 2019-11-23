@@ -1,14 +1,14 @@
 ﻿namespace McWorld.Shared.Queryables
 {
-    using McWorld.Shared.QueryStack;
+    using McWorld.Shared.Dtos;
     using System;
-    using System.Linq;
+    using System.Collections.Generic;
 
     public interface IEventQueryables
     {
-        Events GetById(Guid id);
-        IQueryable<Events> GetAll();
-        IQueryable<Events> GetByUser(Guid UserId);
-        IQueryable<Events> GetRegistrated(Guid UserId);
+        EventDto GetById(Guid id);
+        IEnumerable<EventDto> GetAll();
+        IEnumerable<EventDto> GetByUser(Guid UserId);
+        IEnumerable<EventDto> GetRegistrated(Guid UserId);
     }
 }

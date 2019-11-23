@@ -1,14 +1,19 @@
-﻿
-namespace McWorld.Shared.Queryables
+﻿namespace McWorld.Shared.Queryables
 {
-    using McWorld.Shared.Models;
+    using McWorld.Shared.Dtos;
     using System;
     using System.Collections.Generic;
 
-    interface IRouteQueryables
+    public interface IRouteQueryables
     {
-        Route GetById(Guid id);
-        IEnumerable<Route> GetAll();
-        IEnumerable<Route> GetByUser(Guid UserId);
+        /// <summary>
+        /// Gets the by routeID
+        /// Returning null, if not exist.
+        /// </summary>
+        /// <param name="routeId">The route identifier.</param>
+        /// <returns></returns>
+        RouteDto GetById(Guid id);
+        IEnumerable<RouteDto> GetAll();
+        IEnumerable<RouteDto> GetByUser(Guid UserId);
     }
 }

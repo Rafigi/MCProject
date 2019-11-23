@@ -1,10 +1,10 @@
 ﻿namespace McWorld.Shared.Queryables
 {
+    using McWorld.Shared.Dtos;
     using McWorld.Shared.QueryStack;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    public class UserQueryables :  IUserQueryables
+    public class UserQueryables : IUserQueryables
     {
         private readonly QueryContext _queryContext;
 
@@ -13,20 +13,19 @@
             _queryContext = queryContext;
         }
 
-
-        public IEnumerable<Users> GetAll()
+        public UserDto GetById(Guid id)
         {
-            return _queryContext.Users;
+            return _queryContext.Users.SingleOrDefault(i => i.UserId == id).AsDto();
         }
 
-        public Users GetById(Guid id)
+        public UserDto GetByMail(string mail)
         {
-            return _queryContext.Users.Single(i => i.UserId == id);
+            return _queryContext.Users.SingleOrDefault(i => i.Email == mail).AsDto();
         }
 
-        public Users GetByMail(string mail)
+        public UserDto GetByUsername(string username)
         {
-            return _queryContext.Users.Single(i => i.Email == mail);
+            return _queryContext.Users.SingleOrDefault(i => i.Username == username).AsDto();
         }
     }
 }

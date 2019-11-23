@@ -1,17 +1,15 @@
 ﻿namespace McWorld.Event.Commands
 {
-    using System.Threading.Tasks;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
 
-    public class CreateEventCommand : ICommand
+    public class UpdateEventCommand : ICommand
     {
-        public CreateEventCommand(Event @event)
+        public UpdateEventCommand(Event @event)
         {
             Event = @event;
-            Route = @event.Route;
         }
+
         public Event Event { get; private set; }
-        public Route Route { get; private set; }
     }
 }
