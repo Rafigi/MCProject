@@ -1,10 +1,11 @@
-namespace Tests.MCRoute.Test
+namespace MCRoute.Test.Controllers
 {
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
     using McWorld.Event.Commands;
     using McWorld.Shared.Dtos;
+    using McWorld.Shared.Factory;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using McWorld.Shared.Persistence;
@@ -35,7 +36,8 @@ namespace Tests.MCRoute.Test
             eventController.GetAll();
 
             //Test
-            A.CallTo(() => eventQueryables.GetAll()).MustHaveHappenedOnceExactly();
+            A.CallTo(() => eventQueryables.GetAll())
+                .MustHaveHappenedOnceExactly();
         }
 
 
@@ -54,7 +56,8 @@ namespace Tests.MCRoute.Test
             eventController.GetAllUserCreatedEvents(userId);
 
             //Test
-            A.CallTo(() => eventQueryables.GetByUser(userId)).MustHaveHappened();
+            A.CallTo(() => eventQueryables.GetByUser(userId))
+                .MustHaveHappened();
         }
 
         [Test]
@@ -73,7 +76,8 @@ namespace Tests.MCRoute.Test
             eventController.GetById(userId);
 
             //Test
-            A.CallTo(() => eventQueryables.GetById(userId)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => eventQueryables.GetById(userId))
+                .MustHaveHappenedOnceExactly();
         }
 
         [Test]
@@ -91,7 +95,8 @@ namespace Tests.MCRoute.Test
             eventController.GetUserRegistrated(userId);
 
             //Test
-            A.CallTo(() => eventQueryables.GetUsersRegistered(userId)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => eventQueryables.GetUsersRegistered(userId))
+                .MustHaveHappenedOnceExactly();
         }
 
 
@@ -99,16 +104,19 @@ namespace Tests.MCRoute.Test
         [AutoCreateTestInput]
         public void EventController_Create_createEventCommandHandler(
             [Frozen] ICommandHandler<CreateEventCommand> createEventCommandHandler,
+            [Frozen] IEventFactory eventFactory, 
             Event @event,
             EventController eventController)
         {
             //Information
+            //A.CallTo(() => eventFactory.Create(A<Event>.Ignored)).Returns(@event);
 
             //Act
             eventController.Create(@event);
 
             //Test
-            A.CallTo(() => createEventCommandHandler.ExecuteAsync(new CreateEventCommand(@event)));
+            A.CallTo(() => createEventCommandHandler.ExecuteAsync(A<CreateEventCommand>.Ignored))
+                .MustHaveHappened();
         
         }
 
@@ -143,7 +151,8 @@ namespace Tests.MCRoute.Test
 
             //Test
             A.CallTo(() => updateEventCommandHandler
-            .ExecuteAsync(new UpdateEventCommand(@event)));
+            .ExecuteAsync(A<UpdateEventCommand>.Ignored))
+            .MustHaveHappened();
         }
 
         [Test]
@@ -178,7 +187,8 @@ namespace Tests.MCRoute.Test
 
             //Test
             A.CallTo(() => registerUserOnEventCommand
-            .ExecuteAsync(new RegisterUserOnEventCommand(registration.EventID, registration.UserID)));
+            .ExecuteAsync(A<RegisterUserOnEventCommand>.Ignored))
+            .MustHaveHappened();
         }
 
         [Test]
@@ -195,7 +205,8 @@ namespace Tests.MCRoute.Test
             eventController.RegisterUser(registration);
 
             //Test
-            A.CallTo(() => unitOfWork.Complete()).MustHaveHappenedOnceExactly();
+            A.CallTo(() => unitOfWork.Complete())
+                .MustHaveHappenedOnceExactly();
         }
 
         [Test]
@@ -212,7 +223,8 @@ namespace Tests.MCRoute.Test
 
             //Test
             A.CallTo(() => unregisterUserOnEventCommand
-            .ExecuteAsync(new UnRegisterUserOnEventCommand(registration.EventID, registration.UserID)));
+            .ExecuteAsync(A<UnRegisterUserOnEventCommand>.Ignored))
+            .MustHaveHappened();
         }
 
         [Test]
@@ -229,7 +241,8 @@ namespace Tests.MCRoute.Test
             eventController.UnRegisterUser(registration);
 
             //Test
-            A.CallTo(() => unitOfWork.Complete()).MustHaveHappenedOnceExactly();
+            A.CallTo(() => unitOfWork.Complete())
+                .MustHaveHappenedOnceExactly();
         }
 
         [Test]
@@ -240,14 +253,14 @@ namespace Tests.MCRoute.Test
             Event @event)
         {
             //Information
-            var registration = new Registration(Guid.NewGuid(), Guid.NewGuid());
 
             //Act
             eventController.Delete(@event.EventID);
 
             //Test
             A.CallTo(() => deleteEventCommandHandler
-            .ExecuteAsync(new DeleteEventCommand(@event.EventID)));
+            .ExecuteAsync(A<DeleteEventCommand>.Ignored))
+            .MustHaveHappened();
         }
 
         [Test]
@@ -263,7 +276,8 @@ namespace Tests.MCRoute.Test
             eventController.Delete(@event.EventID);
 
             //Test
-            A.CallTo(() => unitOfWork.Complete()).MustHaveHappenedOnceExactly();
+            A.CallTo(() => unitOfWork.Complete())
+                .MustHaveHappenedOnceExactly();
         }
 
     }

@@ -8,6 +8,6 @@
         {
             Route = route;
         }
-        public Route Route { get; private set; }
+        public Route Route{ get; private set; }
     }
 }

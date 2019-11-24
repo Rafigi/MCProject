@@ -10,6 +10,8 @@
     using NUnit.Framework;
     using McWorld.Event.Handlers;
     using System;
+    using McWorld.Shared.Queryables;
+    using McWorld.Shared.Dtos;
 
     public class DeleteEventCommandHandler_Test
     {
@@ -18,61 +20,64 @@
         {
         }
 
+        //[Test]
+        //[AutoCreateTestInput]
+        //public void DeleteEvent_UserIsNull(
+        //    [Frozen] IEventRepository  eventRepository,
+        //    Event @event,
+        //    DeleteEventCommand message,
+        //    DeleteEventCommandHandler deleteEventCommandHandler)
+        //{
+        //    //Information
+        //    A.CallTo(() => eventRepository.GetById(message.EventId)).Returns(@event);
+
+        //    //Act
+        //    deleteEventCommandHandler.ExecuteAsync(message);
+
+        //    //Test
+
+        //}
+
         [Test]
         [AutoCreateTestInput]
-        public void DeleteEvent_GetEventWithRepostory_ReturnNull(
-            [Frozen] IEventRepository  eventRepository,
+        public void DeleteEvent_UserExist(
+            [Frozen] IEventRepository eventRepository,
             Event @event,
             DeleteEventCommand message,
             DeleteEventCommandHandler deleteEventCommandHandler)
         {
             //Information
-            eventRepository.Add(@event);
-            A.CallTo(() => eventRepository.GetById(@event.EventID)).Returns(null);
+            A.CallTo(() => eventRepository.GetById(message.EventId)).Returns(@event);
 
             //Act
             deleteEventCommandHandler.ExecuteAsync(message);
 
             //Test
-            A.CallTo(() => eventRepository.GetById(@event.EventID)).Throws<ArgumentNullException>();
+            A.CallTo(() => eventRepository.Remove(@event))
+                .MustHaveHappened();
         }
 
-        [Test]
-        [AutoCreateTestInput]
-        public void DeleteEvent_GetEventById_returnNotNull(
-            [Frozen] IEventRepository eventRepository,
-            Event @event,
-            Guid eventId,
-            DeleteEventCommand message,
-            DeleteEventCommandHandler deleteEventCommandHandler)
-        {
-            //Information
-            A.CallTo(() => eventRepository.GetById(A<Guid>.Ignored)).Returns(@event);
+        //[Test]
+        //[AutoCreateTestInput]
+        //public void DeleteEvent_EventIsRemoved(
+        //    [Frozen] IEventRepository eventRepository,
+        //    Event @event,
+        //    DeleteEventCommand message,
+        //    DeleteEventCommandHandler deleteEventCommandHandler)
+        //{
+        //    //Information
+        //    eventRepository.Add(@event);
+        //    A.CallTo(() => eventRepository.GetById(message.EventId)).Returns(@event);
 
-            //Act
-            deleteEventCommandHandler.ExecuteAsync(message);
+        //    //Act
+        //    deleteEventCommandHandler.ExecuteAsync(message);
 
-            //Test
-            A.CallTo(() => eventRepository.GetById(A<Guid>.Ignored)).MustHaveHappened();
-        }
+        //    //Test
+        //    var e = eventRepository.GetById(@event.EventID);
+        //}
 
-        [Test]
-        [AutoCreateTestInput]
-        public void CreateEvent_EventRemovedCalled(
-            [Frozen] IEventRepository eventRepository,
-            DeleteEventCommand message,
-            Event @event,
-             DeleteEventCommandHandler deleteEventCommandHandler)
-        {
-            //Information
-            A.CallTo(() => eventRepository.GetById(A<Guid>.Ignored)).Returns(@event);
 
-            //Act
-            deleteEventCommandHandler.ExecuteAsync(message);
 
-            //Test
-            A.CallTo(() => eventRepository.Remove(@event)).MustHaveHappened();
-        }
 
 
     }

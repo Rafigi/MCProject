@@ -14,11 +14,6 @@
         {
         }
 
-        public Event GetByID(Guid id)
-        {
-            return McDbContext.Events.Single(x => x.EventID == id);
-        }
-
         public IEnumerable<Event> GetCreatedByUser(Guid id)
         {
             return McDbContext.Events.Where(x => x.User.UserID == id).ToList();
@@ -26,7 +21,7 @@
 
         public Event GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return McDbContext.Events.SingleOrDefault(x => x.EventID == id);
         }
 
         public McDbContext McDbContext

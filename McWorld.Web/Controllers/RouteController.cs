@@ -69,7 +69,7 @@
 
         // PUT: api/Route/5
         [HttpPut("Update")]
-        public void Put([FromBody] Route route)
+        public void Update([FromBody] Route route)
         {
             _updateRouteCommandHandler.ExecuteAsync(new UpdateRouteCommand(route));
             _unitOfWork.Complete();
