@@ -5,13 +5,13 @@
 
     public class RegisterUserOnEventCommand : ICommand
     {
-        public RegisterUserOnEventCommand(Guid eventId, Guid userId)
+        public RegisterUserOnEventCommand(Guid eventId, Guid? userId)
         {
             EventId = eventId;
             UserId = userId;
         }
 
         public Guid EventId { get; private set; }
-        public Guid UserId { get; private set; }
+        public Guid? UserId { get; private set; }
     }
 }

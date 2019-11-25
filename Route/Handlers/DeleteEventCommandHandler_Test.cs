@@ -1,17 +1,14 @@
 ﻿namespace MCRoute.Test.Handlers
 {
     using AutoFixture.NUnit3;
-    using global::MCRoute.Test;
     using FakeItEasy;
-    using McWorld.Event;
+    using global::MCRoute.Test;
     using McWorld.Event.Commands;
+    using McWorld.Event.Handlers;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Models;
     using NUnit.Framework;
-    using McWorld.Event.Handlers;
     using System;
-    using McWorld.Shared.Queryables;
-    using McWorld.Shared.Dtos;
 
     public class DeleteEventCommandHandler_Test
     {
@@ -20,23 +17,25 @@
         {
         }
 
-        //[Test]
-        //[AutoCreateTestInput]
-        //public void DeleteEvent_UserIsNull(
-        //    [Frozen] IEventRepository  eventRepository,
-        //    Event @event,
-        //    DeleteEventCommand message,
-        //    DeleteEventCommandHandler deleteEventCommandHandler)
-        //{
-        //    //Information
-        //    A.CallTo(() => eventRepository.GetById(message.EventId)).Returns(@event);
+        [Test]
+        [AutoCreateTestInput]
+        public void DeleteEvent_UserDoesNotExist(
+            [Frozen] IEventRepository eventRepository,
+            Event @event,
+            DeleteEventCommand message,
+            DeleteEventCommandHandler deleteEventCommandHandler)
+        {
+            //Information
 
-        //    //Act
-        //    deleteEventCommandHandler.ExecuteAsync(message);
+            //Act
+            deleteEventCommandHandler.ExecuteAsync(message);
 
-        //    //Test
+            //Test
+            A.CallTo(() => eventRepository.GetById(message.EventId)).Throws(new ArgumentNullException());
+            A.CallTo(() => eventRepository.Remove(@event))
+                .MustNotHaveHappened();
 
-        //}
+        }
 
         [Test]
         [AutoCreateTestInput]
@@ -57,28 +56,27 @@
                 .MustHaveHappened();
         }
 
-        //[Test]
-        //[AutoCreateTestInput]
-        //public void DeleteEvent_EventIsRemoved(
-        //    [Frozen] IEventRepository eventRepository,
-        //    Event @event,
-        //    DeleteEventCommand message,
-        //    DeleteEventCommandHandler deleteEventCommandHandler)
-        //{
-        //    //Information
-        //    eventRepository.Add(@event);
-        //    A.CallTo(() => eventRepository.GetById(message.EventId)).Returns(@event);
+        [Test]
+        [AutoCreateTestInput]
+        public void DeleteEvent_EventIsRemoved(
+            [Frozen] IEventRepository eventRepository,
+            Event @event,
+            DeleteEventCommand message,
+            DeleteEventCommandHandler deleteEventCommandHandler)
+        {
+            //Information
+            @event.EventID = message.EventId;
+            eventRepository.Add(@event);
+            var actual = eventRepository.GetById(message.EventId);
 
-        //    //Act
-        //    deleteEventCommandHandler.ExecuteAsync(message);
+            //Act
+            deleteEventCommandHandler.ExecuteAsync(message);
 
-        //    //Test
-        //    var e = eventRepository.GetById(@event.EventID);
-        //}
+            //Test
+            var expected = eventRepository.GetById(@event.EventID);
+            Assert.AreNotEqual(expected, actual);
 
-
-
-
+        }
 
     }
 }

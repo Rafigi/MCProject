@@ -6,7 +6,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     class EventRepository : Repository<Event>, IEventRepository
     {
@@ -21,7 +20,34 @@
 
         public Event GetById(Guid id)
         {
-            return McDbContext.Events.SingleOrDefault(x => x.EventID == id);
+            if (id == Guid.Empty)
+                throw new ArgumentNullException($"There is no event with the ID {id}");
+
+            return McDbContext.Events.Single(x => x.EventID == id);
+        }
+
+        public IEnumerable<Registration> GetAllEventsWhereUserIsRegistered(Guid userId)
+        {
+            return McDbContext.Registration
+                .Where(u => u.UserID == userId)
+                .ToList();
+        }
+
+        public Registration GetRegistrationByUserId(Guid? userId, Guid eventId)
+        {
+            return McDbContext.Registration.Single(u => u.UserID == userId && u.EventID == eventId);
+        }
+
+        public void RegisterUser(Guid? userId, Guid eventId)
+        {
+            var registration = GetRegistrationByUserId(userId, eventId);
+            McDbContext.Registration.Add(registration);
+        }
+
+        public void UnRegisterUser(Guid? userId, Guid eventId)
+        {
+            var registration = GetRegistrationByUserId(userId, eventId);
+            McDbContext.Registration.Remove(registration);
         }
 
         public McDbContext McDbContext

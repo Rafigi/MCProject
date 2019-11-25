@@ -19,8 +19,6 @@
         {
             //Using the repostory, because the remove method need Event Type nad not EventDto Type.
             var @event = _eventRepository.GetById(message.EventId);
-            if (@event == null)
-                throw new ArgumentNullException($"There is no event with the ID {message.EventId}");
 
             _eventRepository.Remove(@event);
             return Task.CompletedTask;

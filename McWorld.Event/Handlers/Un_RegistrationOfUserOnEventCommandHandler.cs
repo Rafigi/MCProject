@@ -3,7 +3,6 @@
     using McWorld.Event.Commands;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
-    using System;
     using System.Threading.Tasks;
 
     public class Un_RegistrationOfUserOnEventCommandHandler : ICommandHandler<RegisterUserOnEventCommand>, ICommandHandler<UnRegisterUserOnEventCommand>
@@ -16,22 +15,13 @@
         }
         public Task ExecuteAsync(RegisterUserOnEventCommand message)
         {
-            var @event = _eventRepository.GetById(message.EventId);
-            if (@event == null)
-                throw new ArgumentNullException($"There is no Event with the Id {message.EventId}");
-
-            @event.RegisterUser(message.EventId, message.UserId);
+            _eventRepository.UnRegisterUser(message.UserId, message.EventId);
             return Task.CompletedTask;
         }
 
         public Task ExecuteAsync(UnRegisterUserOnEventCommand message)
         {
-
-            var @event = _eventRepository.GetById(message.EventId);
-            if (@event == null)
-                throw new ArgumentNullException($"There is no Event with the Id {message.EventId}");
-
-            @event.UnRegisterUser(message.EventId, message.UserId);
+            _eventRepository.RegisterUser(message.UserId, message.EventId);
             return Task.CompletedTask;
         }
     }

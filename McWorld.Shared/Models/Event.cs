@@ -40,22 +40,7 @@
                
         #region Methods
 
-        public void RegisterUser(Guid eventId, Guid userId)
-        {
-            var registration = new Registration(eventId, userId);
-            if (Registration.Contains(registration))
-                throw new InvalidOperationException($"The User with the ID {userId} is aldready registered the Event With {eventId}");
-
-            Registration.Add(registration);
-        }
-        public void UnRegisterUser(Guid eventId, Guid userId)
-        {
-            var registration = new Registration(eventId, userId);
-            if (Registration.Contains(registration))
-                throw new InvalidOperationException($"The User with the ID {userId} is aldready unregistered from the Event With {eventId}");
-
-            Registration.Remove(registration);
-        }
+     
 
         #endregion
     }

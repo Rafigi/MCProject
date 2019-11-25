@@ -31,7 +31,7 @@
             return _context.Set<TEntity>().Where(predicate);
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(Guid id)
         {
             return _context.Set<TEntity>().Find(id);
         }

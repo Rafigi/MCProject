@@ -10,6 +10,6 @@
             EventId = eventId;
         }
 
-        public Guid EventId { get; private set; }
+        public Guid EventId { get; set; }
     }
 }
