@@ -3,8 +3,6 @@ namespace MCRoute.Test.Controllers
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
-    using McWorld.Event.Commands;
-    using McWorld.Route;
     using McWorld.Route.Commands;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Messages;
@@ -95,7 +93,7 @@ namespace MCRoute.Test.Controllers
             A.CallTo(() => createRouteCommandHandler
             .ExecuteAsync(A<CreateRouteCommand>.Ignored))
                 .MustHaveHappened(); ;
-        
+
         }
 
         [Test]
