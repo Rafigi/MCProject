@@ -37,7 +37,7 @@ namespace Tests.MCRoute.Test
             A.CallTo(() => commandHandler.ExecuteAsync(A<CreateUserCommand>.Ignored));
         }
 
-                     
+
         [Test]
         [AutoCreateTestInput]
         public void CreateUser_CreateUserWithUserFactory(
@@ -59,7 +59,7 @@ namespace Tests.MCRoute.Test
         [Test]
         [AutoCreateTestInput]
         public void CreateUser_AddToRepository(
-            [Frozen] IUserRepository userRepository, 
+            [Frozen] IUserRepository userRepository,
             [Frozen] IUserFactory userFactory,
             CreateUserCommandHandler createUserCommandHandler,
             User user,
