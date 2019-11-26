@@ -1,7 +1,7 @@
 ﻿namespace McWorld.Event
 {
     using McWorld.Event.Commands;
-    using McWorld.Route;
+    using McWorld.Route.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
