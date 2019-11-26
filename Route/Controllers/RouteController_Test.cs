@@ -1,18 +1,18 @@
+using AutoFixture.NUnit3;
+using FakeItEasy;
+using McWorld.Route.Commands;
+using McWorld.Shared.Dtos;
+using McWorld.Shared.Messages;
+using McWorld.Shared.Models;
+using McWorld.Shared.Persistence;
+using McWorld.Shared.Queryables;
+using McWorld.Web.Controllers;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic; 
+
 namespace MCRoute.Test.Controllers
 {
-    using AutoFixture.NUnit3;
-    using FakeItEasy;
-    using global::MCRoute.Test;
-    using McWorld.Route.Commands;
-    using McWorld.Shared.Dtos;
-    using McWorld.Shared.Messages;
-    using McWorld.Shared.Models;
-    using McWorld.Shared.Persistence;
-    using McWorld.Shared.Queryables;
-    using McWorld.Web.Controllers;
-    using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
 
     public class RouteController_Tests
     {
