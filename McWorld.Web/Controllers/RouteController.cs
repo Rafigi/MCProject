@@ -17,23 +17,23 @@
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRouteQueryables _routeQueryables;
         private readonly ICommandHandler<CreateRouteCommand> _createRouteCommandHandler;
-        private readonly ICommandHandler<UpdateRouteCommand> _updateRouteCommandHandler;
-        private readonly ICommandHandler<DeleteRouteCommand> _deleteRouteCommandHandler;
+        //private readonly ICommandHandler<UpdateRouteCommand> _updateRouteCommandHandler;
+        //private readonly ICommandHandler<DeleteRouteCommand> _deleteRouteCommandHandler;
 
         public RouteController
             (
             IUnitOfWork unitOfWork,
             IRouteQueryables routeQueryables,
-            ICommandHandler<CreateRouteCommand> createRouteCommandHandler,
-            ICommandHandler<UpdateRouteCommand> updateRouteCommandHandler,
-            ICommandHandler<DeleteRouteCommand> deleteRouteCommandHandler
+            ICommandHandler<CreateRouteCommand> createRouteCommandHandler
+            //ICommandHandler<UpdateRouteCommand> updateRouteCommandHandler,
+            //ICommandHandler<DeleteRouteCommand> deleteRouteCommandHandler
             )
         {
             _unitOfWork = unitOfWork;
             _routeQueryables = routeQueryables;
             _createRouteCommandHandler = createRouteCommandHandler;
-            _updateRouteCommandHandler = updateRouteCommandHandler;
-            _deleteRouteCommandHandler = deleteRouteCommandHandler;
+            //_updateRouteCommandHandler = updateRouteCommandHandler;
+            //_deleteRouteCommandHandler = deleteRouteCommandHandler;
         }
 
         // GET: api/Route/GetAll
@@ -70,7 +70,7 @@
         [HttpPut("Update")]
         public void Update([FromBody] Route route)
         {
-            _updateRouteCommandHandler.ExecuteAsync(new UpdateRouteCommand(route));
+           // _updateRouteCommandHandler.ExecuteAsync(new UpdateRouteCommand(route));
             _unitOfWork.Complete();
         }
 
@@ -78,7 +78,7 @@
         [HttpDelete]
         public void Delete(Guid id)
         {
-            _deleteRouteCommandHandler.ExecuteAsync(new DeleteRouteCommand(id));
+            //_deleteRouteCommandHandler.ExecuteAsync(new DeleteRouteCommand(id));
             _unitOfWork.Complete();
         }
 
