@@ -1,11 +1,10 @@
 ﻿namespace McWorld.Route.Handlers
 {
     using McWorld.Address;
-    using McWorld.Route;
+    using McWorld.Route.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
-    using McWorld.Shared.ServicesBus;
     using System.Threading.Tasks;
     public class CreateRouteCommandHandler : ICommandHandler<CreateRouteCommand>
     {
@@ -14,8 +13,8 @@
         private readonly ICommandHandler<CreateAddressCommand> _createAddressCommandHandler;
 
         public CreateRouteCommandHandler(
-            IRouteRepository routeRepository, 
-            IRouteFactory routeFactory, 
+            IRouteRepository routeRepository,
+            IRouteFactory routeFactory,
             ICommandHandler<CreateAddressCommand> createAddressCommandHandler)
         {
             _routeRepository = routeRepository;
