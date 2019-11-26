@@ -5,7 +5,7 @@
     using McWorld.User.Commands;
     using System;
     using System.Threading.Tasks;
-    class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand>, ICommandHandler<UpdatePasswordCommand>
+    public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand>, ICommandHandler<UpdatePasswordCommand>
     {
         private readonly IUserRepository _userRepository;
 

@@ -3,11 +3,10 @@
     using McWorld.Route.Commands;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
-    using McWorld.Shared.Queryables;
-    using System.Threading.Tasks;
     using System;
+    using System.Threading.Tasks;
 
-    class DeleteRouteCommandHandler : ICommandHandler<DeleteRouteCommand>
+    public class DeleteRouteCommandHandler : ICommandHandler<DeleteRouteCommand>
     {
         private readonly IRouteRepository _routeRepository;
 

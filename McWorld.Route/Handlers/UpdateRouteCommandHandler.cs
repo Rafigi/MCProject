@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
     using System;
 
-    class UpdateRouteCommandHandler : ICommandHandler<UpdateRouteCommand>
+    public class UpdateRouteCommandHandler : ICommandHandler<UpdateRouteCommand>
     {
         private readonly IRouteRepository _routeRepository;
         private readonly IRouteQueryables _routeQueryables;

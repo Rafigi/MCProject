@@ -7,7 +7,7 @@
     using System;
     using System.Threading.Tasks;
 
-    class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
+    public class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>
     {
         private readonly IUserRepository _userRepository;
 

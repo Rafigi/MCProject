@@ -6,7 +6,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using McWorld.Shared.Models;
-    class CreateAddressCommandHandler : ICommandHandler<CreateAddressCommand>
+    public class CreateAddressCommandHandler : ICommandHandler<CreateAddressCommand>
     {
         private readonly IAdresseRepository _adresseRepository;
         private readonly IAddressFactory _addressFactory;
