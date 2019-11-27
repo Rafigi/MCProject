@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MCRoute.Test.Handlers
+namespace MCRoute.Test.EventHandlers
 {
     class Un_RegistrationOfUserOnEventCommandHandler_Tests
     {

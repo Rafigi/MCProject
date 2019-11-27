@@ -19,8 +19,8 @@
         }
         public Task ExecuteAsync(UpdateRouteCommand message)
         {
-            if (_routeQueryables.GetById(message.Route.RouteID) != null)
-                throw new ArgumentNullException($"There is already a route with the ID {message.Route.RouteID}");
+            if (_routeQueryables.GetById(message.Route.RouteID) == null)
+                throw new ArgumentNullException();
 
 
             _routeRepository.Update(message.Route);

@@ -1,4 +1,4 @@
-namespace MCRoute.Test.Handlers
+namespace MCRoute.Test.EventHandlers
 {
     using AutoFixture.NUnit3;
     using FakeItEasy;
