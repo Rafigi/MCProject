@@ -113,23 +113,23 @@ namespace MCRoute.Test.Controllers
                 .MustHaveHappenedOnceExactly();
         }
 
-        //[Test]
-        //[AutoCreateTestInput]
-        //public void RouteController_Update_UpdateRouteCommandHandler(
-        //    [Frozen] ICommandHandler<UpdateRouteCommand> updateRouteCommandHandler,
-        //    Route route,
-        //    RouteController routeController)
-        //{
-        //    //Information
+        [Test]
+        [AutoCreateTestInput]
+        public void RouteController_Update_UpdateRouteCommandHandler(
+            [Frozen] ICommandHandler<UpdateRouteCommand> updateRouteCommandHandler,
+            Route route,
+            RouteController routeController)
+        {
+            //Information
 
-        //    //Act
-        //    routeController.Update(route);
+            //Act
+            routeController.Update(route);
 
-        //    //Test
-        //    A.CallTo(() => updateRouteCommandHandler
-        //    .ExecuteAsync(A<UpdateRouteCommand>.Ignored))
-        //    .MustHaveHappened();
-        //}
+            //Test
+            A.CallTo(() => updateRouteCommandHandler
+            .ExecuteAsync(A<UpdateRouteCommand>.Ignored))
+            .MustHaveHappened();
+        }
 
         [Test]
         [AutoCreateTestInput]
@@ -149,23 +149,23 @@ namespace MCRoute.Test.Controllers
         }
 
 
-        //[Test]
-        //[AutoCreateTestInput]
-        //public void RouteController_Delete_deleteRouteCommandHandler(
-        //    [Frozen] ICommandHandler<DeleteRouteCommand> deleteRouteCommandHandler,
-        //    RouteController routeController,
-        //    Route route)
-        //{
-        //    //Information
+        [Test]
+        [AutoCreateTestInput]
+        public void RouteController_Delete_deleteRouteCommandHandler(
+            [Frozen] ICommandHandler<DeleteRouteCommand> deleteRouteCommandHandler,
+            RouteController routeController,
+            Route route)
+        {
+            //Information
 
-        //    //Act
-        //    routeController.Delete(route.RouteID);
+            //Act
+            routeController.Delete(route.RouteID);
 
-        //    //Test
-        //    A.CallTo(() => deleteRouteCommandHandler
-        //    .ExecuteAsync(A<DeleteRouteCommand>.Ignored))
-        //    .MustHaveHappened(); ;
-        //}
+            //Test
+            A.CallTo(() => deleteRouteCommandHandler
+            .ExecuteAsync(A<DeleteRouteCommand>.Ignored))
+            .MustHaveHappened(); ;
+        }
 
         [Test]
         [AutoCreateTestInput]
