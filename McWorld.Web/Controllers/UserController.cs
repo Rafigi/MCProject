@@ -1,6 +1,6 @@
 ﻿namespace McWorld.Web.Controllers
 {
-    using McWorld.McUser.Commands;
+    using McWorld.User.Commands;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;

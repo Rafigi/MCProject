@@ -43,7 +43,7 @@
   <ItemGroup>
     <ProjectReference Include="..\McWorld.Event\McWorld.Event.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
-    <ProjectReference Include="..\McWorld.User\McWorld.McUser.csproj" />
+    <ProjectReference Include="..\McWorld.User\McWorld.User.csproj" />
   </ItemGroup>
 
   <ItemGroup>

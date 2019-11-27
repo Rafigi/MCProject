@@ -1,4 +1,4 @@
-﻿namespace McWorld.McRoute.Commands
+﻿namespace McWorld.Route.Commands
 {
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;

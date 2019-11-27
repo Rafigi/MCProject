@@ -1,6 +1,6 @@
-﻿namespace McWorld.McUser.Handler
+﻿namespace McWorld.User.Handler
 {
-    using McWorld.McUser.Commands;
+    using McWorld.User.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;

@@ -5,7 +5,7 @@ namespace MCRoute.Test.Handlers
     using global::MCRoute.Test;
     using McWorld.Event.Commands;
     using McWorld.Event.Handlers;
-    using McWorld.McRoute.Commands;
+    using McWorld.Route.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
