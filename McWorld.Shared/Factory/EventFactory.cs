@@ -4,7 +4,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class EventFactory : IEventFactory
+    class EventFactory : IEventFactory
     {
         private List<Address> _addresses = new List<Address>();
         public Event Create(Event @event)
@@ -52,11 +52,6 @@
                     Addresses = _addresses
                 }
             };
-        }
-
-        public Event Update(Event type)
-        {
-            throw new NotImplementedException();
         }
     }
 }

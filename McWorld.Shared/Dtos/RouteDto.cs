@@ -9,7 +9,7 @@ using System.Text;
         //Who Created the Route
         string Username { get; set; }
         public Guid RouteID { get; set; }
-        public double Distance { get; set; }
+        public string Distance { get; set; }
         public bool Motorway { get; set; }
         public bool Ferry { get; set; }
         public bool Toll { get; set; }

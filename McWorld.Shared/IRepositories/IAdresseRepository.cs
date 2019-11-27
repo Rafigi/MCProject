@@ -4,6 +4,6 @@
     using System;
     public interface IAdresseRepository : IRepository<Address>
     {
-        Address GetAdresseByID(Guid id);
+        Address GetById(Guid id);
     }
 }

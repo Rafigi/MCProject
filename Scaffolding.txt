@@ -1,1 +1,4 @@
-Scaffold-DbContext "Server=(localdb)\\mssqllocaldb;Database=McWorldDatabase;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir QueryStack -Context "McDbContext"
+Remember to change the default project in the Packagemanager, when Scafolding.
+
+
+Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=McWorldDatabase;Trusted_Connection=True;"Microsoft.EntityFrameworkCore.SqlServer -OutputDir QueryStack -Context "QueryContext" -StartupProject MCworld.Shared -force

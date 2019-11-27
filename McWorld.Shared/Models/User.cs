@@ -6,7 +6,7 @@
     /// <summary>
     /// This is an Object for the User, There have connections to Route, Event, Registration
     /// </summary>
-    public class User
+    public partial class User
     {
         [Key]
         public Guid UserID { get; set; }
@@ -25,6 +25,21 @@
 
         //This if to make a many og many relation for the registration
         public ICollection<Registration> Registration { get; set; }
+
+
+        #region Methods
+        public void UpdateMail(string mail)
+        {
+            Email = mail;
+        }
+
+        public void UpdatePassword(string password)
+        {
+            Password = password;
+        }
+
+        #endregion
+
 
     }
 }

@@ -5,25 +5,18 @@
     using McWorld.Shared.Models;
     using System;
     using System.Linq;
-    public class UserRepository : Repository<User>, IUserRepository
+    class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(McDbContext context) : base(context)
         {
         }
-
-        public string GetEmailByID(Guid id)
+        public User GetById(Guid id)
         {
-            return McDbContext.Users.Single(x => x.UserID == id).Email;
+            return McDbContext.Users.SingleOrDefault(x => x.UserID == id);
         }
-
-        public User GetUserByID(Guid id)
+        public User GetByMail(string mail)
         {
-            return McDbContext.Users.Single(x => x.UserID == id);
-        }
-
-        public string GetUsernameByID(Guid? id)
-        {
-            return McDbContext.Users.Single(x => x.UserID == id).Username;
+            return McDbContext.Users.SingleOrDefault(x => x.Email == mail);
         }
 
         public McDbContext McDbContext

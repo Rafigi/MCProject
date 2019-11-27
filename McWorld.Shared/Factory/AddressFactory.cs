@@ -2,7 +2,8 @@
 {
     using McWorld.Shared.Models;
     using System;
-    public class AddressFactory : IAddressFactory
+
+    class AddressFactory : IAddressFactory
     {
         public Address Create(Address address)
         {
@@ -17,11 +18,6 @@
                 Latitude = address.Latitude,
                 Longitude = address.Longitude
             };
-        }
-
-        public Address Update(Address type)
-        {
-            throw new NotImplementedException();
         }
     }
 }

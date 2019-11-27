@@ -6,7 +6,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+
+    class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         protected readonly McDbContext _context;
 
@@ -30,7 +31,7 @@
             return _context.Set<TEntity>().Where(predicate);
         }
 
-        public TEntity Get(int id)
+        public TEntity Get(Guid id)
         {
             return _context.Set<TEntity>().Find(id);
         }
@@ -53,6 +54,11 @@
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return _context.Set<TEntity>().SingleOrDefault(predicate);
+        }
+
+        public void Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Update(entity);
         }
     }
 }

@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
+    <ProjectReference Include="..\McWorld.Route\McWorld.Route.csproj" />
   </ItemGroup>
 
 </Project>

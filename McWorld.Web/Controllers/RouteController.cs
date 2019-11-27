@@ -1,11 +1,11 @@
 ﻿namespace McWorld.Web.Controllers
 {
-    using McWorld.Route;
+    using McWorld.Route.Commands;
     using McWorld.Shared.Dtos;
-    using McWorld.Shared.Factory;
+    using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
+    using McWorld.Shared.Persistence;
     using McWorld.Shared.Queryables;
-    using McWorld.Shared.ServicesBus;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -14,62 +14,72 @@
     [ApiController]
     public class RouteController : ControllerBase
     {
-        private readonly IServiceBus _serviceBus;
-        private readonly IRouteFactory _routeFactory;
-        private readonly IQueryables _queryables;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IRouteQueryables _routeQueryables;
+        private readonly ICommandHandler<CreateRouteCommand> _createRouteCommandHandler;
+        private readonly ICommandHandler<UpdateRouteCommand> _updateRouteCommandHandler;
+        private readonly ICommandHandler<DeleteRouteCommand> _deleteRouteCommandHandler;
 
-        public RouteController(IServiceBus serviceBus, IRouteFactory routeFactory, IQueryables queryables)
+        public RouteController
+            (
+            IUnitOfWork unitOfWork,
+            IRouteQueryables routeQueryables,
+            ICommandHandler<CreateRouteCommand> createRouteCommandHandler,
+            ICommandHandler<UpdateRouteCommand> updateRouteCommandHandler,
+            ICommandHandler<DeleteRouteCommand> deleteRouteCommandHandler
+            )
         {
-            _serviceBus = serviceBus;
-            _routeFactory = routeFactory;
-            _queryables = queryables;
+            _unitOfWork = unitOfWork;
+            _routeQueryables = routeQueryables;
+            _createRouteCommandHandler = createRouteCommandHandler;
+            _updateRouteCommandHandler = updateRouteCommandHandler;
+            _deleteRouteCommandHandler = deleteRouteCommandHandler;
         }
 
         // GET: api/Route/GetAll
         [HttpGet("GetAll")]
         public IEnumerable<RouteDto> GetAll()
         {
-            return _queryables.GetAllRoutesWithAddress();
+            return _routeQueryables.GetAll();
         }
 
-        [HttpGet]
+        [HttpGet("userCreated/{id}")]
         public IEnumerable<RouteDto> GetAllUserCreatedRoutes(Guid userId)
         {
-            return _queryables.GetAllUserCreatedRoutes(userId);
+            return _routeQueryables.GetByUser(userId);
         }
 
 
         // GET: api/Route/5
         [HttpGet("{id}")]
-        public Route GetById(Guid id)
+        public RouteDto GetById(Guid id)
         {
-            return null;
+            return _routeQueryables.GetById(id);
         }
 
         // POST: api/Route/Create
         [HttpPost]
         public IActionResult Create([FromBody] Route route)
         {
-            //For creating a mock data
-            //var _route = CreateDefaultValues();
-
-            var _route = _routeFactory.Create(route);
-            _serviceBus.Add(new CreateRouteCommand(_route));
-            _serviceBus.Complete();
+            _createRouteCommandHandler.ExecuteAsync(new CreateRouteCommand(route));
+            _unitOfWork.Complete();
             return Ok();
         }
 
         // PUT: api/Route/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut("Update")]
+        public void Update([FromBody] Route route)
         {
+            _updateRouteCommandHandler.ExecuteAsync(new UpdateRouteCommand(route));
+            _unitOfWork.Complete();
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/route/5
         [HttpDelete]
         public void Delete(Guid id)
         {
-
+            _deleteRouteCommandHandler.ExecuteAsync(new DeleteRouteCommand(id));
+            _unitOfWork.Complete();
         }
 
         //Only for test purpose.
@@ -104,7 +114,7 @@
             var route = new Route()
             {
                 RouteID = Guid.NewGuid(),
-                Distance = 132,
+                Distance = "132",
                 Created = new DateTime().ToShortDateString(),
                 Ferry = false,
                 Toll = false,

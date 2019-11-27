@@ -33,7 +33,15 @@
         public Guid RouteID { get; set; }
         public Route Route { get; set; }
 
-        //Is there to make a many og many relation for the registration
+        //Is there to make a many to many relation for the registration
         public ICollection<Registration> Registration { get; set; }
+
+
+               
+        #region Methods
+
+     
+
+        #endregion
     }
 }

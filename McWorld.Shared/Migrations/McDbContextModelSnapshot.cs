@@ -81,7 +81,8 @@ namespace McWorld.Shared.Migrations
                     b.Property<string>("Created")
                         .IsRequired();
 
-                    b.Property<double>("Distance");
+                    b.Property<string>("Distance")
+                        .IsRequired();
 
                     b.Property<bool>("Ferry");
 

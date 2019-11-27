@@ -2,9 +2,9 @@
 {
     using McWorld.Shared.Messages;
     using System.Threading.Tasks;
-    public interface IServiceBus : IMessage
+    public interface IServiceBus
     {
-        Task Add<TMessage>(TMessage message) where TMessage : ICommand;
+        Task Add<T>(T message) where T : IMessage;
 
         Task Complete();
     }

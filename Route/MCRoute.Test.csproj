@@ -14,15 +14,17 @@
     <PackageReference Include="AutoFixture.AutoFakeItEasy" Version="4.11.0" />
     <PackageReference Include="AutoFixture.AutoFoq" Version="4.11.0" />
     <PackageReference Include="AutoFixture.NUnit3" Version="4.11.0" />
-    <PackageReference Include="FakeItEasy" Version="5.3.0" />
+    <PackageReference Include="FakeItEasy" Version="5.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.0" />
     <PackageReference Include="nunit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MCWorld.Route\McWorld.Route.csproj" />
+    <ProjectReference Include="..\McWorld.Address\McWorld.Address.csproj" />
+    <ProjectReference Include="..\McWorld.Event\McWorld.Event.csproj" />
+    <ProjectReference Include="..\McWorld.Route\McWorld.Route.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
     <ProjectReference Include="..\McWorld.User\McWorld.User.csproj" />
     <ProjectReference Include="..\McWorld.Web\McWorld.Web.csproj" />

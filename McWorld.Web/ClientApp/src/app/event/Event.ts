@@ -28,7 +28,7 @@ export default class Event {
     this.EndTime = endTime;
   }
 
-  UpdateRoute(distance: number, ferry: boolean, toll: boolean, motorway: boolean, startAddress: Address, endAddress: Address) {
+  UpdateRoute(distance: string, ferry: boolean, toll: boolean, motorway: boolean, startAddress: Address, endAddress: Address) {
     this.Route.Distance = distance;
     this.Route.Ferry = ferry;
     this.Route.Toll = toll;
