@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFi
 		Scaffolding.txt = Scaffolding.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McWorld.Route", "McWorld.Route\McWorld.Route.csproj", "{C4731027-E592-4443-896D-51BAAE0B2CF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{3584D1E4-2EBC-4781-95B7-D509B98D3561}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3584D1E4-2EBC-4781-95B7-D509B98D3561}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3584D1E4-2EBC-4781-95B7-D509B98D3561}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4731027-E592-4443-896D-51BAAE0B2CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4731027-E592-4443-896D-51BAAE0B2CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4731027-E592-4443-896D-51BAAE0B2CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4731027-E592-4443-896D-51BAAE0B2CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

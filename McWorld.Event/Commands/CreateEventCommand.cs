@@ -1,6 +1,5 @@
 ﻿namespace McWorld.Event.Commands
 {
-    using System.Threading.Tasks;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
 
