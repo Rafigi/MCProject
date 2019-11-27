@@ -1,4 +1,4 @@
-﻿namespace McWorld.User
+﻿namespace McWorld.McUser.Commands
 {
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;

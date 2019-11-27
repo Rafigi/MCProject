@@ -3,10 +3,9 @@ namespace MCRoute.Test.Handlers
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
-    using McWorld.Event;
-    using McWorld.Event.Commands;
-    using McWorld.Route;
-    using McWorld.Route.Commands;
+    using McWorld.McEvent.Commands;
+    using McWorld.McEvent.Handlers;
+    using McWorld.McRoute.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
@@ -65,7 +64,7 @@ namespace MCRoute.Test.Handlers
             [Frozen] IEventFactory eventFactory,
             CreateEventCommand message,
             Event @event,
-             CreateEventCommandHandler createEventCommandHandler)
+            CreateEventCommandHandler createEventCommandHandler)
         {
             //Information
             A.CallTo(() => eventFactory.Create(message.Event)).Returns(@event);

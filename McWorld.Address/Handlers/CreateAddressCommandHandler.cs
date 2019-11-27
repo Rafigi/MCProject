@@ -1,4 +1,4 @@
-﻿namespace McWorld.Address.Handlers
+﻿namespace McWorld.McAddress.Handlers
 {
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
@@ -6,6 +6,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using McWorld.Shared.Models;
+    using McWorld.McAddress.Commands;
+
     public class CreateAddressCommandHandler : ICommandHandler<CreateAddressCommand>
     {
         private readonly IAdresseRepository _adresseRepository;

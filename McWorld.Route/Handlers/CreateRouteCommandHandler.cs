@@ -1,7 +1,7 @@
-﻿namespace McWorld.Route.Handlers
+﻿namespace McWorld.McRoute.Handlers
 {
-    using McWorld.Address;
-    using McWorld.Route.Commands;
+    using McWorld.McAddress.Commands;
+    using McWorld.McRoute.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;

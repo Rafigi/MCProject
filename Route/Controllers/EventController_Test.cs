@@ -3,7 +3,7 @@ namespace MCRoute.Test.Controllers
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
-    using McWorld.Event.Commands;
+    using McWorld.McEvent.Commands;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Factory;
     using McWorld.Shared.Messages;

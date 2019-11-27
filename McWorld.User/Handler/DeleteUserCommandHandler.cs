@@ -1,10 +1,8 @@
-﻿namespace McWorld.User.Handler
+﻿namespace McWorld.McUser.Handler
 {
+    using McWorld.McUser.Commands;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
-    using McWorld.Shared.Queryables;
-    using McWorld.User.Commands;
-    using System;
     using System.Threading.Tasks;
 
     public class DeleteUserCommandHandler : ICommandHandler<DeleteUserCommand>

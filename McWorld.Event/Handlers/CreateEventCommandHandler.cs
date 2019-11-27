@@ -1,11 +1,12 @@
-﻿namespace McWorld.Event
+﻿namespace McWorld.McEvent.Handlers
 {
-    using McWorld.Event.Commands;
-    using McWorld.Route.Commands;
+    using McWorld.McEvent.Commands;
+    using McWorld.McRoute.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
     using System.Threading.Tasks;
+
     public class CreateEventCommandHandler : ICommandHandler<CreateEventCommand>
     {
         private readonly IEventRepository _eventRepository;

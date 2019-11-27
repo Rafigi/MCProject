@@ -1,9 +1,8 @@
-﻿namespace McWorld.Event.Handlers
+﻿namespace McWorld.McEvent.Handlers
 {
-    using McWorld.Event.Commands;
+    using McWorld.McEvent.Commands;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
-    using System;
     using System.Threading.Tasks;
 
     public class DeleteEventCommandHandler : ICommandHandler<DeleteEventCommand>

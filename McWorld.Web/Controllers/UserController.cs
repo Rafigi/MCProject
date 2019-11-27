@@ -1,12 +1,11 @@
 ﻿namespace McWorld.Web.Controllers
 {
+    using McWorld.McUser.Commands;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using McWorld.Shared.Persistence;
     using McWorld.Shared.Queryables;
-    using McWorld.User;
-    using McWorld.User.Commands;
     using Microsoft.AspNetCore.Mvc;
     using System;
 

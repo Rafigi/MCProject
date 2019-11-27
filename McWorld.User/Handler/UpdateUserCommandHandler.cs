@@ -1,8 +1,8 @@
-﻿namespace McWorld.User.Handler
+﻿namespace McWorld.McUser.Handler
 {
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
-    using McWorld.User.Commands;
+    using McWorld.McUser.Commands;
     using System;
     using System.Threading.Tasks;
     public class UpdateUserCommandHandler : ICommandHandler<UpdateUserCommand>, ICommandHandler<UpdatePasswordCommand>

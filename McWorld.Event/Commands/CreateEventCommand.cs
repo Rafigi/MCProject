@@ -1,4 +1,4 @@
-﻿namespace McWorld.Event.Commands
+﻿namespace McWorld.McEvent.Commands
 {
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
@@ -10,6 +10,7 @@
             Event = @event;
             Route = @event.Route;
         }
+
         public Event Event { get; private set; }
         public Route Route { get; private set; }
     }

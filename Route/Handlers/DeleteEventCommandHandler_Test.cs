@@ -3,8 +3,8 @@
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
-    using McWorld.Event.Commands;
-    using McWorld.Event.Handlers;
+    using McWorld.McEvent.Commands;
+    using McWorld.McEvent.Handlers;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Models;
     using NUnit.Framework;

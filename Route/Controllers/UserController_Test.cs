@@ -3,13 +3,12 @@ namespace MCRoute.Test.Controllers
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
+    using McWorld.McUser.Commands;
     using McWorld.Shared.Dtos;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;
     using McWorld.Shared.Persistence;
     using McWorld.Shared.Queryables;
-    using McWorld.User;
-    using McWorld.User.Commands;
     using McWorld.Web.Controllers;
     using NUnit.Framework;
     using System;
