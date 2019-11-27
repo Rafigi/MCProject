@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\McWorld.Address\McWorld.McAddress.csproj" />
-    <ProjectReference Include="..\McWorld.Event\McWorld.McEvent.csproj" />
+    <ProjectReference Include="..\McWorld.Event\McWorld.Event.csproj" />
     <ProjectReference Include="..\McWorld.Route\McWorld.McRoute.csproj" />
     <ProjectReference Include="..\McWorld.Shared\McWorld.Shared.csproj" />
     <ProjectReference Include="..\McWorld.User\McWorld.McUser.csproj" />

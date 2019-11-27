@@ -3,8 +3,8 @@ namespace MCRoute.Test.Handlers
     using AutoFixture.NUnit3;
     using FakeItEasy;
     using global::MCRoute.Test;
-    using McWorld.McEvent.Commands;
-    using McWorld.McEvent.Handlers;
+    using McWorld.Event.Commands;
+    using McWorld.Event.Handlers;
     using McWorld.McRoute.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;

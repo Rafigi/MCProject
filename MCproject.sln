@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.779
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MCRoute.Test", "Route\MCRoute.Test.csproj", "{C68AFF92-6038-4F36-B9E4-1306138500E2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWorld.McEvent", "McWorld.Event\McWorld.McEvent.csproj", "{14099E63-C0FC-4F2D-BB87-3E091BC27E1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWorld.Event", "McWorld.Event\McWorld.Event.csproj", "{14099E63-C0FC-4F2D-BB87-3E091BC27E1A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "McWorld.Shared", "McWorld.Shared\McWorld.Shared.csproj", "{CABC249A-AABA-4FF1-A1E9-1B524487A4DF}"
 EndProject

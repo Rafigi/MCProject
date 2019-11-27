@@ -1,4 +1,4 @@
-﻿namespace McWorld.McEvent.Commands
+﻿namespace McWorld.Event.Commands
 {
     using McWorld.Shared.Messages;
     using McWorld.Shared.Models;

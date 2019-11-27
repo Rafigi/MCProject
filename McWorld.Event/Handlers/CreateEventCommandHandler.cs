@@ -1,6 +1,6 @@
-﻿namespace McWorld.McEvent.Handlers
+﻿namespace McWorld.Event.Handlers
 {
-    using McWorld.McEvent.Commands;
+    using McWorld.Event.Commands;
     using McWorld.McRoute.Commands;
     using McWorld.Shared.Factory;
     using McWorld.Shared.IRepository;

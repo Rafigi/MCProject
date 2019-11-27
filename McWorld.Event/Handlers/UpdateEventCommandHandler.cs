@@ -1,6 +1,6 @@
-﻿namespace McWorld.McEvent.Handlers
+﻿namespace McWorld.Event.Handlers
 {
-    using McWorld.McEvent.Commands;
+    using McWorld.Event.Commands;
     using McWorld.Shared.IRepository;
     using McWorld.Shared.Messages;
     using McWorld.Shared.Queryables;
