@@ -1,13 +1,18 @@
 import { Component, Input, ElementRef, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-modal',
-    templateUrl: './modal.component.html',
-    styleUrls: ['./modal.component.scss']
+  selector: 'app-modal',
+  templateUrl: './modal.component.html',
+  styleUrls: ['./modal.component.scss']
 })
 /** Modal component*/
 export class ModalComponent implements OnInit {
- show: boolean = false;
+  @Input()
+  show: boolean = false;
+
+  @Input()
+  backgroundColor: any = { 'background-color': 'rgba(255, 255, 255, 0.20)' };
+
   private element: any;
 
   /** Modal ctor */
