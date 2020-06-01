@@ -12,7 +12,7 @@
         {
         }
 
-        public IEnumerable<Route> GetAll()
+        public new IEnumerable<Route> GetAll()
         {
             return McDbContext.Routes.ToList();
         }
