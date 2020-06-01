@@ -104,7 +104,7 @@ namespace MCRoute.Test.Controllers
         [AutoCreateTestInput]
         public void EventController_Create_createEventCommandHandler(
             [Frozen] ICommandHandler<CreateEventCommand> createEventCommandHandler,
-            [Frozen] IEventFactory eventFactory, 
+            [Frozen] IEventFactory eventFactory,
             Event @event,
             EventController eventController)
         {
@@ -117,7 +117,7 @@ namespace MCRoute.Test.Controllers
             //Test
             A.CallTo(() => createEventCommandHandler.ExecuteAsync(A<CreateEventCommand>.Ignored))
                 .MustHaveHappened();
-        
+
         }
 
         [Test]

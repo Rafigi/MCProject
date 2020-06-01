@@ -1,82 +1,3 @@
-<!--Information Modal-->
-<app-modal [hidden]="_InfoModalhidden">
-
-  <h1 class="headline text-center mt-3">Infomation</h1>
-
-  <!--Infomation-->
-  <div class="content row col-lg-10 d-flex justify-content-lg-center">
-    <div class="infoBoxModal col-lg-6">
-      <div class="textBoxModal col-lg-12 pt-lg-2">
-        <p class="text-center text-white">Name: Mail Emailsen</p>
-      </div>
-      <div class="textBoxModal col-lg-12 pt-lg-2">
-        <p class="text-center text-white">Email: Mail@Mail.dk</p>
-      </div>
-      <div class="textBoxModal col-lg-12 pt-lg-2">
-        <p class="text-center text-white">BirthDay: 01/01/90</p>
-      </div>
-    </div>
-
-    <!--Buttons-->
-    <div class="col-lg-6 my-lg-2">
-      <div class="col-lg-12 d-flex justify-content-lg-center my-2">
-        <app-btn-mc-world [btnText]="'Edit Mail'" [btnWidth]="10" (click)="ShowHideEditEmailModal()"></app-btn-mc-world>
-      </div>
-      <div class="col-lg-12 d-flex justify-content-lg-center my-2">
-        <app-btn-mc-world [btnText]="'Change Password'" [btnWidth]="10" (click)="ShowHideChangePasswordModal()"></app-btn-mc-world>
-      </div>
-    </div>
-  </div>
-
-</app-modal>
-
-<!--Change Password Modal-->
-<app-modal [hidden]="_changePasswordModalhidden">
-
-  <h3 class="headline text-center text-white mt-3">Change Password</h3>
-
-  <!--Infomation-->
-  <div class="content col-lg-12 d-flex justify-content-lg-center">
-    <div class="_infoBoxModal col-lg-12">
-      <div class="col-lg-12 pt-lg-2 d-flex justify-content-lg-center">
-        <input class="mcInput text-white text-center" placeholder="New Password" />
-      </div>
-      <div class="col-lg-12 d-flex justify-content-lg-center my-2">
-        <app-btn-mc-world [btnText]="'Save'" [btnWidth]="4" (click)="ChangePassword()"></app-btn-mc-world>
-      </div>
-      <div class="col-lg-12 d-flex justify-content-lg-center my-2">
-        <app-btn-mc-world [btnText]="'Go Back'" [btnWidth]="6" (click)="CloseChangePassword()"></app-btn-mc-world>
-      </div>
-    </div>
-
-  </div>
-
-</app-modal>
-
-<!--Edit Email Modal-->
-<app-modal [hidden]="_EditEmailModalhidden">
-
-  <h3 class="headline text-center mt-3">Edit Email</h3>
-
-  <!--Infomation-->
-  <div class="content col-lg-12 d-flex justify-content-lg-center">
-    <div class="_infoBoxModal col-lg-12">
-      <div class="col-lg-12 pt-lg-2 d-flex justify-content-lg-center">
-        <input class="mcInput text-white text-center" value="Mail@mail.dk"/>
-      </div>
-      <div class="col-lg-12 d-flex justify-content-lg-center my-2">
-        <app-btn-mc-world [btnText]="'Save'" [btnWidth]="4" (click)="EditEmail()"></app-btn-mc-world>
-      </div>
-      <div class="col-lg-12 d-flex justify-content-lg-center my-2">
-        <app-btn-mc-world [btnText]="'Go Back'" [btnWidth]="6" (click)="CloseEditEmail()"></app-btn-mc-world>
-      </div>
-    </div>
-
-  </div>
-
-</app-modal>
-
-<!--Home-->
 <div class="_bg d-flex">
   <div class="row align-content-end col-lg-12 justify-content-lg-center mb-lg-5">
     <button class="_homeButton text-center mx-lg-5">
@@ -89,10 +10,33 @@
       Registered Events
     </button>
     <div class="d-flex col-lg-12 mt-lg-3 justify-content-lg-center ">
-      <button [disabled]="btnDisabled ? 'disabled' : ''" class="_infoButton text-center" (click)="ShowHideInfoModal()">
-        Edit Information
+      <button [disabled]="btnDisabled ? 'disabled' : ''" class="_infoButton text-center" (click)="modal.OpenModal()">
+        Information
       </button>
     </div>
   </div>
 </div>
+
+<!--Information Modal-->
+<app-modal #modal [backgroundColor]="{'background-color': 'rgba(255, 255, 255, 0.55)'}">
+
+  <h1 class="text-center mt-3 text-black">Information</h1>
+
+  <!--Infomation-->
+  <div class="row col-lg-12 d-flex justify-content-lg-center">
+    <div class="col-lg-12">
+      <div class=" col-lg-12">
+        <p class="text-center text-black">Name: Mail Emailsen</p>
+      </div>
+      <div class=" col-lg-12 ">
+        <p class="text-center text-black">Email: Mail@Mail.dk</p>
+      </div>
+      <div class=" col-lg-12">
+        <p class="text-center text-black">BirthDay: 01/01/90</p>
+      </div>
+    </div>
+  </div>
+
+</app-modal>
+
 

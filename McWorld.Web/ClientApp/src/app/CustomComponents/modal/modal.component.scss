@@ -1,14 +1,60 @@
-.bg {
+/* Popup box BEGIN */
+.modalBox {
+  background: rgba(0,0,0,.4);
+  cursor: pointer;
+  height: 100%;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+
+  .helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  .inside-popup {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 551px;
+    min-height: 100px;
+    vertical-align: middle;
+    width: 60%;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px 5%;
+  }
+}
+
+.popupCloseButton {
+  background-color: #fff;
+  border: 1px solid #999;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: arial;
+  font-weight: bold;
   position: absolute;
-  z-index: 100;
-  border-style: solid;
-  border-color: rgb(107, 97, 85);
-  border-width: 1px;
-  -webkit-border-radius: 50px;
-  -moz-border-radius: 50px;
-  border-radius: 100px;
-  padding-top: 6px;
-  background-color: rgba(111, 111, 101, 0.40);
-  -webkit-box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.40);
-  box-shadow: 5px 5px 50px 45px rgba(64,69,63,0.40);
+  top: -15px;
+  right: -20px;
+  font-size: 25px;
+  line-height: 30px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding-top: 5px;
+  transition: 0.5s;
+}
+
+
+.popupCloseButton:hover {
+  background-color: #ccc;
+  transition: 0.5s;
+  width: 45px;
+  height: 45px;
+  padding-top: 7px;
 }

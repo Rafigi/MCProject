@@ -1,20 +1,100 @@
 .bg {
-  background-color: rgba(182, 182, 182, 0.25);
-  border-radius: 45%;
-  box-shadow: 20px 20px 40px 0 rgba(182, 182, 182, 0.40);
-  border-right-style: solid;
-  border-bottom-style: solid;
 
-  p {
-    font-family: 'Handlee', cursive;
-    font-size: 1.2rem;
+  .container {
+    width: 1000px;
+    position: relative;
+    display: flex;
+
+
+    .eventCard {
+      padding: 4px;
+      opacity: 0.8;
+    }
   }
-}
 
 
-.borderBottom {
-  border-bottom: solid 2.2px rgba(65, 143, 149, 0.60);
-  border-top: none;
-  border-right: none;
-  border-left: none;
+  .container .eventCard:hover {
+    opacity: 1;
+  }
+
+  .container .eventCard .face {
+    width: 300px;
+    height: 200px;
+    transition: 0.5s;
+    border-radius: 20px;
+  }
+
+  .container .eventCard .face.face1 {
+    position: relative;
+    background: rgba(182, 182, 182, 1);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    z-index: 1;
+    transform: translateY(100px);
+  }
+
+  .container .eventCard:hover .face.face1 {
+    background: rgba(182, 182, 182, 0.80);
+    transform: translateY(15px);
+  }
+
+  .container .eventCard .face.face1 .content {
+    opacity: 0.8;
+    padding-top: 4px;
+    transition: 0.5s;
+
+    h3 {
+      margin-top: 70px;
+    }
+  }
+
+
+  .container .eventCard:hover .face.face1 .content {
+    opacity: 1;
+    color: white;
+  }
+
+  .container .eventCard .face.face1 .content img {
+    max-width: 100px;
+  }
+
+  .container .eventCard:hover .face.face1.content h3 {
+    padding: 0;
+    color: #fff;
+    font-size: 1.5em;
+    font-family: 'Handlee', cursive;
+  }
+
+  .container .eventCard .face.face2 {
+    position: relative;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 50px rgba(0,0, 0, 0.8);
+  }
+
+  .container .eventCard .face.face2 .content p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container .eventCard .face.face2 .content a {
+    margin: 50px 75px;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    color: #333;
+    padding: 2px;
+    border: 1px solid #333;
+    border-radius: 30px;
+  }
+
+  .container .eventCard .face.face2 .content a:hover {
+    background: #333;
+    color: #fff;
+  }
 }

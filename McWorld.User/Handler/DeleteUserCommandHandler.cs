@@ -16,7 +16,7 @@
 
         public Task ExecuteAsync(DeleteUserCommand message)
         {
-            var user = _userRepository.GetById(message.Id);
+            var user = _userRepository.GetById(message.UserId);
             _userRepository.Remove(user);
             return Task.CompletedTask;
         }

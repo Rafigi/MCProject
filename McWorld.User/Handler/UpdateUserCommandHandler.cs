@@ -16,9 +16,8 @@
         public Task ExecuteAsync(UpdateUserCommand message)
         {
             var user = _userRepository.GetById(message.UserId);
-            if (user == null) throw new ArgumentNullException($"There is no user with that id - {message.UserId}");
 
-            user.UpdateMail(user.Email);
+            _userRepository.Update(user);
             return Task.CompletedTask;
         }
 

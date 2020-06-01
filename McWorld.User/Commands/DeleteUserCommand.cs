@@ -5,10 +5,10 @@
 
     public class DeleteUserCommand : ICommand
     {
-        public Guid Id { get; }
-        public DeleteUserCommand(Guid id)
+        public Guid UserId { get; }
+        public DeleteUserCommand(Guid userId)
         {
-            Id = id;
+            UserId = userId;
         }
     }
 }

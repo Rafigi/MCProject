@@ -147,5 +147,8 @@
       }
     }
   },
-  "defaultProject": "McWorld.Web"
+  "defaultProject": "McWorld.Web",
+  "cli": {
+    "analytics": false
+  }
 }
